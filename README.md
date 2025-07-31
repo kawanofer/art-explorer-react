@@ -4,10 +4,10 @@
 
 Criar uma aplicação web responsiva utilizando **React**, **TypeScript** e **Node.js** (para o backend), com o objetivo de explorar obras de arte da coleção do Metropolitan Museum of Art (The Met). O sistema deve permitir:
 
-* Buscar obras com imagem
-* Visualizar detalhes das obras
-* Marcar como favorita
-* Listar favoritas
+- Buscar obras com imagem
+- Visualizar detalhes das obras
+- Marcar como favorita
+- Listar favoritas
 
 ---
 
@@ -15,34 +15,34 @@ Criar uma aplicação web responsiva utilizando **React**, **TypeScript** e **No
 
 ### 1. **Listagem de Obras com Imagem**
 
-* Utilizar a API: `GET /public/collection/v1/search?hasImages=true&q=painting`
-* Simular paginação (15 por vez) usando slices do array de `objectIDs`
+- Utilizar a API: `GET /public/collection/v1/search?hasImages=true&q=painting`
+- Simular paginação (15 por vez) usando slices do array de `objectIDs`
 
 ### 2. **Detalhes de Obra**
 
-* Buscar detalhes de uma obra: `GET /public/collection/v1/objects/{objectID}`
-* Exibir: imagem, título, artista, data, técnica, departamento, link para o site oficial
+- Buscar detalhes de uma obra: `GET /public/collection/v1/objects/{objectID}`
+- Exibir: imagem, título, artista, data, técnica, departamento, link para o site oficial
 
 ### 3. **Favoritar Obras**
 
-* Botão para marcar/desmarcar favoritos
-* Persistir localmente (no browser usando `localStorage` ou `IndexedDB`)
+- Botão para marcar/desmarcar favoritos
+- Persistir localmente (no browser usando `localStorage` ou `IndexedDB`)
 
 ### 4. **Listar Favoritas**
 
-* Seção ou página dedicada para exibir as obras favoritadas
+- Seção ou página dedicada para exibir as obras favoritadas
 
 ### 5. **Interface Responsiva**
 
-* Design responsivo (preferîncialmente com TailwindCSS ou CSS Modules)
-* Scroll infinito ou botão "carregar mais"
+- Design responsivo (preferîncialmente com TailwindCSS ou CSS Modules)
+- Scroll infinito ou botão "carregar mais"
 
 ---
 
 ## 🚀 Stack Tecnológica
 
-* **Frontend:** React + TypeScript + Axios + TailwindCSS (ou equivalente)
-* **Backend (opcional):** Node.js + Express (poderá ser usado como proxy de requisições ou para features futuras)
+- **Frontend:** React + TypeScript + Axios + TailwindCSS (ou equivalente)
+- **Backend (opcional):** Node.js + Express (poderá ser usado como proxy de requisições ou para features futuras)
 
 ---
 
@@ -60,11 +60,11 @@ Criar uma aplicação web responsiva utilizando **React**, **TypeScript** e **No
 
 ## 📊 Requisitos Desejáveis
 
-* Barra de busca com autocomplete
-* Filtro por departamento ou artista
-* Animações com Framer Motion
-* Dark mode
-* Deploy (ex: Vercel/Netlify para frontend, Render para backend)
+- Barra de busca com autocomplete
+- Filtro por departamento ou artista
+- Animações com Framer Motion
+- Dark mode
+- Deploy (ex: Vercel/Netlify para frontend, Render para backend)
 
 ---
 
@@ -111,9 +111,9 @@ Para padronizar a entrega e facilitar a análise:
 
 ## 📚 Extras
 
-* Pode usar bibliotecas como React Query, Zustand, Redux, etc.
-* Não é necessário criar backend se não for preciso, mas é bem-vindo caso deseje mostrar arquitetura completa.
-* Bonus: testes com Jest + React Testing Library
+- Pode usar bibliotecas como React Query, Zustand, Redux, etc.
+- Não é necessário criar backend se não for preciso, mas é bem-vindo caso deseje mostrar arquitetura completa.
+- Bonus: testes com Jest + React Testing Library
 
 ---
 
@@ -125,5 +125,5 @@ Dados públicos da API do The Met sob [CC0 1.0 Universal](https://creativecommon
 
 ## 📢 Contato
 
-* Autor: Leandro Costa
-* Email: [leandro@jaya.tech](mailto:leandro@jaya.tech)
+- Autor: Leandro Costa
+- Email: [leandro@jaya.tech](mailto:leandro@jaya.tech)

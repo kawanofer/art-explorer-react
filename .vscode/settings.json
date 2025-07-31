@@ -1,0 +1,17 @@
+{
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "eslint.validate": ["javascript", "javascriptreact"],
+    "editor.codeActionsOnSave": {
+      "source.fixAll": "explicit"
+    },
+    "[javascript]": {
+      "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "[javascriptreact]": {
+      "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "testing.automaticallyOpenTestResults": "neverOpen",
+    "prettier.configPath": "./prettier.config.mjs"
+  }
+  
