@@ -10,7 +10,7 @@ interface SearchBoxProps {
 
 const searchTypes = [
   { value: "artist", label: "Artista" },
-  { value: "department", label: "Departamento" }
+  { value: "department", label: "Departamento" },
 ];
 
 export default function SearchBox({ onSearch }: SearchBoxProps) {
@@ -31,7 +31,7 @@ export default function SearchBox({ onSearch }: SearchBoxProps) {
   return (
     <S.Container>
       <TextField
-        label="Search for art"
+        label="Pesquisar arte"
         variant="outlined"
         fullWidth
         value={query}

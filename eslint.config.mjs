@@ -5,6 +5,7 @@ import pluginReactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
 import globals from "globals";
 import tseslint from "typescript-eslint";
+import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
 
 function trimGlobals(obj) {
   return Object.fromEntries(Object.entries(obj).map(([k, v]) => [k.trim(), v]));
@@ -56,7 +57,7 @@ export default [
       "space-before-function-paren": "off",
       "no-tabs": "off",
       "generator-star-spacing": ["off", { before: false, after: false }],
-      "operator-linebreak": ["error", "after"]
+      "operator-linebreak": ["error", "after"],
     },
     settings: {
       react: {
@@ -64,4 +65,5 @@ export default [
       },
     },
   },
+  eslintPluginPrettierRecommended,
 ];

@@ -22,7 +22,7 @@ const customTheme = {
   grey: "#F5F5F5",
   darkGrey: "#E9E9E9",
 
-  fontFamily: "Roboto, 'Open Sans', sans-serif"
+  fontFamily: "Roboto, 'Open Sans', sans-serif",
 };
 
 export default customTheme;
