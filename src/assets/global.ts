@@ -1,6 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
-import theme from "./CustomTheme";
+import theme from "./theme/CustomTheme";
 
 import "react-perfect-scrollbar/dist/css/styles.css";
 

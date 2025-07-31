@@ -17,7 +17,7 @@ const theme = createTheme({
   palette: {
     primary: {
       main: "#1976d2",
-    }
+    },
   },
   components: {
     MuiPagination: {
@@ -30,16 +30,16 @@ const theme = createTheme({
               color: "#ffffff",
               "&:hover": {
                 backgroundColor: "#1565c0",
-              }
+              },
             },
             "&:hover": {
               backgroundColor: "#f3f4f6",
-            }
-          }
+            },
+          },
         },
-      }
+      },
     },
-  }
+  },
 });
 
 const Pagination: React.FC<PaginationProps> = ({

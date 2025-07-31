@@ -11,10 +11,10 @@ export default defineConfig({
       "@mui/material",
       "@emotion/react",
       "@emotion/styled",
-    ]
+    ],
   },
   server: {
     port: 2025,
     open: true, // abre navegador?
-  }
+  },
 });

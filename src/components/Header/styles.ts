@@ -45,7 +45,7 @@ export const Nav = styled.nav`
   gap: 8px;
 `;
 
-export const NavLink = styled.a<{ $isActive?: boolean }>`
+export const NavLink = styled.span<{ $isActive?: boolean }>`
   color: white;
   text-decoration: none;
   padding: 12px 20px;

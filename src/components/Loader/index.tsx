@@ -1,15 +1,14 @@
 import React from "react";
 import * as S from "./styles";
+import { CircularProgress } from "@mui/material";
 
-interface LoaderProps {
-  message?: string;
-}
-
-const Loader: React.FC<LoaderProps> = ({ message = "Loading..." }) => {
+const Loader = () => {
   return (
-    <S.LoaderContainer>
-      <S.LoaderText>{message}</S.LoaderText>
-    </S.LoaderContainer>
+    <S.Container>
+      <S.Content>
+        <CircularProgress />
+      </S.Content>
+    </S.Container>
   );
 };
 

@@ -42,6 +42,7 @@ export default [
       ...pluginReact.configs.recommended.rules,
       "react-hooks/exhaustive-deps": "warn",
       "comma-dangle": ["error", "never"],
+      "prettier/prettier": "error",
       "object-curly-newline": [
         "error",
         { consistent: true, minProperties: 10 },
@@ -55,8 +56,7 @@ export default [
       "space-before-function-paren": "off",
       "no-tabs": "off",
       "generator-star-spacing": ["off", { before: false, after: false }],
-      "operator-linebreak": ["error", "after"],
-      "prettier/prettier": "error",
+      "operator-linebreak": ["error", "after"]
     },
     settings: {
       react: {

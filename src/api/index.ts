@@ -21,7 +21,7 @@ interface ArtworkDetail {
 export const fetchArtworkWithImages = async (): Promise<number[]> => {
   try {
     const response = await axios.get(
-      `${BASE_URL}/public/collection/v1/search?hasImages=true&q=painting`
+      `${BASE_URL}/public/collection/v1/search?hasImages=true&q=painting`,
     );
     return response.data.objectIDs;
   } catch (error) {
@@ -34,7 +34,7 @@ export const fetchArtworkWithImages = async (): Promise<number[]> => {
   Detalhes de uma obra	GET /public/collection/v1/objects/{objectID}
 */
 export const fetchArtworkDetail = async (
-  objectID: number
+  objectID: number,
 ): Promise<ArtworkDetail | null> => {
   try {
     const response = await axios.get<ArtworkDetail>(
@@ -61,7 +61,7 @@ export const fetchArtworkByArtist = async (
     const artworkPromises = response.data.objectIDs.map((id) =>
       axios.get<ArtworkDetail>(
         `${BASE_URL}/public/collection/v1/objects/${id}`,
-      )
+      ),
     );
 
     const artworks = await axios.all(artworkPromises);
@@ -104,7 +104,7 @@ export const fetchArtworkByDepartment = async (
     const artworkPromises = response.data.objectIDs.map((id) =>
       axios.get<ArtworkDetail>(
         `${BASE_URL}/public/collection/v1/objects/${id}`,
-      )
+      ),
     );
 
     const artworks = await axios.all(artworkPromises);

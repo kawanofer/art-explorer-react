@@ -16,7 +16,7 @@ const menuItems: MenuItem[] = [
   {
     label: "Favoritas",
     to: "/favorites",
-  }
+  },
 ];
 
 export default function Header() {

@@ -33,6 +33,6 @@ export default defineConfig({
         "**/src/main.{js,jsx,ts,tsx}", // Ignora ponto de entrada da aplicação
       ],
       reporter: ["text", "json", "html"], // Formatos de relatório
-    }
-  }
+    },
+  },
 });

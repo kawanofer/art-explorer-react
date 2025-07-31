@@ -1,15 +1,18 @@
 import styled from "styled-components";
+import theme from "../../assets/theme/CustomTheme";
 
-export const LoaderContainer = styled.div`
+export const Container = styled.div`
+  position: fixed;
+  inset: 0;
+  background: ${theme.grey}cc;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  background-color: #f9fafb;
+  z-index: 9999;
 `;
 
-export const LoaderText = styled.div`
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #374151;
+export const Content = styled.span`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

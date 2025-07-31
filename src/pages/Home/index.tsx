@@ -3,7 +3,10 @@ import { fetchArtworkWithImages, fetchArtworkDetail } from "../../api";
 import Loader from "../../components/Loader";
 import Error from "../../components/Error";
 import Pagination from "../../components/Pagination";
+import Title from "../../components/Title";
 import * as S from "./styles";
+import SearchBox from "../../components/SearchBox";
+import { Divider } from "@mui/material";
 
 interface ArtworkDetail {
   objectID: number;
@@ -30,7 +33,6 @@ const Home = () => {
       try {
         setLoading(true);
         const artworkIds = await fetchArtworkWithImages();
-        console.log("ArtworkIds: ", artworkIds);
 
         setTotalArtworks(artworkIds.length);
 
@@ -38,8 +40,6 @@ const Home = () => {
         const startIndex = (currentPage - 1) * itemsPerPage;
         const endIndex = startIndex + itemsPerPage;
         const limitedIds = artworkIds.slice(startIndex, endIndex);
-
-        console.log("LimitedIds: ", limitedIds);
 
         const artworkPromises = limitedIds.map((id) => fetchArtworkDetail(id));
         const artworkResults = await Promise.all(artworkPromises);
@@ -49,11 +49,10 @@ const Home = () => {
           (artwork): artwork is ArtworkDetail =>
             artwork !== null && artwork.primaryImageSmall !== "",
         );
-
-        console.log("VALID ARTWORKS: ", validArtworks);
         setArtworks(validArtworks);
       } catch (err) {
         setError("Failed to fetch artworks");
+        console.error("Error fetching artworks:", err);
       } finally {
         setLoading(false);
       }
@@ -63,7 +62,7 @@ const Home = () => {
   }, [currentPage]);
 
   if (loading) {
-    return <Loader message="Loading artworks..." />;
+    return <Loader />;
   }
 
   if (error) {
@@ -74,12 +73,19 @@ const Home = () => {
     setCurrentPage(page);
   };
 
+  const onSearch = async (query: string, searchType: string) => {
+    console.log("Search query: ", query);
+    console.log("Search type: ", searchType);
+  };
+
   const totalPages = Math.ceil(totalArtworks / itemsPerPage);
 
   return (
     <S.Container>
       <S.Content>
-        <S.Title>Obras</S.Title>
+        <Title>Obras</Title>
+        <SearchBox onSearch={onSearch}></SearchBox>
+        <Divider sx={{ margin: "20px 0" }} />
         <S.ArtworkGrid>
           {artworks.map((artwork) => (
             <S.ArtworkCard key={artwork.objectID}>
