@@ -12,6 +12,9 @@
       "editor.defaultFormatter": "vscode.typescript-language-features"
     },
     "testing.automaticallyOpenTestResults": "neverOpen",
-    "prettier.configPath": "./prettier.config.mjs"
+    "prettier.configPath": "./prettier.config.mjs",
+    "[typescriptreact]": {
+      "editor.defaultFormatter": "vscode.typescript-language-features"
+    }
   }
   

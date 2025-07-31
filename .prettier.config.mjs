@@ -1,32 +1,32 @@
 // prettier.config.mjs
-import pluginSortImports from '@trivago/prettier-plugin-sort-imports'
+import pluginSortImports from "@trivago/prettier-plugin-sort-imports";
 
 export default {
-  arrowParens: 'always',
+  arrowParens: "always",
   bracketSameLine: true,
   bracketSpacing: true,
   experimentalTernaries: true,
   jsxSingleQuote: true,
-  quoteProps: 'as-needed',
+  quoteProps: "as-needed",
   semi: false,
   singleAttributePerLine: false,
   singleQuote: true,
   tabWidth: 2,
-  trailingComma: 'none',
+  trailingComma: "none",
   useTabs: false,
-  importOrderParserPlugins: ['jsx', 'decorators-legacy'],
+  importOrderParserPlugins: ["jsx", "decorators-legacy"],
   plugins: [pluginSortImports],
   importOrder: [
-    '^react',
-    '<THIRD_PARTY_MODULES>',
-    '^@mui',
-    '^components',
-    '^store',
-    'constants',
-    '^utils',
-    '^[./]'
+    "^react",
+    "<THIRD_PARTY_MODULES>",
+    "^@mui",
+    "^components",
+    "^store",
+    "constants",
+    "^utils",
+    "^[./]",
   ],
   importOrderSeparation: true,
   importOrderSortSpecifiers: true,
-  importOrderCaseInsensitive: true
-}
+  importOrderCaseInsensitive: true,
+};

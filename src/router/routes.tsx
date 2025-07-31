@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Header from "../components/Header";
-import About from "../pages/About";
+import Favorites from "../pages/Favorites";
 import Home from "../pages/Home";
 
 export function AppRouters() {
@@ -11,7 +11,7 @@ export function AppRouters() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
+        <Route path="/favorites" element={<Favorites />} />
       </Routes>
     </BrowserRouter>
   );
