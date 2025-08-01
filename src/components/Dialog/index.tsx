@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { isEmpty } from "lodash";
 
 import {
@@ -8,6 +8,7 @@ import {
   Box,
   Link,
   IconButton,
+  useTheme,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
@@ -25,6 +26,7 @@ export interface DialogProps {
 export default function ArtDetailDialog(props: DialogProps) {
   const { onClose, open, artDetail } = props;
   const [favorites] = useLocalStorage<number[]>("favorites", []);
+  const theme = useTheme();
 
   if (!artDetail) return null;
 
@@ -40,7 +42,7 @@ export default function ArtDetailDialog(props: DialogProps) {
       aria-describedby="alert-dialog-description"
     >
       <DialogTitle>
-        <strong>{artDetail.title}</strong>
+        <S.DialogTitle>{artDetail.title}</S.DialogTitle>
         <IconButton
           aria-label="close"
           onClick={() => onClose && onClose()}
@@ -65,7 +67,7 @@ export default function ArtDetailDialog(props: DialogProps) {
                 maxHeight: 620,
                 borderRadius: 8,
                 objectFit: "contain",
-                background: "#f3f3f3",
+                background: theme.palette.grey[100],
               }}
               onError={(e) => {
                 (e.target as HTMLImageElement).src =

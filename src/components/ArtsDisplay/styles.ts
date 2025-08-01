@@ -1,3 +1,4 @@
+import theme from "../../assets/theme/CustomTheme";
 import styled from "styled-components";
 
 export const ArtworkGrid = styled.div`
@@ -51,7 +52,7 @@ export const ArtworkTitle = styled.h3`
   font-size: 1.125rem;
   font-weight: 600;
   margin-bottom: 12px;
-  color: #111827;
+  color: ${theme.textPrimary};
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -63,13 +64,16 @@ export const InfoContainer = styled.div`
   gap: 8px;
 `;
 
-export const InfoText = styled.p`
-  font-size: 0.875rem;
-  color: #6b7280;
-  font-weight: 400;
+export const InfoLabel = styled.div`
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: ${theme.textPrimary};
+  margin-bottom: 16px;
+  font-family: ${theme.fontFamilySerif};
 `;
 
-export const InfoLabel = styled.div`
-  font-weight: 500;
-  color: #374151;
+export const InfoText = styled.p`
+  font-size: 0.875rem;
+  color: ${theme.textSecondary};
+  font-weight: normal;
 `;

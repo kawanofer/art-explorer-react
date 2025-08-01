@@ -1,8 +1,9 @@
 import styled from "styled-components";
+import theme from "../../assets/theme/CustomTheme";
 
 export const Container = styled.header`
-  background-color: #e4002b;
-  color: white;
+  background-color: ${theme.textError};
+  color: ${theme.white};
   padding: 0;
   box-shadow: 0 2px 8px rgba(228, 0, 43, 0.3);
   position: sticky;
@@ -46,7 +47,7 @@ export const Nav = styled.nav`
 `;
 
 export const NavLink = styled.span<{ $isActive?: boolean }>`
-  color: white;
+  color: ${theme.white};
   text-decoration: none;
   padding: 12px 20px;
   border-radius: 8px;
@@ -57,19 +58,7 @@ export const NavLink = styled.span<{ $isActive?: boolean }>`
   ${({ $isActive }) =>
     $isActive
       ? `
-        background-color: rgba(255, 255, 255, 0.2);
-        font-weight: 600;
-        &::after {
-          content: '';
-          position: absolute;
-          bottom: 0;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 20px;
-          height: 3px;
-          background-color: white;
-          border-radius: 2px;
-        }
+        font-weight: bold;
       `
       : `
         &:hover {
@@ -83,7 +72,7 @@ export const MobileMenuButton = styled.button`
   display: none;
   background: none;
   border: none;
-  color: white;
+  color: ${theme.white};
   font-size: 1.5rem;
   cursor: pointer;
   padding: 8px;
@@ -114,7 +103,7 @@ export const MobileNav = styled.div<{ $isOpen: boolean }>`
   top: 100%;
   left: 0;
   right: 0;
-  background-color: #e4002b;
+  background-color: ${theme.textError};
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   padding: 16px;
   flex-direction: column;

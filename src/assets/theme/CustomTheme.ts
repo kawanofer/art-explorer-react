@@ -1,28 +1,26 @@
 const customTheme = {
-  primary: "#4286f4",
-  primaryDark: "#004A85",
-  secondary: "#004A85",
-  secondaryDark: "#004A85",
-  background: "#F1F1F1",
-  textPrimary: "#006CAC",
+  /* Cores de Fundo */
+  white: "#FFFFFF",
+  black: "#1A1A1A",
 
-  errorColor: "#d9534f",
-  highlightColor: "rgba(0, 0, 0, 0.05)",
+  /* Cores de Texto */
+  textPrimary: "#1A1A1A",
+  textSecondary: "#4A4A4A",
+  textOnDark: "#F5F5F5",
 
-  fadedPrimarycolor: "#8eb9ff",
-  extraFadedPrimaryColor: "#f2f7ff",
-  secondaryColor: "#04829b",
-  fadedSecondaryColor: "#d5e2e5",
-  tertiaryColor: "#4fa5b5",
+  textError: "#e4002b",
 
-  main: "#2094D3",
-  dark: "#004A85",
-  light: "#6CADDF",
+  /* Cores de Linhas e Bordas */
+  grey: "#E9E9E9",
 
-  grey: "#F5F5F5",
-  darkGrey: "#E9E9E9",
+  /* Cores Interativas / de Destaque */
+  interactivePrimary: "#003366" /* Azul Marinho Escuro */,
+  interactiveHover: "#004080" /* Azul Marinho um pouco mais claro para hover */,
+  accentSubtle: "#B8860B" /* Dourado/Bronze - Opcional */,
 
-  fontFamily: "Roboto, 'Open Sans', sans-serif",
+  /* Fontes */
+  fontFamilySerif: "'Playfair Display', serif" /* Para títulos */,
+  fontFamily: "'Inter', sans-serif" /* Para corpo do texto e UI */,
 };
 
 export default customTheme;

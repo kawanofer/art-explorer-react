@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import theme from "../../assets/theme/CustomTheme";
 
 export const PaginationContainer = styled.div`
   display: flex;
@@ -16,7 +17,7 @@ export const PaginationComponent = styled.div`
 
 export const PaginationInfo = styled.div`
   font-size: 0.875rem;
-  color: #6b7280;
+  color: ${theme.grey};
   text-align: center;
 
   span {

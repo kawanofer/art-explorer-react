@@ -1,3 +1,4 @@
+import theme from "../../assets/theme/CustomTheme";
 import styled from "styled-components";
 
 export const DialogContent = styled.div`
@@ -7,12 +8,18 @@ export const DialogContent = styled.div`
 `;
 
 export const Title = styled.div`
-  font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
+  color: ${theme.textPrimary};
 `;
 
 export const Description = styled.div`
   font-weight: normal;
   font-size: 1rem;
-  color: #333;
+  color: ${theme.textSecondary};
+`;
+
+export const DialogTitle = styled.div`
+  color: ${theme.textPrimary};
+  font-family: ${theme.fontFamilySerif};
+  font-weight: bold;
 `;

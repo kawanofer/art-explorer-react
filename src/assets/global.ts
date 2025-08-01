@@ -16,9 +16,9 @@ export default createGlobalStyle`
 
   body {
     background: ${theme.white};
-    color: ${theme.textColor};
+    color: ${theme.textPrimary};
     font-size: 14px;
-    font-family: Helvetica Neue, Helvetica, Arial;
+    font-family: ${theme.fontFamily};
     -webkit-font-smoothing: antialiased !important;
   }
 
@@ -30,7 +30,7 @@ export default createGlobalStyle`
 
 
   body, input, button {
-    font-family: Helvetica Neue, Helvetica, Arial;
+    font-family: ${theme.fontFamily};
   }
 
   a {

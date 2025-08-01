@@ -141,15 +141,13 @@ const Home = () => {
         <Title>Obras</Title>
         <SearchBox onSearch={onSearch}></SearchBox>
         <ArtsDisplay artworks={artworks} onArtClick={handleArtClick} />
-        {artworks.length > 0 && (
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={handlePageChange}
-            itemsPerPage={itemsPerPage}
-            totalItems={totalArtworks}
-          />
-        )}
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+          itemsPerPage={itemsPerPage}
+          totalItems={totalArtworks}
+        />
       </S.Content>
 
       {selectedArt && (

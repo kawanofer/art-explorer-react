@@ -1,15 +1,11 @@
 import React from "react";
-import {
-  Card,
-  CardContent,
-  CardMedia,
-  Typography,
-  Box,
-  Grid,
-} from "@mui/material";
+import { Card, CardContent, CardMedia, Box, Grid } from "@mui/material";
 import { isEmpty } from "lodash";
 import FavoriteIcon from "../FavoriteIcon";
 import useLocalStorage from "../../hooks/useLocalStorage";
+import { useTheme } from "@mui/material/styles";
+
+import * as S from "./styles";
 
 interface Artwork {
   objectID: number;
@@ -30,6 +26,7 @@ export default function ArtsDisplay({
   onArtClick,
 }: ArtsDisplayProps) {
   const [favorites] = useLocalStorage<number[]>("favorites", []);
+  const theme = useTheme();
 
   return (
     <Grid container spacing={3}>
@@ -63,11 +60,11 @@ export default function ArtsDisplay({
                   position: "absolute",
                   top: 8,
                   right: 8,
-                  backgroundColor: "rgba(255, 255, 255, 0.9)",
+                  backgroundColor: theme.palette.background.paper,
                   borderRadius: "50%",
                   padding: "4px",
                   backdropFilter: "blur(4px)",
-                  boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
+                  boxShadow: theme.shadows[2],
                 }}
               >
                 <FavoriteIcon
@@ -77,22 +74,10 @@ export default function ArtsDisplay({
               </Box>
             </Box>
             <CardContent>
-              <Typography
-                gutterBottom
-                variant="h6"
-                component="div"
-                sx={{
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                  whiteSpace: "nowrap",
-                  fontWeight: 600,
-                }}
-              >
-                {artwork.title}
-              </Typography>
+              <S.InfoLabel>{artwork.title}</S.InfoLabel>
               <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
                 {!isEmpty(artwork.constituents) && (
-                  <Typography variant="body2" color="text.secondary">
+                  <S.InfoText>
                     {(artwork.constituents ?? []).map((artist, index) => (
                       <span key={index}>
                         {artist.name}
@@ -101,17 +86,13 @@ export default function ArtsDisplay({
                         )}
                       </span>
                     ))}
-                  </Typography>
+                  </S.InfoText>
                 )}
                 {!isEmpty(artwork.objectDate) && (
-                  <Typography variant="body2" color="text.secondary">
-                    {artwork.objectDate}
-                  </Typography>
+                  <S.InfoText>{artwork.objectDate}</S.InfoText>
                 )}
                 {!isEmpty(artwork.department) && (
-                  <Typography variant="body2" color="text.secondary">
-                    {artwork.department}
-                  </Typography>
+                  <S.InfoText>{artwork.department}</S.InfoText>
                 )}
               </Box>
             </CardContent>
