@@ -1,7 +1,6 @@
 import axios from "axios";
 
-const BASE_URL =
-  import.meta.env.VITE_BASE_URL || "https://collectionapi.metmuseum.org";
+const BASE_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:3001";
 
 interface ArtworkDetail {
   objectID: number;
@@ -16,14 +15,16 @@ interface ArtworkDetail {
 }
 
 /*
-  Buscar obras com imagens	GET /public/collection/v1/search?hasImages=true&q=painting
+  Buscar obras com imagens  GET /api/artworks/search/images
 */
-export const fetchArtworkWithImages = async (): Promise<number[]> => {
+export const fetchArtworkWithImages = async (
+  query: string = "painting",
+): Promise<number[]> => {
   try {
     const response = await axios.get(
-      `${BASE_URL}/public/collection/v1/search?hasImages=true&q=painting`,
+      `${BASE_URL}/api/artworks/search/images?q=${encodeURIComponent(query)}`,
     );
-    return response.data.objectIDs;
+    return response.data;
   } catch (error) {
     console.error("Error fetching artwork IDs:", error);
     return [];
@@ -31,14 +32,14 @@ export const fetchArtworkWithImages = async (): Promise<number[]> => {
 };
 
 /*
-  Detalhes de uma obra	GET /public/collection/v1/objects/{objectID}
+  Detalhes de uma obra  GET /api/artworks/:objectID
 */
 export const fetchArtworkDetail = async (
   objectID: number,
 ): Promise<ArtworkDetail | null> => {
   try {
     const response = await axios.get<ArtworkDetail>(
-      `${BASE_URL}/public/collection/v1/objects/${objectID}`,
+      `${BASE_URL}/api/artworks/${objectID}`,
     );
     return response.data;
   } catch (error) {
@@ -48,24 +49,16 @@ export const fetchArtworkDetail = async (
 };
 
 /*
-  Buscar por artista/cultura	GET /public/collection/v1/search?artistOrCulture=true&q=van+gogh
+  Buscar por artista/cultura  GET /api/artworks/search/artist?q=van+gogh
 */
 export const fetchArtworkByArtist = async (
   artistName: string,
 ): Promise<ArtworkDetail[] | null> => {
   try {
-    const response = await axios.get<{ objectIDs: number[] }>(
-      `${BASE_URL}/public/collection/v1/search?artistOrCulture=true&q=${encodeURIComponent(artistName)}`,
+    const response = await axios.get<ArtworkDetail[]>(
+      `${BASE_URL}/api/artworks/search/artist?q=${encodeURIComponent(artistName)}`,
     );
-
-    const artworkPromises = response.data.objectIDs.map((id) =>
-      axios.get<ArtworkDetail>(
-        `${BASE_URL}/public/collection/v1/objects/${id}`,
-      ),
-    );
-
-    const artworks = await axios.all(artworkPromises);
-    return artworks.map((response) => response.data);
+    return response.data;
   } catch (error) {
     console.error(`Error fetching artworks for artist ${artistName}:`, error);
     return null;
@@ -73,16 +66,19 @@ export const fetchArtworkByArtist = async (
 };
 
 /*
-  Listar departamentos	GET /public/collection/v1/departments
+  Listar departamentos  GET /api/departments
 */
 export const fetchDepartments = async (): Promise<
   { departmentId: number; displayName: string }[] | null
 > => {
   try {
-    const response = await axios.get<{
-      departments: { departmentId: number; displayName: string }[];
-    }>(`${BASE_URL}/public/collection/v1/departments`);
-    return response.data.departments;
+    const response = await axios.get<
+      {
+        departmentId: number;
+        displayName: string;
+      }[]
+    >(`${BASE_URL}/api/departments`);
+    return response.data;
   } catch (error) {
     console.error("Error fetching departments:", error);
     return null;
@@ -90,25 +86,17 @@ export const fetchDepartments = async (): Promise<
 };
 
 /*
-  Buscar por departamento	GET /public/collection/v1/search?departmentId=11&q=portrait
+  Buscar por departamento GET /api/artworks/search/department?departmentId=11&q=portrait
 */
 export const fetchArtworkByDepartment = async (
   departmentId: number,
   query: string,
 ): Promise<ArtworkDetail[] | null> => {
   try {
-    const response = await axios.get<{ objectIDs: number[] }>(
-      `${BASE_URL}/public/collection/v1/search?departmentId=${departmentId}&q=${encodeURIComponent(query)}`,
+    const response = await axios.get<ArtworkDetail[]>(
+      `${BASE_URL}/api/artworks/search/department?departmentId=${departmentId}&q=${encodeURIComponent(query)}`,
     );
-
-    const artworkPromises = response.data.objectIDs.map((id) =>
-      axios.get<ArtworkDetail>(
-        `${BASE_URL}/public/collection/v1/objects/${id}`,
-      ),
-    );
-
-    const artworks = await axios.all(artworkPromises);
-    return artworks.map((response) => response.data);
+    return response.data;
   } catch (error) {
     console.error(
       `Error fetching artworks for department ${departmentId}:`,

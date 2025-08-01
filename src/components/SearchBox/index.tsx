@@ -1,8 +1,14 @@
 import React, { useState } from "react";
-import { TextField, Button, Divider } from "@mui/material";
+import {
+  FormControlLabel,
+  Radio,
+  RadioGroup,
+  TextField,
+  Button,
+  Divider,
+} from "@mui/material";
 
 import * as S from "./styles";
-import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
 
 interface SearchBoxProps {
   onSearch?: (query: string, searchType: string) => void;

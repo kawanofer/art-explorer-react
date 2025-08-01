@@ -12,6 +12,7 @@ import Title from "../../components/Title";
 
 import { fetchArtworkDetail } from "../../api/arts";
 import { fetchArtworkIds } from "../../redux/artsSlice";
+import { addDetailArts } from "../../redux/detailsArtSlice";
 import type { RootState, AppDispatch } from "../../redux/store";
 
 import * as S from "./styles";
@@ -23,7 +24,7 @@ interface constituentsProps {
 
 interface ArtworkItemsProps {
   additionalImages: string[];
-  constituents: constituentsProps[];
+  constituents?: constituentsProps[];
   artistDisplayName: string;
   artistPrefix: string;
   department: string;
@@ -43,9 +44,13 @@ const Home = () => {
     (state: RootState) => state.arts,
   );
 
+  const detailArts = useSelector(
+    (state: RootState) => state.detailsArt.detailArts,
+  );
+
   const [artworks, setArtworks] = useState<ArtworkItemsProps[]>([]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [artSelected, setArtSelected] = useState<ArtworkItemsProps>();
+  const [selectedArt, setSelectedArt] = useState<ArtworkItemsProps>();
 
   const [currentPage, setCurrentPage] = useState(1);
   const [totalArtworks, setTotalArtworks] = useState(0);
@@ -65,6 +70,8 @@ const Home = () => {
 
         setTotalArtworks(artworkIds?.length);
 
+        console.log("CurrentPage:", currentPage);
+
         // Calculate pagination
         const startIndex = (currentPage - 1) * itemsPerPage;
         const endIndex = startIndex + itemsPerPage;
@@ -73,7 +80,9 @@ const Home = () => {
         const artworkPromises = limitedIds.map((id: number) =>
           fetchArtworkDetail(id),
         );
+
         const artworkResults = await Promise.all(artworkPromises);
+        console.log("-> ArtworkResults: ", artworkResults);
 
         // Filter out null results and artworks without images
         const validArtworks = artworkResults.filter(
@@ -83,6 +92,10 @@ const Home = () => {
             artwork.primaryImageSmall !== "",
         );
 
+        console.log("-> ValidArtworks: ", validArtworks);
+
+        dispatch(addDetailArts(validArtworks));
+
         setArtworks(validArtworks);
       } catch (err) {
         console.error("Error fetching artworks:", err);
@@ -90,7 +103,7 @@ const Home = () => {
     };
 
     fetchArtworks();
-  }, [artworkIds, currentPage]);
+  }, [artworkIds, currentPage, dispatch]);
 
   if (loading) return <Loader />;
 
@@ -108,19 +121,19 @@ const Home = () => {
   const totalPages = Math.ceil(totalArtworks / itemsPerPage);
 
   const handleArtClick = (artwork: ArtworkItemsProps) => {
-    const constituents = artwork.constituents.filter(
+    const constituents = artwork.constituents?.filter(
       (constituent) => constituent.role === "Artist",
     );
 
     const artworkFilteredByConstituents = { ...artwork, constituents };
 
-    setArtSelected(artworkFilteredByConstituents);
+    setSelectedArt(artworkFilteredByConstituents);
     setIsDialogOpen(true);
   };
 
   const handleCloseDialog = () => {
     setIsDialogOpen(false);
-    setArtSelected(undefined);
+    setSelectedArt(undefined);
   };
 
   return (
@@ -140,10 +153,10 @@ const Home = () => {
         )}
       </S.Content>
 
-      {artSelected && (
+      {selectedArt && (
         <DialogDetails
           open={isDialogOpen}
-          artDetail={artSelected}
+          artDetail={selectedArt}
           onClose={handleCloseDialog}
         />
       )}

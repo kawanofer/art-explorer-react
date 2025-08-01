@@ -4,13 +4,14 @@ import {
   Dialog,
   DialogContent,
   DialogActions,
-  Button,
   Box,
   Link,
   IconButton,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { isEmpty } from "lodash";
+
+import FavoriteIcon from "../FavoriteIcon";
 
 import * as S from "./styles";
 
@@ -133,13 +134,7 @@ export default function SimpleDialog(props: DialogProps) {
         </Box>
       </DialogContent>
       <DialogActions>
-        <Button
-          onClick={() => onClose && onClose()}
-          variant="contained"
-          color="primary"
-        >
-          Fechar
-        </Button>
+        <FavoriteIcon isFavorite={false} />
       </DialogActions>
     </Dialog>
   );
