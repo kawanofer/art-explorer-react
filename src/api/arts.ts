@@ -23,7 +23,6 @@ export const fetchArtworkWithImages = async (): Promise<number[]> => {
     const response = await axios.get(
       `${BASE_URL}/public/collection/v1/search?hasImages=true&q=painting`,
     );
-    console.log("ENDPOINT: ", response);
     return response.data.objectIDs;
   } catch (error) {
     console.error("Error fetching artwork IDs:", error);

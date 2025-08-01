@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useArtworkWithImages } from "../../api/queries";
 import { fetchArtworkDetail } from "../../api/arts";
 
+import { isEmpty } from "lodash";
 import Loader from "../../components/Loader";
 import Error from "../../components/Error";
 import Pagination from "../../components/Pagination";
@@ -9,24 +10,39 @@ import Title from "../../components/Title";
 import * as S from "./styles";
 import SearchBox from "../../components/SearchBox";
 import { Divider } from "@mui/material";
+import DialogDetails from "../../components/Dialog";
+import toast from "react-hot-toast";
 
-interface ArtworkDetail {
-  objectID: number;
-  title: string;
+interface constituentsProps {
+  name: string;
+  role: string;
+}
+
+interface ArtworkItemsProps {
+  additionalImages: string[];
+  constituents: constituentsProps[];
   artistDisplayName: string;
-  objectDate: string;
-  medium: string;
+  artistPrefix: string;
   department: string;
+  dimensions: string;
+  medium: string;
+  objectDate: string;
+  objectID: number;
+  objectURL: string;
   primaryImage: string;
   primaryImageSmall: string;
-  objectURL: string;
+  title: string;
 }
 
 const Home = () => {
   const { data: artworkIds, isLoading, error } = useArtworkWithImages();
 
-  const [artworks, setArtworks] = useState<ArtworkDetail[]>([]);
+  const [artworks, setArtworks] = useState<ArtworkItemsProps[]>([]);
   const [loading, setLoading] = useState(true);
+
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [artSelected, setArtSelected] = useState<ArtworkItemsProps>();
+
   const [currentPage, setCurrentPage] = useState(1);
   const [totalArtworks, setTotalArtworks] = useState(0);
   const itemsPerPage = 12;
@@ -37,7 +53,8 @@ const Home = () => {
         setLoading(true);
 
         if (!artworkIds) {
-          throw new Error("No artwork IDs found");
+          toast.error("Nenhuma obra encontrada com imagens.");
+          return;
         }
 
         setTotalArtworks(artworkIds?.length);
@@ -54,9 +71,12 @@ const Home = () => {
 
         // Filter out null results and artworks without images
         const validArtworks = artworkResults.filter(
-          (artwork): artwork is ArtworkDetail =>
-            artwork !== null && artwork.primaryImageSmall !== "",
+          (artwork): artwork is ArtworkItemsProps =>
+            artwork !== null &&
+            typeof artwork.primaryImageSmall === "string" &&
+            artwork.primaryImageSmall !== "",
         );
+
         setArtworks(validArtworks);
       } catch (err) {
         console.error("Error fetching artworks:", err);
@@ -87,6 +107,22 @@ const Home = () => {
 
   const totalPages = Math.ceil(totalArtworks / itemsPerPage);
 
+  const handleDetailsClick = (artwork: ArtworkItemsProps) => {
+    const constituents = artwork.constituents.filter(
+      (constituent) => constituent.role === "Artist",
+    );
+
+    const artworkFilteredByConstituents = { ...artwork, constituents };
+
+    setArtSelected(artworkFilteredByConstituents);
+    setIsDialogOpen(true);
+  };
+
+  const handleCloseDialog = () => {
+    setIsDialogOpen(false);
+    setArtSelected(undefined);
+  };
+
   return (
     <S.Container>
       <S.Content>
@@ -95,7 +131,10 @@ const Home = () => {
         <Divider sx={{ margin: "20px 0" }} />
         <S.ArtworkGrid>
           {artworks.map((artwork) => (
-            <S.ArtworkCard key={artwork.objectID}>
+            <S.ArtworkCard
+              key={artwork.objectID}
+              onClick={() => handleDetailsClick(artwork)}
+            >
               <S.ImageContainer>
                 <S.ArtworkImage
                   src={artwork.primaryImageSmall}
@@ -109,19 +148,22 @@ const Home = () => {
               <S.CardContent>
                 <S.ArtworkTitle>{artwork.title}</S.ArtworkTitle>
                 <S.InfoContainer>
-                  <S.InfoText>
-                    <S.InfoLabel>Artist:</S.InfoLabel>{" "}
-                    {artwork.artistDisplayName}
-                  </S.InfoText>
-                  <S.InfoText>
-                    <S.InfoLabel>Date:</S.InfoLabel> {artwork.objectDate}
-                  </S.InfoText>
-                  <S.InfoText>
-                    <S.InfoLabel>Medium:</S.InfoLabel> {artwork.medium}
-                  </S.InfoText>
-                  <S.InfoText>
-                    <S.InfoLabel>Department:</S.InfoLabel> {artwork.department}
-                  </S.InfoText>
+                  {!isEmpty(artwork.constituents) && (
+                    <S.InfoText>
+                      {artwork.constituents.map((artist, index) => (
+                        <span key={index}>
+                          {artist.name}
+                          <br />
+                        </span>
+                      ))}
+                    </S.InfoText>
+                  )}
+                  {!isEmpty(artwork.objectDate) && (
+                    <S.InfoText>{artwork.objectDate}</S.InfoText>
+                  )}
+                  {!isEmpty(artwork.department) && (
+                    <S.InfoText>{artwork.department}</S.InfoText>
+                  )}
                 </S.InfoContainer>
               </S.CardContent>
             </S.ArtworkCard>
@@ -137,6 +179,14 @@ const Home = () => {
           />
         )}
       </S.Content>
+
+      {artSelected && (
+        <DialogDetails
+          open={isDialogOpen}
+          artDetail={artSelected}
+          onClose={handleCloseDialog}
+        />
+      )}
     </S.Container>
   );
 };

@@ -38,6 +38,7 @@ export const ArtworkCard = styled.div`
   overflow: hidden;
   transition: all 0.3s ease;
   transform: translateY(0);
+  cursor: pointer;
 
   &:hover {
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
@@ -84,9 +85,10 @@ export const InfoContainer = styled.div`
 export const InfoText = styled.p`
   font-size: 0.875rem;
   color: #6b7280;
+  font-weight: 400;
 `;
 
-export const InfoLabel = styled.span`
+export const InfoLabel = styled.div`
   font-weight: 500;
   color: #374151;
 `;
