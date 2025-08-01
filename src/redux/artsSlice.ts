@@ -18,7 +18,6 @@ export const fetchArtworkIds = createAsyncThunk<number[]>(
   async (_, { rejectWithValue }) => {
     try {
       const ids = await fetchArtworkWithImages();
-      console.log("Fetched artwork IDs:", ids.length);
       return ids || [];
     } catch (error: any) {
       return rejectWithValue(error.message || "Erro ao buscar IDs das obras");

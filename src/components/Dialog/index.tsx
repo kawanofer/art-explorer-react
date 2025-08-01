@@ -9,36 +9,12 @@ import {
   Link,
   IconButton,
 } from "@mui/material";
-
 import CloseIcon from "@mui/icons-material/Close";
 
-import useLocalStorage from "../../hooks/useLocalStorage";
-
-import FavoriteIcon from "../FavoriteIcon";
-
 import * as S from "./styles";
-import { toast } from "react-hot-toast";
-
-interface constituentsProps {
-  name: string;
-  role: string;
-}
-
-interface ArtworkDetailProps {
-  additionalImages: string[];
-  constituents: constituentsProps[];
-  artistPrefix: string;
-  artistRole?: string;
-  department: string;
-  dimensions: string;
-  medium: string;
-  objectDate: string;
-  objectID: number;
-  objectURL: string;
-  primaryImage: string;
-  primaryImageSmall: string;
-  title: string;
-}
+import FavoriteIcon from "../FavoriteIcon";
+import useLocalStorage from "../../hooks/useLocalStorage";
+import type { ArtworkDetailProps } from "../../types/artwork";
 
 export interface DialogProps {
   open: boolean;
@@ -46,23 +22,13 @@ export interface DialogProps {
   onClose: (value?: string) => void;
 }
 
-export default function SimpleDialog(props: DialogProps) {
+export default function ArtDetailDialog(props: DialogProps) {
   const { onClose, open, artDetail } = props;
-  const [favorites, setFavorites] = useLocalStorage<number[]>("favorites", []);
+  const [favorites] = useLocalStorage<number[]>("favorites", []);
 
   if (!artDetail) return null;
 
   const isFavorite = favorites.includes(artDetail.objectID);
-
-  const handleClickFavorite = (action: 'add' | 'remove') => {
-    if (action === 'add') {
-      setFavorites([...favorites, artDetail.objectID]);
-      toast.success("Obra adicionada aos favoritos!");
-    } else {
-      setFavorites(favorites.filter(id => id !== artDetail.objectID));
-      toast.success("Obra removida dos favoritos!");
-    }
-  };
 
   return (
     <Dialog
@@ -109,7 +75,10 @@ export default function SimpleDialog(props: DialogProps) {
           </Box>
           <Box flex={1} gap={2} display="flex" flexDirection="column">
             <div style={{ display: "flex", justifyContent: "flex-end" }}>
-              <FavoriteIcon isFavorite={isFavorite} onClickFavorite={handleClickFavorite} />
+              <FavoriteIcon
+                isFavorite={isFavorite}
+                objectId={artDetail.objectID}
+              />
             </div>
 
             {!isEmpty(artDetail.constituents) && (

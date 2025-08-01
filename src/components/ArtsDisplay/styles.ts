@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const ArtworkGrid = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
   gap: 24px;
 `;
 
@@ -17,30 +16,31 @@ export const ArtworkCard = styled.div`
     0 10px 15px -3px rgba(0, 0, 0, 0.1),
     0 4px 6px -2px rgba(0, 0, 0, 0.05);
   overflow: hidden;
-  transition: all 0.3s ease;
-  transform: translateY(0);
   cursor: pointer;
-
-  &:hover {
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-    transform: translateY(-4px);
-  }
 `;
 
 export const ImageContainer = styled.div`
+  position: relative;
   aspect-ratio: 1;
   overflow: hidden;
+`;
+
+export const FavoriteIconContainer = styled.div`
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  padding: 4px;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 `;
 
 export const ArtworkImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
-
-  &:hover {
-    transform: scale(1.05);
-  }
 `;
 
 export const CardContent = styled.div`

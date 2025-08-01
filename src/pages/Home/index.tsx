@@ -14,29 +14,13 @@ import { fetchArtworkDetail } from "../../api/arts";
 import { fetchArtworkIds } from "../../redux/artsSlice";
 import { addDetailArts } from "../../redux/detailsArtSlice";
 import type { RootState, AppDispatch } from "../../redux/store";
+import type {
+  ArtworkItemsProps,
+  ArtworkDisplayProps,
+  ArtworkDetailProps,
+} from "../../types/artwork";
 
 import * as S from "./styles";
-
-interface constituentsProps {
-  name: string;
-  role: string;
-}
-
-interface ArtworkItemsProps {
-  additionalImages: string[];
-  constituents?: constituentsProps[];
-  artistDisplayName: string;
-  artistPrefix: string;
-  department: string;
-  dimensions: string;
-  medium: string;
-  objectDate: string;
-  objectID: number;
-  objectURL: string;
-  primaryImage: string;
-  primaryImageSmall: string;
-  title: string;
-}
 
 const Home = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -44,13 +28,10 @@ const Home = () => {
     (state: RootState) => state.arts,
   );
 
-  const detailArts = useSelector(
-    (state: RootState) => state.detailsArt.detailArts,
-  );
-
-  const [artworks, setArtworks] = useState<ArtworkItemsProps[]>([]);
+  const [artworks, setArtworks] = useState<ArtworkDisplayProps[]>([]);
+  const [fullArtworks, setFullArtworks] = useState<ArtworkItemsProps[]>([]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [selectedArt, setSelectedArt] = useState<ArtworkItemsProps>();
+  const [selectedArt, setSelectedArt] = useState<ArtworkDetailProps>();
 
   const [currentPage, setCurrentPage] = useState(1);
   const [totalArtworks, setTotalArtworks] = useState(0);
@@ -70,8 +51,6 @@ const Home = () => {
 
         setTotalArtworks(artworkIds?.length);
 
-        console.log("CurrentPage:", currentPage);
-
         // Calculate pagination
         const startIndex = (currentPage - 1) * itemsPerPage;
         const endIndex = startIndex + itemsPerPage;
@@ -82,7 +61,6 @@ const Home = () => {
         );
 
         const artworkResults = await Promise.all(artworkPromises);
-        console.log("-> ArtworkResults: ", artworkResults);
 
         // Filter out null results and artworks without images
         const validArtworks = artworkResults.filter(
@@ -94,9 +72,22 @@ const Home = () => {
 
         dispatch(addDetailArts(validArtworks));
 
-        setArtworks(validArtworks);
-      } catch (err) {
-        console.error("Error fetching artworks:", err);
+        // Store full artworks data
+        setFullArtworks(validArtworks);
+
+        // Map to the format expected by ArtsDisplay component
+        const mappedArtworks = validArtworks.map((artwork) => ({
+          objectID: artwork.objectID,
+          primaryImageSmall: artwork.primaryImageSmall,
+          title: artwork.title,
+          constituents: artwork.constituents,
+          objectDate: artwork.objectDate,
+          department: artwork.department,
+        }));
+
+        setArtworks(mappedArtworks);
+      } catch {
+        // Error fetching artworks - silently handle
       }
     };
 
@@ -111,21 +102,31 @@ const Home = () => {
     setCurrentPage(page);
   };
 
-  const onSearch = async (query: string, searchType: string) => {
-    console.log("Search query: ", query);
-    console.log("Search type: ", searchType);
+  const onSearch = () => {
+    // Search functionality to be implemented later
   };
 
   const totalPages = Math.ceil(totalArtworks / itemsPerPage);
 
-  const handleArtClick = (artwork: ArtworkItemsProps) => {
-    const constituents = artwork.constituents?.filter(
-      (constituent) => constituent.role === "Artist",
+  const handleArtClick = (artwork: ArtworkDisplayProps) => {
+    // Find the full artwork data from fullArtworks
+    const fullArtwork = fullArtworks.find(
+      (item) => item.objectID === artwork.objectID,
     );
 
-    const artworkFilteredByConstituents = { ...artwork, constituents };
+    if (!fullArtwork) return;
 
-    setSelectedArt(artworkFilteredByConstituents);
+    const constituents =
+      fullArtwork.constituents?.filter(
+        (constituent) => constituent.role === "Artist",
+      ) || [];
+
+    const artworkForDialog: ArtworkDetailProps = {
+      ...fullArtwork,
+      constituents: constituents,
+    };
+
+    setSelectedArt(artworkForDialog);
     setIsDialogOpen(true);
   };
 
