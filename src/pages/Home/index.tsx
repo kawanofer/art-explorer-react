@@ -92,8 +92,6 @@ const Home = () => {
             artwork.primaryImageSmall !== "",
         );
 
-        console.log("-> ValidArtworks: ", validArtworks);
-
         dispatch(addDetailArts(validArtworks));
 
         setArtworks(validArtworks);

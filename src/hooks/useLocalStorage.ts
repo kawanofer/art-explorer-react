@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-function useLocalStorage(key: string, initialValue: string) {
-  const [storedValue, setStoredValue] = useState(() => {
+function useLocalStorage<T>(key: string, initialValue: T) {
+  const [storedValue, setStoredValue] = useState<T>(() => {
     if (typeof window === "undefined" || !window.localStorage) {
       return initialValue;
     }
@@ -24,7 +24,8 @@ function useLocalStorage(key: string, initialValue: string) {
       }
     }
   }, [key, storedValue]);
-  return [storedValue, setStoredValue];
+  
+  return [storedValue, setStoredValue] as const;
 }
 
 export default useLocalStorage;

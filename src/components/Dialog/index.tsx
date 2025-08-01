@@ -1,19 +1,23 @@
 import * as React from "react";
+import { isEmpty } from "lodash";
+
 import {
   DialogTitle,
   Dialog,
   DialogContent,
-  DialogActions,
   Box,
   Link,
   IconButton,
 } from "@mui/material";
+
 import CloseIcon from "@mui/icons-material/Close";
-import { isEmpty } from "lodash";
+
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 import FavoriteIcon from "../FavoriteIcon";
 
 import * as S from "./styles";
+import { toast } from "react-hot-toast";
 
 interface constituentsProps {
   name: string;
@@ -44,8 +48,21 @@ export interface DialogProps {
 
 export default function SimpleDialog(props: DialogProps) {
   const { onClose, open, artDetail } = props;
+  const [favorites, setFavorites] = useLocalStorage<number[]>("favorites", []);
 
   if (!artDetail) return null;
+
+  const isFavorite = favorites.includes(artDetail.objectID);
+
+  const handleClickFavorite = (action: 'add' | 'remove') => {
+    if (action === 'add') {
+      setFavorites([...favorites, artDetail.objectID]);
+      toast.success("Obra adicionada aos favoritos!");
+    } else {
+      setFavorites(favorites.filter(id => id !== artDetail.objectID));
+      toast.success("Obra removida dos favoritos!");
+    }
+  };
 
   return (
     <Dialog
@@ -91,6 +108,10 @@ export default function SimpleDialog(props: DialogProps) {
             />
           </Box>
           <Box flex={1} gap={2} display="flex" flexDirection="column">
+            <div style={{ display: "flex", justifyContent: "flex-end" }}>
+              <FavoriteIcon isFavorite={isFavorite} onClickFavorite={handleClickFavorite} />
+            </div>
+
             {!isEmpty(artDetail.constituents) && (
               <S.DialogContent>
                 <S.Title>Artistas</S.Title>
@@ -133,9 +154,6 @@ export default function SimpleDialog(props: DialogProps) {
           </Box>
         </Box>
       </DialogContent>
-      <DialogActions>
-        <FavoriteIcon isFavorite={false} />
-      </DialogActions>
     </Dialog>
   );
 }
