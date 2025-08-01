@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { useArtworkWithImages } from "../../api/queries";
-import { fetchArtworkDetail } from "../../api/arts";
-
-import { isEmpty } from "lodash";
-import Loader from "../../components/Loader";
-import Error from "../../components/Error";
-import Pagination from "../../components/Pagination";
-import Title from "../../components/Title";
-import * as S from "./styles";
-import SearchBox from "../../components/SearchBox";
-import { Divider } from "@mui/material";
-import DialogDetails from "../../components/Dialog";
 import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+
+import ArtsDisplay from "../../components/ArtsDisplay";
+import DialogDetails from "../../components/Dialog";
+import Error from "../../components/Error";
+import Loader from "../../components/Loader";
+import Pagination from "../../components/Pagination";
+import SearchBox from "../../components/SearchBox";
+import Title from "../../components/Title";
+
+import { fetchArtworkDetail } from "../../api/arts";
+import { fetchArtworkIds } from "../../redux/artsSlice";
+import type { RootState, AppDispatch } from "../../redux/store";
+
+import * as S from "./styles";
 
 interface constituentsProps {
   name: string;
@@ -35,23 +38,26 @@ interface ArtworkItemsProps {
 }
 
 const Home = () => {
-  const { data: artworkIds, isLoading, error } = useArtworkWithImages();
+  const dispatch = useDispatch<AppDispatch>();
+  const { artworkIds, loading, error } = useSelector(
+    (state: RootState) => state.arts,
+  );
 
   const [artworks, setArtworks] = useState<ArtworkItemsProps[]>([]);
-  const [loading, setLoading] = useState(true);
-
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [artSelected, setArtSelected] = useState<ArtworkItemsProps>();
 
   const [currentPage, setCurrentPage] = useState(1);
   const [totalArtworks, setTotalArtworks] = useState(0);
-  const itemsPerPage = 12;
+  const itemsPerPage = 15;
+
+  useEffect(() => {
+    dispatch(fetchArtworkIds());
+  }, [dispatch]);
 
   useEffect(() => {
     const fetchArtworks = async () => {
       try {
-        setLoading(true);
-
         if (!artworkIds) {
           toast.error("Nenhuma obra encontrada com imagens.");
           return;
@@ -80,21 +86,15 @@ const Home = () => {
         setArtworks(validArtworks);
       } catch (err) {
         console.error("Error fetching artworks:", err);
-      } finally {
-        setLoading(false);
       }
     };
 
     fetchArtworks();
   }, [artworkIds, currentPage]);
 
-  if (loading || isLoading) {
-    return <Loader />;
-  }
+  if (loading) return <Loader />;
 
-  if (error) {
-    return <Error message={error.message} />;
-  }
+  if (error) return <Error message={error} />;
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -107,7 +107,7 @@ const Home = () => {
 
   const totalPages = Math.ceil(totalArtworks / itemsPerPage);
 
-  const handleDetailsClick = (artwork: ArtworkItemsProps) => {
+  const handleArtClick = (artwork: ArtworkItemsProps) => {
     const constituents = artwork.constituents.filter(
       (constituent) => constituent.role === "Artist",
     );
@@ -128,47 +128,7 @@ const Home = () => {
       <S.Content>
         <Title>Obras</Title>
         <SearchBox onSearch={onSearch}></SearchBox>
-        <Divider sx={{ margin: "20px 0" }} />
-        <S.ArtworkGrid>
-          {artworks.map((artwork) => (
-            <S.ArtworkCard
-              key={artwork.objectID}
-              onClick={() => handleDetailsClick(artwork)}
-            >
-              <S.ImageContainer>
-                <S.ArtworkImage
-                  src={artwork.primaryImageSmall}
-                  alt={artwork.title}
-                  onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
-                    e.currentTarget.src =
-                      "https://via.placeholder.com/400x400?text=No+Image";
-                  }}
-                />
-              </S.ImageContainer>
-              <S.CardContent>
-                <S.ArtworkTitle>{artwork.title}</S.ArtworkTitle>
-                <S.InfoContainer>
-                  {!isEmpty(artwork.constituents) && (
-                    <S.InfoText>
-                      {artwork.constituents.map((artist, index) => (
-                        <span key={index}>
-                          {artist.name}
-                          <br />
-                        </span>
-                      ))}
-                    </S.InfoText>
-                  )}
-                  {!isEmpty(artwork.objectDate) && (
-                    <S.InfoText>{artwork.objectDate}</S.InfoText>
-                  )}
-                  {!isEmpty(artwork.department) && (
-                    <S.InfoText>{artwork.department}</S.InfoText>
-                  )}
-                </S.InfoContainer>
-              </S.CardContent>
-            </S.ArtworkCard>
-          ))}
-        </S.ArtworkGrid>
+        <ArtsDisplay artworks={artworks} onArtClick={handleArtClick} />
         {artworks.length > 0 && (
           <Pagination
             currentPage={currentPage}

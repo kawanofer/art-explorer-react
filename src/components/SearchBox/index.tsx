@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, Divider } from "@mui/material";
 
 import * as S from "./styles";
 import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
@@ -60,6 +60,7 @@ export default function SearchBox({ onSearch }: SearchBoxProps) {
           Procurar
         </Button>
       </S.RadioGroupWrapper>
+      <Divider sx={{ margin: "20px 0" }} />
     </S.Container>
   );
 }
