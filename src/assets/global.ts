@@ -1,7 +1,5 @@
 import { createGlobalStyle } from "styled-components";
 
-import theme from "./theme/CustomTheme";
-
 import "react-perfect-scrollbar/dist/css/styles.css";
 
 export default createGlobalStyle`
@@ -15,10 +13,10 @@ export default createGlobalStyle`
   }
 
   body {
-    background: ${theme.white};
-    color: ${theme.textPrimary};
+    background: ${({ theme }) => theme.background};
+    color: ${({ theme }) => theme.textPrimary};
     font-size: 14px;
-    font-family: ${theme.fontFamily};
+    font-family: ${({ theme }) => theme.fontFamily};
     -webkit-font-smoothing: antialiased !important;
   }
 
@@ -30,7 +28,7 @@ export default createGlobalStyle`
 
 
   body, input, button {
-    font-family: ${theme.fontFamily};
+    font-family: ${({ theme }) => theme.fontFamily};
   }
 
   a {
@@ -41,5 +39,4 @@ export default createGlobalStyle`
   ul {
     list-style: inside;
   }
-}
 `;

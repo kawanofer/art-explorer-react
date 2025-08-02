@@ -40,8 +40,12 @@ const detailsArtSlice = createSlice({
         state.detailArts = action.payload;
       } else {
         // Filter out duplicates based on objectID before adding
-        const existingIds = new Set(state.detailArts.map(art => art.objectID));
-        const newArts = action.payload.filter(art => !existingIds.has(art.objectID));
+        const existingIds = new Set(
+          state.detailArts.map((art) => art.objectID),
+        );
+        const newArts = action.payload.filter(
+          (art) => !existingIds.has(art.objectID),
+        );
         state.detailArts = [...state.detailArts, ...newArts];
       }
     },
@@ -51,6 +55,7 @@ const detailsArtSlice = createSlice({
   },
 });
 
-export const { setDetailArts, addDetailArts, clearDetailArts } = detailsArtSlice.actions;
+export const { setDetailArts, addDetailArts, clearDetailArts } =
+  detailsArtSlice.actions;
 
 export default detailsArtSlice.reducer;

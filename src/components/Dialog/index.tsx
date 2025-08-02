@@ -1,15 +1,7 @@
 import React from "react";
 import { isEmpty } from "lodash";
 
-import {
-  DialogTitle,
-  Dialog,
-  DialogContent,
-  Box,
-  Link,
-  IconButton,
-  useTheme,
-} from "@mui/material";
+import { DialogTitle, DialogContent, Box, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
 import * as S from "./styles";
@@ -26,14 +18,13 @@ export interface DialogProps {
 export default function ArtDetailDialog(props: DialogProps) {
   const { onClose, open, artDetail } = props;
   const [favorites] = useLocalStorage<number[]>("favorites", []);
-  const theme = useTheme();
 
   if (!artDetail) return null;
 
   const isFavorite = favorites.includes(artDetail.objectID);
 
   return (
-    <Dialog
+    <S.StyledDialog
       open={open}
       fullWidth
       maxWidth="md"
@@ -59,16 +50,9 @@ export default function ArtDetailDialog(props: DialogProps) {
       <DialogContent dividers>
         <Box display="flex" flexDirection={{ xs: "column", md: "row" }} gap={3}>
           <Box flexShrink={0}>
-            <img
+            <S.Image
               src={artDetail.primaryImageSmall}
               alt={artDetail.title}
-              style={{
-                maxWidth: 520,
-                maxHeight: 620,
-                borderRadius: 8,
-                objectFit: "contain",
-                background: theme.palette.grey[100],
-              }}
               onError={(e) => {
                 (e.target as HTMLImageElement).src =
                   "https://via.placeholder.com/320x320?text=No+Image";
@@ -117,14 +101,18 @@ export default function ArtDetailDialog(props: DialogProps) {
 
             {artDetail.objectURL && (
               <S.DialogContent>
-                <Link href={artDetail.objectURL} target="_blank" rel="noopener">
+                <S.StyledLink
+                  href={artDetail.objectURL}
+                  target="_blank"
+                  rel="noopener"
+                >
                   Veja mais detalhes
-                </Link>
+                </S.StyledLink>
               </S.DialogContent>
             )}
           </Box>
         </Box>
       </DialogContent>
-    </Dialog>
+    </S.StyledDialog>
   );
 }

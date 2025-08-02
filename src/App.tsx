@@ -1,10 +1,10 @@
 import React, { Suspense } from "react";
 
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
-import { ThemeProvider } from "styled-components";
-import CustomTheme from "./assets/theme/CustomTheme";
+import { ThemeProvider } from "./contexts/ThemeContext";
 import { AppRouters } from "./router/routes";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
+import GlobalStyle from "./assets/global";
 
 const queryClient = new QueryClient();
 
@@ -14,7 +14,8 @@ function App() {
       fallback={<div className="flex justify-center text-3xl">Loading...</div>}
     >
       <QueryClientProvider client={queryClient}>
-        <ThemeProvider theme={CustomTheme}>
+        <ThemeProvider>
+          <GlobalStyle />
           <AppRouters />
           <Toaster />
         </ThemeProvider>

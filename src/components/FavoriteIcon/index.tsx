@@ -45,7 +45,7 @@ export default function FavoriteIcon({
         aria-label="Adicionar aos favoritos"
         onClick={handleClickFavorite("add")}
       >
-        <FavoriteNotSelected />
+        <FavoriteNotSelected color="info" />
       </IconButton>
     </Tooltip>
   );

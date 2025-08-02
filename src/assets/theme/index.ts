@@ -1,4 +1,4 @@
-import createTheme from "../../utils/styled-components-theme.ts";
+import createTheme from "../../utils/styled-components-theme";
 import CustomTheme from "./CustomTheme";
 
 const Theme = createTheme(...Object.keys(CustomTheme));

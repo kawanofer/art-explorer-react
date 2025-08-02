@@ -1,4 +1,3 @@
-import theme from "../../assets/theme/CustomTheme";
 import styled from "styled-components";
 
 export const ErrorContainer = styled.div`
@@ -6,11 +5,11 @@ export const ErrorContainer = styled.div`
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: ${theme.white};
+  background-color: ${({ theme }) => theme.background};
 `;
 
 export const ErrorText = styled.div`
   font-size: 1.25rem;
-  color: ${theme.textError};
+  color: ${({ theme }) => theme.textError};
   font-weight: 600;
 `;

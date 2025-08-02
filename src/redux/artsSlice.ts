@@ -19,7 +19,7 @@ export const fetchArtworkIds = createAsyncThunk<number[]>(
     try {
       const ids = await fetchArtworkWithImages();
       return ids || [];
-    } catch (error: any) {
+    } catch (error: unknown) {
       return rejectWithValue(error.message || "Erro ao buscar IDs das obras");
     }
   },

@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-import {
-  FormControlLabel,
-  Radio,
-  RadioGroup,
-  TextField,
-  Button,
-  Divider,
-} from "@mui/material";
+import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
 
 import * as S from "./styles";
 
@@ -36,7 +29,7 @@ export default function SearchBox({ onSearch }: SearchBoxProps) {
 
   return (
     <S.Container>
-      <TextField
+      <S.StyledTextField
         label="Pesquisar arte"
         variant="outlined"
         fullWidth
@@ -62,11 +55,11 @@ export default function SearchBox({ onSearch }: SearchBoxProps) {
           ))}
         </RadioGroup>
 
-        <Button onClick={handleSubmit} variant="contained" color="primary">
+        <S.StyledButton onClick={handleSubmit} variant="contained">
           Procurar
-        </Button>
+        </S.StyledButton>
       </S.RadioGroupWrapper>
-      <Divider sx={{ margin: "20px 0" }} />
+      <S.StyledDivider />
     </S.Container>
   );
 }

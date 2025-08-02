@@ -119,7 +119,7 @@ function Favorites() {
   return (
     <S.Container>
       <S.Content>
-        <Title>Favoritos ({artworks.length})</Title>
+        <Title>Favoritos</Title>
         <ArtsDisplay artworks={artworks} onArtClick={handleArtClick} />
       </S.Content>
 

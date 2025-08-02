@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { NavLink as RouterNavLink } from "react-router-dom";
 import * as S from "./styles";
 import logo from "../../assets/logo.svg";
+import ThemeColor from "../ThemeColor";
 
 interface MenuItem {
   label: string;
@@ -53,6 +54,7 @@ export default function Header() {
               </RouterNavLink>
             ))}
           </S.Nav>
+          <ThemeColor />
         </S.DesktopNav>
       </S.Content>
 
@@ -71,6 +73,7 @@ export default function Header() {
             )}
           </RouterNavLink>
         ))}
+        <ThemeColor />
       </S.MobileNav>
     </S.Container>
   );
