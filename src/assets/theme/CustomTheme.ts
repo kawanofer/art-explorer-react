@@ -40,7 +40,7 @@ const darkTheme = {
   textSecondary: "#CCCCCC",
   textOnDark: "#1A1A1A",
 
-  textError: "#FF6B6B",
+  textError: "#e4002b",
 
   /* Cores de Linhas e Bordas */
   grey: "#3A3A3A",

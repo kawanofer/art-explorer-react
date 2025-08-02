@@ -2,36 +2,27 @@ import styled from "styled-components";
 import { TextField, Button, Divider } from "@mui/material";
 
 export const Container = styled.div`
-  width: 100%;
-  padding: 32px 0px;
   background-color: ${({ theme }) => theme.background};
+  padding: 24px;
+  border-radius: 8px;
+  margin-bottom: 24px;
 `;
 
-export const RadioGroupWrapper = styled.div`
-  width: 100%;
+export const SearchRow = styled.div`
   display: flex;
-  justify-content: flex-end;
-  margin-top: 16px;
   gap: 16px;
-  align-items: center;
+  margin-bottom: 16px;
 
-  .MuiFormControlLabel-root {
-    color: ${({ theme }) => theme.textPrimary};
-  }
-
-  .MuiRadio-root {
-    color: ${({ theme }) => theme.textSecondary};
-
-    &.Mui-checked {
-      color: ${({ theme }) => theme.interactivePrimary};
-    }
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 12px;
   }
 `;
-
 export const StyledTextField = styled(TextField)`
+  background-color: ${({ theme }) => theme.white};
+
   & .MuiOutlinedInput-root {
     background-color: ${({ theme }) => theme.white};
-    color: ${({ theme }) => theme.textPrimary};
 
     & fieldset {
       border-color: ${({ theme }) => theme.border};
@@ -46,12 +37,41 @@ export const StyledTextField = styled(TextField)`
     }
   }
 
+  & .MuiInputBase-input {
+    color: ${({ theme }) => theme.textPrimary};
+  }
+
   & .MuiInputLabel-root {
     color: ${({ theme }) => theme.textSecondary};
 
     &.Mui-focused {
       color: ${({ theme }) => theme.interactivePrimary};
     }
+  }
+`;
+
+export const RadioGroupWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 16px;
+
+  & .MuiFormControlLabel-label {
+    color: ${({ theme }) => theme.textPrimary};
+  }
+
+  & .MuiRadio-root {
+    color: ${({ theme }) => theme.textSecondary};
+
+    &.Mui-checked {
+      color: ${({ theme }) => theme.interactivePrimary};
+    }
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
   }
 `;
 
@@ -62,11 +82,12 @@ export const StyledButton = styled(Button)`
   &:hover {
     background-color: ${({ theme }) => theme.interactiveHover} !important;
   }
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 export const StyledDivider = styled(Divider)`
-  &.MuiDivider-root {
-    border-color: ${({ theme }) => theme.border};
-    margin: 20px 0;
-  }
+  border-color: ${({ theme }) => theme.border} !important;
 `;

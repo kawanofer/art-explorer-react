@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink as RouterNavLink } from "react-router-dom";
+import { NavLink as RouterNavLink, useNavigate } from "react-router-dom";
 import * as S from "./styles";
 import logo from "../../assets/logo.svg";
 import ThemeColor from "../ThemeColor";
@@ -22,15 +22,20 @@ const menuItems: MenuItem[] = [
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
+  const handleLogoClick = () => {
+    navigate("/");
+  };
+
   return (
     <S.Container>
       <S.Content>
-        <S.LogoSection>
+        <S.LogoSection onClick={handleLogoClick}>
           <S.Logo src={logo} alt="Art Explorer Logo" />
           <S.LogoText>Art Explorer</S.LogoText>
         </S.LogoSection>

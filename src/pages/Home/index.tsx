@@ -6,11 +6,14 @@ import ArtsDisplay from "../../components/ArtsDisplay";
 import DialogDetails from "../../components/Dialog";
 import Error from "../../components/Error";
 import Loader from "../../components/Loader";
-import Pagination from "../../components/Pagination";
 import SearchBox from "../../components/SearchBox";
 import Title from "../../components/Title";
 
-import { fetchArtworkDetail } from "../../api/arts";
+import {
+  fetchArtworkDetail,
+  fetchArtworkByArtist,
+  fetchArtworkByDepartment,
+} from "../../api/arts";
 import { fetchArtworkIds } from "../../redux/artsSlice";
 import { addDetailArts } from "../../redux/detailsArtSlice";
 import type { RootState, AppDispatch } from "../../redux/store";
@@ -32,31 +35,48 @@ const Home = () => {
   const [fullArtworks, setFullArtworks] = useState<ArtworkItemsProps[]>([]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [selectedArt, setSelectedArt] = useState<ArtworkDetailProps>();
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [isSearchMode, setIsSearchMode] = useState(false);
+  const [searching, setSearching] = useState(false);
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalArtworks, setTotalArtworks] = useState(0);
-  const itemsPerPage = 15;
-
-  useEffect(() => {
-    dispatch(fetchArtworkIds());
-  }, [dispatch]);
+  const [displayedCount, setDisplayedCount] = useState(15);
+  const itemsPerLoad = 15;
 
   useEffect(() => {
+    if (!isSearchMode) {
+      dispatch(fetchArtworkIds());
+    }
+  }, [dispatch, isSearchMode]);
+
+  useEffect(() => {
+    if (isSearchMode) return; // Don't load default artworks in search mode
+
     const fetchArtworks = async () => {
+      if (!artworkIds || artworkIds.length === 0) {
+        return;
+      }
+
+      setLoadingMore(true);
+
       try {
-        if (!artworkIds) {
-          toast.error("Nenhuma obra encontrada com imagens.");
+        // Get IDs for current display count
+        const limitedIds = artworkIds.slice(0, displayedCount);
+
+        // Filter out already loaded artworks
+        const alreadyLoadedIds = fullArtworks.map(
+          (artwork) => artwork.objectID,
+        );
+        const newIds = limitedIds.filter(
+          (id) => !alreadyLoadedIds.includes(id),
+        );
+
+        if (newIds.length === 0) {
+          setLoadingMore(false);
           return;
         }
 
-        setTotalArtworks(artworkIds?.length);
-
-        // Calculate pagination
-        const startIndex = (currentPage - 1) * itemsPerPage;
-        const endIndex = startIndex + itemsPerPage;
-        const limitedIds = artworkIds.slice(startIndex, endIndex);
-
-        const artworkPromises = limitedIds.map((id: number) =>
+        // Fetch artwork details for new IDs
+        const artworkPromises = newIds.map((id: number) =>
           fetchArtworkDetail(id),
         );
 
@@ -70,43 +90,135 @@ const Home = () => {
             artwork.primaryImageSmall !== "",
         );
 
+        // Add to Redux store
         dispatch(addDetailArts(validArtworks));
 
-        // Store full artworks data
-        setFullArtworks(validArtworks);
+        // Merge with existing artworks
+        const updatedFullArtworks = [...fullArtworks, ...validArtworks];
+        setFullArtworks(updatedFullArtworks);
 
         // Map to the format expected by ArtsDisplay component
-        const mappedArtworks = validArtworks.map((artwork) => ({
-          objectID: artwork.objectID,
-          primaryImageSmall: artwork.primaryImageSmall,
-          title: artwork.title,
-          constituents: artwork.constituents,
-          objectDate: artwork.objectDate,
-          department: artwork.department,
-        }));
+        const mappedArtworks: ArtworkDisplayProps[] = updatedFullArtworks.map(
+          (artwork) => ({
+            objectID: artwork.objectID,
+            primaryImageSmall: artwork.primaryImageSmall,
+            title: artwork.title,
+            constituents: artwork.constituents,
+            objectDate: artwork.objectDate,
+            department: artwork.department,
+          }),
+        );
 
         setArtworks(mappedArtworks);
-      } catch {
-        // Error fetching artworks - silently handle
+      } catch (error) {
+        console.error("Error fetching artworks:", error);
+        toast.error("Erro ao carregar as obras de arte");
+      } finally {
+        setLoadingMore(false);
       }
     };
 
     fetchArtworks();
-  }, [artworkIds, currentPage, dispatch]);
+  }, [artworkIds, displayedCount, dispatch, isSearchMode]);
 
-  if (loading) return <Loader />;
+  // Show loading if fetching artwork IDs or searching
+  if (loading || searching) return <Loader />;
 
   if (error) return <Error message={error} />;
 
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
+  if (!isSearchMode && (!artworkIds || artworkIds.length === 0)) {
+    return <Error message="Nenhuma obra encontrada com imagens." />;
+  }
+
+  const handleLoadMore = () => {
+    if (isSearchMode) {
+      // In search mode, we don't support load more
+      return;
+    }
+    setDisplayedCount((prev) => prev + itemsPerLoad);
   };
 
-  const onSearch = () => {
-    // Search functionality to be implemented later
+  const hasMore =
+    !isSearchMode && artworkIds && displayedCount < artworkIds.length;
+
+  const onSearch = async (
+    query: string,
+    searchType: string,
+    selectedDepartment: number,
+  ) => {
+    // Reset states
+    setArtworks([]);
+    setFullArtworks([]);
+    setIsSearchMode(true);
+    setSearching(true);
+
+    debugger;
+    try {
+      let searchResults = [];
+
+      if (searchType === "artist") {
+        if (!query.trim()) {
+          setIsSearchMode(false);
+          setSearching(false);
+          return;
+        }
+
+        searchResults = await fetchArtworkByArtist(query.trim());
+      } else if (searchType === "department") {
+        if (!selectedDepartment) {
+          setIsSearchMode(false);
+          setSearching(false);
+          return;
+        }
+
+        searchResults = await fetchArtworkByDepartment(selectedDepartment);
+      }
+
+      if (searchResults && searchResults.length > 0) {
+        console.log("1 Search by department:", searchResults.length);
+
+        // Store as fullArtworks
+        setFullArtworks(searchResults as ArtworkItemsProps[]);
+
+        // Map to display format
+        const mappedArtworks: ArtworkDisplayProps[] = searchResults.map(
+          (artwork) => ({
+            objectID: artwork.objectID,
+            primaryImageSmall: artwork.primaryImageSmall,
+            title: artwork.title,
+            constituents: artwork.constituents,
+            objectDate: artwork.objectDate,
+            department: artwork.department,
+          }),
+        );
+
+        console.log("3 Mapped artworks:", mappedArtworks.length);
+        setArtworks(mappedArtworks);
+
+        // Add to Redux store
+        dispatch(addDetailArts(searchResults as ArtworkItemsProps[]));
+
+        toast.success(`${searchResults.length} obra(s) encontrada(s)`);
+      } else {
+        setArtworks([]);
+        setFullArtworks([]);
+        toast.info("Nenhuma obra encontrada para esta busca");
+      }
+    } catch (error) {
+      console.error("Search error:", error);
+      toast.error("Erro ao realizar a busca");
+      setIsSearchMode(false);
+    } finally {
+      setSearching(false);
+    }
   };
 
-  const totalPages = Math.ceil(totalArtworks / itemsPerPage);
+  const handleBackToDefault = () => {
+    setIsSearchMode(false);
+    setDisplayedCount(15);
+    setArtworks([]);
+    setFullArtworks([]);
+  };
 
   const handleArtClick = (artwork: ArtworkDisplayProps) => {
     // Find the full artwork data from fullArtworks
@@ -114,13 +226,18 @@ const Home = () => {
       (item) => item.objectID === artwork.objectID,
     );
 
-    if (!fullArtwork) return;
+    if (!fullArtwork) {
+      toast.error("Erro ao carregar detalhes da obra");
+      return;
+    }
 
+    // Filter constituents to show only artists, ensuring we have a valid array
     const constituents =
       fullArtwork.constituents?.filter(
         (constituent) => constituent.role === "Artist",
       ) || [];
 
+    // Create artwork for dialog with guaranteed constituents array
     const artworkForDialog: ArtworkDetailProps = {
       ...fullArtwork,
       constituents: constituents,
@@ -135,19 +252,38 @@ const Home = () => {
     setSelectedArt(undefined);
   };
 
+  const shouldShowEmptySearch = isSearchMode && artworks.length === 0;
+
   return (
     <S.Container>
       <S.Content>
         <Title>Obras</Title>
-        <SearchBox onSearch={onSearch}></SearchBox>
-        <ArtsDisplay artworks={artworks} onArtClick={handleArtClick} />
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={handlePageChange}
-          itemsPerPage={itemsPerPage}
-          totalItems={totalArtworks}
-        />
+        <SearchBox onSearch={onSearch} />
+
+        {isSearchMode && (
+          <S.SearchInfo>
+            <span>
+              Resultados da busca ({artworks.length} obra(s) encontrada(s))
+            </span>
+            <S.BackButton onClick={handleBackToDefault}>
+              Voltar para todas as obras
+            </S.BackButton>
+          </S.SearchInfo>
+        )}
+
+        {shouldShowEmptySearch ? (
+          <Error message="Nenhuma obra encontrada para esta busca." />
+        ) : (
+          artworks.length > 0 && (
+            <ArtsDisplay
+              artworks={artworks}
+              onArtClick={handleArtClick}
+              onLoadMore={handleLoadMore}
+              hasMore={hasMore}
+              loading={loadingMore}
+            />
+          )
+        )}
       </S.Content>
 
       {selectedArt && (

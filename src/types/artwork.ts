@@ -5,9 +5,9 @@ export interface constituentsProps {
 
 export interface ArtworkItemsProps {
   additionalImages: string[];
-  constituents?: constituentsProps[];
   artistDisplayName: string;
   artistPrefix: string;
+  constituents?: constituentsProps[];
   department: string;
   dimensions: string;
   medium: string;
@@ -20,12 +20,12 @@ export interface ArtworkItemsProps {
 }
 
 export interface ArtworkDisplayProps {
+  constituents?: { name: string }[];
+  department?: string;
+  objectDate?: string;
   objectID: number;
   primaryImageSmall: string;
   title: string;
-  constituents?: { name: string }[];
-  objectDate?: string;
-  department?: string;
 }
 
 export interface ArtworkDetailProps {

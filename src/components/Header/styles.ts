@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.header`
   background-color: ${({ theme }) => theme.textError};
-  color: ${({ theme }) => theme.white};
+  color: #fff;
   padding: 0;
   box-shadow: 0 2px 8px rgba(228, 0, 43, 0.3);
   position: sticky;
@@ -24,6 +24,12 @@ export const LogoSection = styled.div`
   display: flex;
   align-items: center;
   gap: 12px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.8;
+  }
 `;
 
 export const Logo = styled.img`
@@ -46,7 +52,7 @@ export const Nav = styled.nav`
 `;
 
 export const NavLink = styled.span<{ $isActive?: boolean }>`
-  color: ${({ theme }) => theme.white};
+  color: #fff;
   text-decoration: none;
   padding: 12px 20px;
   border-radius: 8px;

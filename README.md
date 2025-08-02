@@ -13,26 +13,26 @@ Criar uma aplicação web responsiva utilizando **React**, **TypeScript** e **No
 
 ## 🔍 Funcionalidades Requeridas
 
-### 1. **Listagem de Obras com Imagem**
+### ✅ 1. **Listagem de Obras com Imagem**
 
 - Utilizar a API: `GET /public/collection/v1/search?hasImages=true&q=painting`
 - Simular paginação (15 por vez) usando slices do array de `objectIDs`
 
-### 2. **Detalhes de Obra**
+### ✅ 2. **Detalhes de Obra**
 
 - Buscar detalhes de uma obra: `GET /public/collection/v1/objects/{objectID}`
 - Exibir: imagem, título, artista, data, técnica, departamento, link para o site oficial
 
-### 3. **Favoritar Obras**
+### ✅ 3. **Favoritar Obras**
 
 - Botão para marcar/desmarcar favoritos
 - Persistir localmente (no browser usando `localStorage` ou `IndexedDB`)
 
-### 4. **Listar Favoritas**
+### ✅ 4. **Listar Favoritas**
 
 - Seção ou página dedicada para exibir as obras favoritadas
 
-### 5. **Interface Responsiva**
+### ✅ 5. **Interface Responsiva**
 
 - Design responsivo (preferîncialmente com TailwindCSS ou CSS Modules)
 - Scroll infinito ou botão "carregar mais"
@@ -63,7 +63,7 @@ Criar uma aplicação web responsiva utilizando **React**, **TypeScript** e **No
 - Barra de busca com autocomplete
 - Filtro por departamento ou artista
 - Animações com Framer Motion
-- Dark mode
+- ✅ Dark mode
 - Deploy (ex: Vercel/Netlify para frontend, Render para backend)
 
 ---

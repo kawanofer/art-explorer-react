@@ -1,29 +1,31 @@
 import styled from "styled-components";
+import { Card as MuiCard, CardContent, Button } from "@mui/material";
 
-export const Card = styled.div`
+export const Container = styled.div`
+  width: 100%;
+`;
+
+export const Card = styled(MuiCard)`
   background-color: ${({ theme }) => theme.white};
   border-radius: 8px;
-  border: 1px solid ${({ theme }) => theme.border};
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   cursor: pointer;
+  transition: all 0.3s ease;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  max-width: 100%;
-  transition: transform 0.2s ease;
 
   &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
 `;
 
 export const CardWrapper = styled.div`
+  padding: 16px;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  padding: 16px;
-  width: 100%;
-  margin: 0 auto;
 `;
 
 export const CardMedia = styled.img`
@@ -48,9 +50,65 @@ export const InfoText = styled.p`
 `;
 
 export const StyledFavoriteIconContainer = styled.div`
-  background-color: ${({ theme }) => theme.background};
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: ${({ theme }) => theme.white};
   border-radius: 50%;
   padding: 4px;
   backdrop-filter: blur(4px);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  border: 1px solid ${({ theme }) => theme.border};
+`;
+
+export const StyledCard = styled(Card)`
+  background-color: ${({ theme }) => theme.white} !important;
+  color: ${({ theme }) => theme.textPrimary} !important;
+  border: 1px solid ${({ theme }) => theme.border} !important;
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  }
+`;
+
+export const StyledCardContent = styled(CardContent)`
+  background-color: ${({ theme }) => theme.white} !important;
+  color: ${({ theme }) => theme.textPrimary} !important;
+`;
+
+export const LoadMoreContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+  padding: 24px 0;
+`;
+
+export const LoadMoreButton = styled(Button)`
+  background-color: ${({ theme }) => theme.interactivePrimary} !important;
+  color: ${({ theme }) => theme.white} !important;
+  padding: 12px 32px !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  border-radius: 8px !important;
+  text-transform: none !important;
+  min-width: 200px !important;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.interactiveHover} !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+  }
+
+  &:disabled {
+    background-color: ${({ theme }) => theme.grey} !important;
+    color: ${({ theme }) => theme.textSecondary} !important;
+    cursor: not-allowed !important;
+
+    &:hover {
+      transform: none !important;
+      box-shadow: none !important;
+    }
+  }
+
+  transition: all 0.2s ease !important;
 `;

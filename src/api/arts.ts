@@ -90,12 +90,12 @@ export const fetchDepartments = async (): Promise<
 */
 export const fetchArtworkByDepartment = async (
   departmentId: number,
-  query: string,
 ): Promise<ArtworkDetail[] | null> => {
   try {
     const response = await axios.get<ArtworkDetail[]>(
-      `${BASE_URL}/api/artworks/search/department?departmentId=${departmentId}&q=${encodeURIComponent(query)}`,
+      `${BASE_URL}/api/artworks/search/department?departmentId=${departmentId}`,
     );
+    console.log(`Fetched ${response} artworks for department ${departmentId}`);
     return response.data;
   } catch (error) {
     console.error(

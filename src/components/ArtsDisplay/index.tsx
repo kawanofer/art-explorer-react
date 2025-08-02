@@ -19,68 +19,74 @@ interface Artwork {
 interface ArtsDisplayProps {
   artworks: Artwork[];
   onArtClick: (artwork: Artwork) => void;
+  onLoadMore?: () => void;
+  hasMore?: boolean;
+  loading?: boolean;
 }
 
 export default function ArtsDisplay({
   artworks,
   onArtClick,
+  onLoadMore,
+  hasMore = false,
+  loading = false,
 }: ArtsDisplayProps) {
   const [favorites] = useLocalStorage<number[]>("favorites", []);
 
   return (
-    <Grid container spacing={3}>
-      {artworks.map((artwork) => (
-        <Grid item xs={12} sm={6} md={3} key={artwork.objectID}>
-          <S.Card onClick={() => onArtClick(artwork)}>
-            <S.CardWrapper>
-              <div style={{ position: "relative" }}>
-                <S.CardMedia
-                  src={artwork.primaryImageSmall}
-                  alt={artwork.title}
-                  onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
-                    e.currentTarget.src =
-                      "https://via.placeholder.com/400x400?text=No+Image";
-                  }}
-                />
-                <div
-                  style={{
-                    position: "absolute",
-                    top: 8,
-                    right: 8,
-                  }}
-                >
+    <S.Container>
+      <Grid container spacing={3}>
+        {artworks.map((artwork) => (
+          <Grid item xs={12} sm={6} md={3} key={artwork.objectID}>
+            <S.StyledCard onClick={() => onArtClick(artwork)}>
+              <S.StyledCardContent>
+                <div style={{ position: "relative" }}>
+                  <S.CardMedia
+                    src={artwork.primaryImageSmall}
+                    alt={artwork.title}
+                    onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = "/placeholder-image.jpg";
+                    }}
+                  />
                   <S.StyledFavoriteIconContainer>
                     <FavoriteIcon
+                      objectID={artwork.objectID}
                       isFavorite={favorites.includes(artwork.objectID)}
-                      objectId={artwork.objectID}
                     />
                   </S.StyledFavoriteIconContainer>
                 </div>
-              </div>
+                {!isEmpty(artwork.title) && (
+                  <S.InfoLabel>{artwork.title}</S.InfoLabel>
+                )}
+                {!isEmpty(artwork.constituents) && (
+                  <S.InfoText>
+                    {artwork.constituents?.map((c) => c.name).join(", ")}
+                  </S.InfoText>
+                )}
+                {!isEmpty(artwork.objectDate) && (
+                  <S.InfoText>{artwork.objectDate}</S.InfoText>
+                )}
+                {!isEmpty(artwork.department) && (
+                  <S.InfoText>{artwork.department}</S.InfoText>
+                )}
+              </S.StyledCardContent>
+            </S.StyledCard>
+          </Grid>
+        ))}
+      </Grid>
 
-              <S.InfoLabel>{artwork.title}</S.InfoLabel>
-              {!isEmpty(artwork.constituents) && (
-                <S.InfoText>
-                  {(artwork.constituents ?? []).map((artist, index) => (
-                    <span key={index}>
-                      {artist.name}
-                      {index < (artwork.constituents?.length ?? 0) - 1 && (
-                        <br />
-                      )}
-                    </span>
-                  ))}
-                </S.InfoText>
-              )}
-              {!isEmpty(artwork.objectDate) && (
-                <S.InfoText>{artwork.objectDate}</S.InfoText>
-              )}
-              {!isEmpty(artwork.department) && (
-                <S.InfoText>{artwork.department}</S.InfoText>
-              )}
-            </S.CardWrapper>
-          </S.Card>
-        </Grid>
-      ))}
-    </Grid>
+      {hasMore && (
+        <S.LoadMoreContainer>
+          <S.LoadMoreButton
+            onClick={onLoadMore}
+            disabled={loading}
+            variant="contained"
+          >
+            {loading ? "Carregando..." : "Carregar mais"}
+          </S.LoadMoreButton>
+        </S.LoadMoreContainer>
+      )}
+    </S.Container>
   );
 }

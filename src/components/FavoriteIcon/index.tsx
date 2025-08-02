@@ -7,12 +7,12 @@ import toast from "react-hot-toast";
 
 type FavoriteIconProps = {
   isFavorite: boolean;
-  objectId: number;
+  objectID: number;
 };
 
 export default function FavoriteIcon({
   isFavorite,
-  objectId,
+  objectID,
 }: FavoriteIconProps) {
   const [favorites, setFavorites] = useLocalStorage<number[]>("favorites", []);
 
@@ -20,10 +20,10 @@ export default function FavoriteIcon({
     (action: "add" | "remove") => (event: React.MouseEvent) => {
       event.stopPropagation(); // Prevent card click
       if (action === "add") {
-        setFavorites([...favorites, objectId]);
+        setFavorites([...favorites, objectID]);
         toast.success("Obra adicionada aos favoritos!");
       } else {
-        setFavorites(favorites.filter((id) => id !== objectId));
+        setFavorites(favorites.filter((id) => id !== objectID));
         toast.success("Obra removida dos favoritos!");
       }
     };
