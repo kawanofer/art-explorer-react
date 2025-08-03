@@ -33,25 +33,3 @@ export const SearchInfo = styled.div`
     text-align: center;
   }
 `;
-
-export const BackButton = styled.button`
-  background-color: ${({ theme }) => theme.interactivePrimary};
-  color: ${({ theme }) => theme.white};
-  border: none;
-  padding: 8px 16px;
-  border-radius: 6px;
-  font-size: 0.875rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-
-  &:hover {
-    background-color: ${({ theme }) => theme.interactiveHover};
-    transform: translateY(-1px);
-  }
-
-  @media (max-width: 768px) {
-    width: 100%;
-    padding: 12px 16px;
-  }
-`;

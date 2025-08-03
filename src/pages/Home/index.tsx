@@ -2,10 +2,13 @@ import React, { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 
+import { Button } from "@mui/material";
+
 import ArtsDisplay from "../../components/ArtsDisplay";
 import DialogDetails from "../../components/Dialog";
 import Error from "../../components/Error";
 import Loader from "../../components/Loader";
+import ScrollToTopButton from "../../components/ScrollToTopButton";
 import SearchBox from "../../components/SearchBox";
 import Title from "../../components/Title";
 
@@ -265,9 +268,9 @@ const Home = () => {
             <span>
               Resultados da busca ({artworks.length} obra(s) encontrada(s))
             </span>
-            <S.BackButton onClick={handleBackToDefault}>
+            <Button variant="outlined" onClick={handleBackToDefault}>
               Voltar para todas as obras
-            </S.BackButton>
+            </Button>
           </S.SearchInfo>
         )}
 
@@ -293,6 +296,8 @@ const Home = () => {
           onClose={handleCloseDialog}
         />
       )}
+      {/* Scroll to Top Button */}
+      <ScrollToTopButton />
     </S.Container>
   );
 };

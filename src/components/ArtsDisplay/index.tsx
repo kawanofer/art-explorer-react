@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import { isEmpty } from "lodash";
 
 import FavoriteIcon from "../FavoriteIcon";
@@ -64,6 +64,7 @@ export default function ArtsDisplay({
                     {artwork.constituents?.map((c) => c.name).join(", ")}
                   </S.InfoText>
                 )}
+                <br />
                 {!isEmpty(artwork.objectDate) && (
                   <S.InfoText>{artwork.objectDate}</S.InfoText>
                 )}
@@ -78,13 +79,14 @@ export default function ArtsDisplay({
 
       {hasMore && (
         <S.LoadMoreContainer>
-          <S.LoadMoreButton
-            onClick={onLoadMore}
+          <Button
             disabled={loading}
+            size="small"
+            onClick={onLoadMore}
             variant="contained"
           >
             {loading ? "Carregando..." : "Carregar mais"}
-          </S.LoadMoreButton>
+          </Button>
         </S.LoadMoreContainer>
       )}
     </S.Container>

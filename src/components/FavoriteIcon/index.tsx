@@ -1,13 +1,15 @@
 import React from "react";
+import toast from "react-hot-toast";
+
 import FavoriteNotSelected from "@mui/icons-material/FavoriteBorder";
 import FavoriteSelected from "@mui/icons-material/Favorite";
 import { IconButton, Tooltip } from "@mui/material";
+
 import useLocalStorage from "../../hooks/useLocalStorage";
-import toast from "react-hot-toast";
 
 type FavoriteIconProps = {
   isFavorite: boolean;
-  objectID: number;
+  objectID: number; // Renamed from objectID for clarity
 };
 
 export default function FavoriteIcon({
@@ -16,36 +18,40 @@ export default function FavoriteIcon({
 }: FavoriteIconProps) {
   const [favorites, setFavorites] = useLocalStorage<number[]>("favorites", []);
 
-  const handleClickFavorite =
-    (action: "add" | "remove") => (event: React.MouseEvent) => {
-      event.stopPropagation(); // Prevent card click
-      if (action === "add") {
-        setFavorites([...favorites, objectID]);
-        toast.success("Obra adicionada aos favoritos!");
-      } else {
-        setFavorites(favorites.filter((id) => id !== objectID));
-        toast.success("Obra removida dos favoritos!");
-      }
-    };
+  const handleClickFavorite = (event: React.MouseEvent) => {
+    event.stopPropagation(); // Prevent card click
 
-  return isFavorite ? (
-    <Tooltip title="Remover dos favoritos">
+    if (isFavorite) {
+      // Remove from favorites
+      const updatedFavorites = favorites.filter((id) => id !== objectID);
+      setFavorites(updatedFavorites);
+      toast.success("Obra removida dos favoritos!");
+    } else {
+      // Add to favorites (check if not already exists to avoid duplicates)
+      if (!favorites.includes(objectID)) {
+        const updatedFavorites = [...favorites, objectID];
+        setFavorites(updatedFavorites);
+        toast.success("Obra adicionada aos favoritos!");
+      }
+    }
+  };
+
+  return (
+    <Tooltip
+      title={isFavorite ? "Remover dos favoritos" : "Adicionar aos favoritos"}
+    >
       <IconButton
         size="small"
-        aria-label="Remover dos favoritos"
-        onClick={handleClickFavorite("remove")}
+        aria-label={
+          isFavorite ? "Remover dos favoritos" : "Adicionar aos favoritos"
+        }
+        onClick={handleClickFavorite}
       >
-        <FavoriteSelected color="error" />
-      </IconButton>
-    </Tooltip>
-  ) : (
-    <Tooltip title="Adicionar aos favoritos">
-      <IconButton
-        size="small"
-        aria-label="Adicionar aos favoritos"
-        onClick={handleClickFavorite("add")}
-      >
-        <FavoriteNotSelected color="info" />
+        {isFavorite ? (
+          <FavoriteSelected color="error" />
+        ) : (
+          <FavoriteNotSelected color="info" />
+        )}
       </IconButton>
     </Tooltip>
   );

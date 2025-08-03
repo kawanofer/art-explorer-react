@@ -1,6 +1,7 @@
 import axios from "axios";
+import config from "../config/env";
 
-const BASE_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:3001";
+const BASE_URL = config.baseUrl;
 
 interface ArtworkDetail {
   objectID: number;

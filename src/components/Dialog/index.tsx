@@ -63,7 +63,7 @@ export default function ArtDetailDialog(props: DialogProps) {
             <div style={{ display: "flex", justifyContent: "flex-end" }}>
               <FavoriteIcon
                 isFavorite={isFavorite}
-                objectId={artDetail.objectID}
+                objectID={artDetail.objectID}
               />
             </div>
 

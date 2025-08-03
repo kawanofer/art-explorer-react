@@ -82,33 +82,3 @@ export const LoadMoreContainer = styled.div`
   margin-top: 32px;
   padding: 24px 0;
 `;
-
-export const LoadMoreButton = styled(Button)`
-  background-color: ${({ theme }) => theme.interactivePrimary} !important;
-  color: ${({ theme }) => theme.white} !important;
-  padding: 12px 32px !important;
-  font-size: 1rem !important;
-  font-weight: 600 !important;
-  border-radius: 8px !important;
-  text-transform: none !important;
-  min-width: 200px !important;
-
-  &:hover {
-    background-color: ${({ theme }) => theme.interactiveHover} !important;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
-  }
-
-  &:disabled {
-    background-color: ${({ theme }) => theme.grey} !important;
-    color: ${({ theme }) => theme.textSecondary} !important;
-    cursor: not-allowed !important;
-
-    &:hover {
-      transform: none !important;
-      box-shadow: none !important;
-    }
-  }
-
-  transition: all 0.2s ease !important;
-`;

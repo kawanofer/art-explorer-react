@@ -90,9 +90,6 @@ export default function DepartamentBox({
               </MenuItem>
             ))}
           </S.StyledSelect>
-          {loading && (
-            <S.LoadingText>Carregando departamentos...</S.LoadingText>
-          )}
         </FormControl>
       </S.StyledFormControl>
     </S.Container>
