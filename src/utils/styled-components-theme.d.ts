@@ -2,19 +2,29 @@ import "styled-components";
 
 declare module "styled-components" {
   export interface DefaultTheme {
-    white: string;
-    black: string;
-    background: string;
-    surface: string;
-    textPrimary: string;
-    textSecondary: string;
-    textOnDark: string;
-    red: string;
-    grey: string;
-    border: string;
-    interactivePrimary: string;
-    interactiveHover: string;
-    accentSubtle: string;
+    /* Cores de Fundo */
+    colorBackground: string;
+    colorSurface: string;
+    colorCard: string;
+
+    /* Cores de Texto */
+    colorTextPrimary: string;
+    colorTextSecondary: string;
+    colorTextOnDark: string;
+
+    /* Cores de Feedback */
+    colorError: string;
+
+    /* Cores de Linhas e Bordas */
+    colorBorder: string;
+    colorDivider: string;
+
+    /* Cores Interativas e de Destaque */
+    colorPrimary: string;
+    colorPrimaryHover: string;
+    colorAccent: string;
+
+    /* Fontes */
     fontFamilySerif: string;
     fontFamily: string;
   }

@@ -4,7 +4,7 @@ import theme from "../../assets/theme/CustomTheme";
 export const Container = styled.div`
   position: fixed;
   inset: 0;
-  background: ${theme.grey}cc;
+  background: ${theme.colorBorder}cc;
   display: flex;
   justify-content: center;
   align-items: center;

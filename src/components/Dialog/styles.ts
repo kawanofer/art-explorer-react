@@ -3,8 +3,8 @@ import { Dialog, Link } from "@mui/material";
 
 export const StyledDialog = styled(Dialog)`
   & .MuiDialog-paper {
-    background-color: ${({ theme }) => theme.white};
-    color: ${({ theme }) => theme.textPrimary};
+    background-color: ${({ theme }) => theme.colorBackground};
+    color: ${({ theme }) => theme.colorTextPrimary};
     margin: 16px;
     max-height: calc(100% - 32px);
 
@@ -16,11 +16,11 @@ export const StyledDialog = styled(Dialog)`
 
   & .MuiDialogTitle-root {
     background-color: ${({ theme }) => theme.surface};
-    border-bottom: 1px solid ${({ theme }) => theme.border};
+    border-bottom: 1px solid ${({ theme }) => theme.colorDivider};
   }
 
   & .MuiDialogContent-root {
-    background-color: ${({ theme }) => theme.white};
+    background-color: ${({ theme }) => theme.colorBackground};
     padding: 16px;
 
     @media (max-width: 600px) {
@@ -29,19 +29,19 @@ export const StyledDialog = styled(Dialog)`
   }
 
   & .MuiIconButton-root {
-    color: ${({ theme }) => theme.textSecondary};
+    color: ${({ theme }) => theme.colorTextSecondary};
 
     &:hover {
-      background-color: ${({ theme }) => theme.grey};
+      background-color: ${({ theme }) => theme.colorBorder};
     }
   }
 `;
 
 export const StyledLink = styled(Link)`
-  color: ${({ theme }) => theme.interactivePrimary} !important;
+  color: ${({ theme }) => theme.colorPrimary} !important;
 
   &:hover {
-    color: ${({ theme }) => theme.interactiveHover} !important;
+    color: ${({ theme }) => theme.colorPrimaryHover} !important;
   }
 `;
 
@@ -53,17 +53,17 @@ export const DialogContent = styled.div`
 
 export const Title = styled.div`
   font-size: 1.1rem;
-  color: ${({ theme }) => theme.textPrimary};
+  color: ${({ theme }) => theme.colorTextPrimary};
 `;
 
 export const Description = styled.div`
   font-weight: normal;
   font-size: 1rem;
-  color: ${({ theme }) => theme.textSecondary};
+  color: ${({ theme }) => theme.colorTextSecondary};
 `;
 
 export const DialogTitle = styled.div`
-  color: ${({ theme }) => theme.textPrimary};
+  color: ${({ theme }) => theme.colorTextPrimary};
   font-family: ${({ theme }) => theme.fontFamilySerif};
   font-weight: bold;
 `;

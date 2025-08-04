@@ -19,12 +19,12 @@ export const ScrollToTopContainer = styled.div<{ $isVisible: boolean }>`
 `;
 
 export const StyledFab = styled(Fab)`
-  background-color: ${({ theme }) => theme.interactivePrimary} !important;
-  color: ${({ theme }) => theme.white} !important;
+  background-color: ${({ theme }) => theme.colorPrimary} !important;
+  color: ${({ theme }) => theme.colorBackground} !important;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
 
   &:hover {
-    background-color: ${({ theme }) => theme.interactiveHover} !important;
+    background-color: ${({ theme }) => theme.colorPrimaryHover} !important;
     transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2) !important;
   }

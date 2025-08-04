@@ -19,33 +19,33 @@ export const SearchRow = styled.div`
   }
 `;
 export const StyledTextField = styled(TextField)`
-  background-color: ${({ theme }) => theme.white};
+  background-color: ${({ theme }) => theme.colorBackground};
 
   & .MuiOutlinedInput-root {
-    background-color: ${({ theme }) => theme.white};
+    background-color: ${({ theme }) => theme.colorBackground};
 
     & fieldset {
-      border-color: ${({ theme }) => theme.border};
+      border-color: ${({ theme }) => theme.colorDivider};
     }
 
     &:hover fieldset {
-      border-color: ${({ theme }) => theme.interactivePrimary};
+      border-color: ${({ theme }) => theme.colorPrimary};
     }
 
     &.Mui-focused fieldset {
-      border-color: ${({ theme }) => theme.interactivePrimary};
+      border-color: ${({ theme }) => theme.colorPrimary};
     }
   }
 
   & .MuiInputBase-input {
-    color: ${({ theme }) => theme.textPrimary};
+    color: ${({ theme }) => theme.colorTextPrimary};
   }
 
   & .MuiInputLabel-root {
-    color: ${({ theme }) => theme.textSecondary};
+    color: ${({ theme }) => theme.colorTextSecondary};
 
     &.Mui-focused {
-      color: ${({ theme }) => theme.interactivePrimary};
+      color: ${({ theme }) => theme.colorPrimary};
     }
   }
 `;
@@ -57,14 +57,14 @@ export const RadioGroupWrapper = styled.div`
   margin-bottom: 16px;
 
   & .MuiFormControlLabel-label {
-    color: ${({ theme }) => theme.textPrimary};
+    color: ${({ theme }) => theme.colorTextPrimary};
   }
 
   & .MuiRadio-root {
-    color: ${({ theme }) => theme.textSecondary};
+    color: ${({ theme }) => theme.colorTextSecondary};
 
     &.Mui-checked {
-      color: ${({ theme }) => theme.interactivePrimary};
+      color: ${({ theme }) => theme.colorPrimary};
     }
   }
 
@@ -76,11 +76,11 @@ export const RadioGroupWrapper = styled.div`
 `;
 
 export const StyledButton = styled(Button)`
-  background-color: ${({ theme }) => theme.interactivePrimary} !important;
-  color: ${({ theme }) => theme.white} !important;
+  background-color: ${({ theme }) => theme.colorPrimary} !important;
+  color: ${({ theme }) => theme.colorBackground} !important;
 
   &:hover {
-    background-color: ${({ theme }) => theme.interactiveHover} !important;
+    background-color: ${({ theme }) => theme.colorPrimaryHover} !important;
   }
 
   @media (max-width: 768px) {
@@ -89,5 +89,5 @@ export const StyledButton = styled(Button)`
 `;
 
 export const StyledDivider = styled(Divider)`
-  border-color: ${({ theme }) => theme.border} !important;
+  border-color: ${({ theme }) => theme.colorDivider} !important;
 `;

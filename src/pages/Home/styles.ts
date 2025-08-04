@@ -19,10 +19,10 @@ export const SearchInfo = styled.div`
   padding: 16px 24px;
   border-radius: 8px;
   margin-bottom: 24px;
-  border: 1px solid ${({ theme }) => theme.border};
+  border: 1px solid ${({ theme }) => theme.colorDivider};
 
   span {
-    color: ${({ theme }) => theme.textPrimary};
+    color: ${({ theme }) => theme.colorTextPrimary};
     font-weight: 500;
     font-size: 1rem;
   }

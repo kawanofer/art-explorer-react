@@ -17,7 +17,7 @@ export const GridContainer = styled.div`
 `;
 
 export const StyledCard = styled.div`
-  background-color: ${({ theme }) => theme.white};
+  background-color: ${({ theme }) => theme.colorCard};
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   cursor: pointer;
@@ -25,7 +25,7 @@ export const StyledCard = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  border: 1px solid ${({ theme }) => theme.border};
+  border: 1px solid ${({ theme }) => theme.colorDivider};
 `;
 
 export const StyledCardContent = styled.div`
@@ -33,8 +33,8 @@ export const StyledCardContent = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  background-color: ${({ theme }) => theme.white};
-  color: ${({ theme }) => theme.textPrimary};
+  background-color: ${({ theme }) => theme.colorCard};
+  color: ${({ theme }) => theme.colorTextPrimary};
 `;
 
 export const CardMedia = styled.img`
@@ -48,7 +48,7 @@ export const CardMedia = styled.img`
 export const InfoLabel = styled.div`
   font-size: 1.1rem;
   font-weight: 600;
-  color: ${({ theme }) => theme.textPrimary};
+  color: ${({ theme }) => theme.colorTextPrimary};
   margin-bottom: 8px;
   font-family: ${({ theme }) => theme.fontFamilySerif};
   line-height: 1.3;
@@ -56,7 +56,7 @@ export const InfoLabel = styled.div`
 
 export const InfoText = styled.p`
   font-size: 0.875rem;
-  color: ${({ theme }) => theme.textSecondary};
+  color: ${({ theme }) => theme.colorTextSecondary};
   font-weight: normal;
   margin: 4px 0;
   line-height: 1.4;
@@ -66,12 +66,12 @@ export const StyledFavoriteIconContainer = styled.div`
   position: absolute;
   top: 8px;
   right: 8px;
-  background-color: ${({ theme }) => theme.white};
+  background-color: ${({ theme }) => theme.colorBackground};
   border-radius: 50%;
   padding: 4px;
   backdrop-filter: blur(4px);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  border: 1px solid ${({ theme }) => theme.border};
+  border: 1px solid ${({ theme }) => theme.colorDivider};
   z-index: 2;
 `;
 
@@ -83,8 +83,8 @@ export const LoadMoreContainer = styled.div`
 `;
 
 export const LoadMoreButton = styled.button`
-  background-color: ${({ theme }) => theme.interactivePrimary};
-  color: ${({ theme }) => theme.white};
+  background-color: ${({ theme }) => theme.colorPrimary};
+  color: ${({ theme }) => theme.colorBackground};
   padding: 12px 32px;
   font-size: 1rem;
   font-weight: 600;
@@ -95,14 +95,14 @@ export const LoadMoreButton = styled.button`
   transition: all 0.2s ease;
 
   &:hover:not(:disabled) {
-    background-color: ${({ theme }) => theme.interactiveHover};
+    background-color: ${({ theme }) => theme.colorPrimaryHover};
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   }
 
   &:disabled {
-    background-color: ${({ theme }) => theme.grey};
-    color: ${({ theme }) => theme.textSecondary};
+    background-color: ${({ theme }) => theme.colorBorder};
+    color: ${({ theme }) => theme.colorTextSecondary};
     cursor: not-allowed;
 
     &:hover {
