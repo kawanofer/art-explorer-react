@@ -61,10 +61,10 @@ Criar uma aplicação web responsiva utilizando **React**, **TypeScript** e **No
 ## 📊 Requisitos Desejáveis
 
 - Barra de busca com autocomplete
-- Filtro por departamento ou artista
-- Animações com Framer Motion
+- ✅ Filtro por departamento ou artista
+- ✅ Animações com Framer Motion
 - ✅ Dark mode
-- Deploy (ex: Vercel/Netlify para frontend, Render para backend)
+- ✅ Deploy (ex: Vercel/Netlify para frontend, Render para backend)
 
 ---
 
@@ -107,6 +107,10 @@ Para padronizar a entrega e facilitar a análise:
 
 > ✅ **Dica**: Você pode incluir um arquivo `THOUGHTS.md` com decisões técnicas, ideias descartadas e sugestões de melhoria.
 
+---
+## DEPLOY 
+- FRONT-END DEPLOY VERCEL: https://art-explorer-react-nu.vercel.app/
+- BACK-END DEPLOY RENDER: https://met-museum-backend.onrender.com
 ---
 
 ## 📚 Extras

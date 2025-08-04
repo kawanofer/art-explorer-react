@@ -1,24 +1,16 @@
 import React from "react";
 import { Button, Grid } from "@mui/material";
-import { isEmpty } from "lodash";
 
-import FavoriteIcon from "../FavoriteIcon";
 import useLocalStorage from "../../hooks/useLocalStorage";
 
 import * as S from "./styles";
+import ArtCard from "./Card";
 
-interface Artwork {
-  objectID: number;
-  primaryImageSmall: string;
-  title: string;
-  constituents?: { name: string }[];
-  objectDate?: string;
-  department?: string;
-}
+import { ArtworkDisplayProps } from "../../types/artwork";
 
 interface ArtsDisplayProps {
-  artworks: Artwork[];
-  onArtClick: (artwork: Artwork) => void;
+  artworks: ArtworkDisplayProps[];
+  onArtClick: (artwork: ArtworkDisplayProps) => void;
   onLoadMore?: () => void;
   hasMore?: boolean;
   loading?: boolean;
@@ -36,45 +28,11 @@ export default function ArtsDisplay({
   return (
     <S.Container>
       <Grid container spacing={3}>
-        {artworks.map((artwork) => (
-          <Grid item xs={12} sm={6} md={3} key={artwork.objectID}>
-            <S.StyledCard onClick={() => onArtClick(artwork)}>
-              <S.StyledCardContent>
-                <div style={{ position: "relative" }}>
-                  <S.CardMedia
-                    src={artwork.primaryImageSmall}
-                    alt={artwork.title}
-                    onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
-                      const target = e.target as HTMLImageElement;
-                      target.src = "/placeholder-image.jpg";
-                    }}
-                  />
-                  <S.StyledFavoriteIconContainer>
-                    <FavoriteIcon
-                      objectID={artwork.objectID}
-                      isFavorite={favorites.includes(artwork.objectID)}
-                    />
-                  </S.StyledFavoriteIconContainer>
-                </div>
-                {!isEmpty(artwork.title) && (
-                  <S.InfoLabel>{artwork.title}</S.InfoLabel>
-                )}
-                {!isEmpty(artwork.constituents) && (
-                  <S.InfoText>
-                    {artwork.constituents?.map((c) => c.name).join(", ")}
-                  </S.InfoText>
-                )}
-                <br />
-                {!isEmpty(artwork.objectDate) && (
-                  <S.InfoText>{artwork.objectDate}</S.InfoText>
-                )}
-                {!isEmpty(artwork.department) && (
-                  <S.InfoText>{artwork.department}</S.InfoText>
-                )}
-              </S.StyledCardContent>
-            </S.StyledCard>
-          </Grid>
-        ))}
+        <ArtCard
+          artworks={artworks}
+          onArtClick={onArtClick}
+          favorites={favorites}
+        />
       </Grid>
 
       {hasMore && (

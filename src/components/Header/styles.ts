@@ -77,7 +77,7 @@ export const MobileMenuButton = styled.button`
   display: none;
   background: none;
   border: none;
-  color: ${({ theme }) => theme.white};
+  color: #fff;
   font-size: 1.5rem;
   cursor: pointer;
   padding: 8px;

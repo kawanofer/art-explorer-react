@@ -8,6 +8,7 @@ import * as S from "./styles";
 import FavoriteIcon from "../FavoriteIcon";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import type { ArtworkDetailProps } from "../../types/artwork";
+import ImageCarousel from "./ImageCarousel";
 
 export interface DialogProps {
   open: boolean;
@@ -20,6 +21,15 @@ export default function ArtDetailDialog(props: DialogProps) {
   const [favorites] = useLocalStorage<number[]>("favorites", []);
 
   if (!artDetail) return null;
+
+  const images: string[] = [];
+
+  if (artDetail.additionalImages && artDetail.additionalImages.length > 0) {
+    // Use a spread operator to add all additional images if they exist and are not empty
+    images.push(...artDetail.additionalImages.filter(Boolean));
+  } else if (artDetail.primaryImageSmall) {
+    images.push(artDetail.primaryImageSmall);
+  }
 
   const isFavorite = favorites.includes(artDetail.objectID);
 
@@ -49,16 +59,7 @@ export default function ArtDetailDialog(props: DialogProps) {
       </DialogTitle>
       <DialogContent dividers>
         <Box display="flex" flexDirection={{ xs: "column", md: "row" }} gap={3}>
-          <Box flexShrink={0}>
-            <S.Image
-              src={artDetail.primaryImageSmall}
-              alt={artDetail.title}
-              onError={(e) => {
-                (e.target as HTMLImageElement).src =
-                  "https://via.placeholder.com/320x320?text=No+Image";
-              }}
-            />
-          </Box>
+          <ImageCarousel images={images} title={artDetail.title} />
           <Box flex={1} gap={2} display="flex" flexDirection="column">
             <div style={{ display: "flex", justifyContent: "flex-end" }}>
               <FavoriteIcon

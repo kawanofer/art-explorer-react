@@ -1,11 +1,22 @@
 import styled from "styled-components";
-import { Card as MuiCard, CardContent, Button } from "@mui/material";
 
 export const Container = styled.div`
   width: 100%;
 `;
 
-export const Card = styled(MuiCard)`
+export const GridContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  width: 100%;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 16px;
+  }
+`;
+
+export const StyledCard = styled.div`
   background-color: ${({ theme }) => theme.white};
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -14,18 +25,16 @@ export const Card = styled(MuiCard)`
   height: 100%;
   display: flex;
   flex-direction: column;
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  }
+  border: 1px solid ${({ theme }) => theme.border};
 `;
 
-export const CardWrapper = styled.div`
+export const StyledCardContent = styled.div`
   padding: 16px;
   height: 100%;
   display: flex;
   flex-direction: column;
+  background-color: ${({ theme }) => theme.white};
+  color: ${({ theme }) => theme.textPrimary};
 `;
 
 export const CardMedia = styled.img`
@@ -33,20 +42,24 @@ export const CardMedia = styled.img`
   height: 300px;
   object-fit: cover;
   border-radius: 8px;
+  margin-bottom: 12px;
 `;
 
 export const InfoLabel = styled.div`
   font-size: 1.1rem;
   font-weight: 600;
   color: ${({ theme }) => theme.textPrimary};
-  margin-bottom: 16px;
+  margin-bottom: 8px;
   font-family: ${({ theme }) => theme.fontFamilySerif};
+  line-height: 1.3;
 `;
 
 export const InfoText = styled.p`
   font-size: 0.875rem;
   color: ${({ theme }) => theme.textSecondary};
   font-weight: normal;
+  margin: 4px 0;
+  line-height: 1.4;
 `;
 
 export const StyledFavoriteIconContainer = styled.div`
@@ -59,21 +72,7 @@ export const StyledFavoriteIconContainer = styled.div`
   backdrop-filter: blur(4px);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   border: 1px solid ${({ theme }) => theme.border};
-`;
-
-export const StyledCard = styled(Card)`
-  background-color: ${({ theme }) => theme.white} !important;
-  color: ${({ theme }) => theme.textPrimary} !important;
-  border: 1px solid ${({ theme }) => theme.border} !important;
-
-  &:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
-  }
-`;
-
-export const StyledCardContent = styled(CardContent)`
-  background-color: ${({ theme }) => theme.white} !important;
-  color: ${({ theme }) => theme.textPrimary} !important;
+  z-index: 2;
 `;
 
 export const LoadMoreContainer = styled.div`
@@ -81,4 +80,39 @@ export const LoadMoreContainer = styled.div`
   justify-content: center;
   margin-top: 32px;
   padding: 24px 0;
+`;
+
+export const LoadMoreButton = styled.button`
+  background-color: ${({ theme }) => theme.interactivePrimary};
+  color: ${({ theme }) => theme.white};
+  padding: 12px 32px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  min-width: 200px;
+  transition: all 0.2s ease;
+
+  &:hover:not(:disabled) {
+    background-color: ${({ theme }) => theme.interactiveHover};
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  &:disabled {
+    background-color: ${({ theme }) => theme.grey};
+    color: ${({ theme }) => theme.textSecondary};
+    cursor: not-allowed;
+
+    &:hover {
+      transform: none;
+      box-shadow: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    max-width: 300px;
+  }
 `;

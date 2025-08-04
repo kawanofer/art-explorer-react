@@ -41,6 +41,7 @@
     "axios": "^1.11.0",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
+    "motion": "^12.23.12",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.51.5",
