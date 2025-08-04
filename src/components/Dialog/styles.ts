@@ -75,3 +75,14 @@ export const Image = styled.img`
   border-radius: 8px;
   object-fit: contain;
 `;
+
+export const AnimatedImageDiv = styled.div`
+  border-radius: 4px;
+  display: block;
+  height: 100%;
+  left: 0;
+  object-fit: contain;
+  position: absolute;
+  top: 0;
+  width: 100%;
+`;

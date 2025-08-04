@@ -37,7 +37,7 @@ export default function ArtDetailDialog(props: DialogProps) {
     <S.StyledDialog
       open={open}
       fullWidth
-      maxWidth="md"
+      maxWidth="lg"
       onClose={() => onClose && onClose()}
       aria-labelledby="dialog-title"
       aria-describedby="alert-dialog-description"

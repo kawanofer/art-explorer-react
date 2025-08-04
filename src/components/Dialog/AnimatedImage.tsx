@@ -1,5 +1,6 @@
 import React, { forwardRef } from "react";
 import { motion, usePresenceData } from "motion/react";
+import * as S from "./styles";
 
 interface AnimatedImageProps {
   src: string;
@@ -29,15 +30,7 @@ const AnimatedImage = forwardRef<HTMLImageElement, AnimatedImageProps>(
           },
         }}
         exit={{ opacity: 0, x: direction * -50 }}
-        style={{
-          maxWidth: "100%",
-          height: "auto",
-          display: "block",
-          borderRadius: "4px",
-          position: "absolute",
-          top: 0,
-          left: 0,
-        }}
+        className={S.AnimatedImageDiv}
       />
     );
   },
