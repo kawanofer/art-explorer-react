@@ -1,6 +1,6 @@
-import { createGlobalStyle } from "styled-components";
-
 import "react-perfect-scrollbar/dist/css/styles.css";
+
+import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
   *, *:after, *:before {

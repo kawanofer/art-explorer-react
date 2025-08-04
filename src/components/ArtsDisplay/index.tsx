@@ -1,12 +1,11 @@
 import React from "react";
+
 import { Button, Grid } from "@mui/material";
+import useLocalStorage from "@src/hooks/useLocalStorage";
+import { ArtworkDisplayProps } from "@src/types/artwork";
 
-import useLocalStorage from "../../hooks/useLocalStorage";
-
-import * as S from "./styles";
 import ArtCard from "./Card";
-
-import { ArtworkDisplayProps } from "../../types/artwork";
+import * as S from "./styles";
 
 interface ArtsDisplayProps {
   artworks: ArtworkDisplayProps[];

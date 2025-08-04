@@ -1,5 +1,7 @@
 import React, { forwardRef } from "react";
+
 import { motion, usePresenceData } from "motion/react";
+
 import * as S from "./styles";
 
 interface AnimatedImageProps {

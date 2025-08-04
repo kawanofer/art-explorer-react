@@ -1,15 +1,14 @@
 import React from "react";
 import toast from "react-hot-toast";
 
-import FavoriteNotSelected from "@mui/icons-material/FavoriteBorder";
 import FavoriteSelected from "@mui/icons-material/Favorite";
+import FavoriteNotSelected from "@mui/icons-material/FavoriteBorder";
 import { IconButton, Tooltip } from "@mui/material";
-
-import useLocalStorage from "../../hooks/useLocalStorage";
+import useLocalStorage from "@src/hooks/useLocalStorage";
 
 type FavoriteIconProps = {
   isFavorite: boolean;
-  objectID: number; // Renamed from objectID for clarity
+  objectID: number;
 };
 
 export default function FavoriteIcon({

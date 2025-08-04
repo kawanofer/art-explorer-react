@@ -1,30 +1,28 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Button } from "@mui/material";
-
-import ArtsDisplay from "../../components/ArtsDisplay";
-import DialogDetails from "../../components/Dialog";
-import Error from "../../components/Error";
-import Loader from "../../components/Loader";
-import ScrollToTopButton from "../../components/ScrollToTopButton";
-import SearchBox from "../../components/SearchBox";
-import Title from "../../components/Title";
-
 import {
-  fetchArtworkDetail,
   fetchArtworkByArtist,
   fetchArtworkByDepartment,
-} from "../../api/arts";
-import { fetchArtworkIds } from "../../redux/artsSlice";
-import { addDetailArts } from "../../redux/detailsArtSlice";
-import type { RootState, AppDispatch } from "../../redux/store";
+  fetchArtworkDetail,
+} from "@src/api/arts";
+import ArtsDisplay from "@src/components/ArtsDisplay";
+import DialogDetails from "@src/components/Dialog";
+import Error from "@src/components/Error";
+import Loader from "@src/components/Loader";
+import ScrollToTopButton from "@src/components/ScrollToTopButton";
+import SearchBox from "@src/components/SearchBox";
+import Title from "@src/components/Title";
+import { fetchArtworkIds } from "@src/redux/artsSlice";
+import { addDetailArts } from "@src/redux/detailsArtSlice";
+import type { AppDispatch, RootState } from "@src/redux/store";
 import type {
-  ArtworkItemsProps,
-  ArtworkDisplayProps,
   ArtworkDetailProps,
-} from "../../types/artwork";
+  ArtworkDisplayProps,
+  ArtworkItemsProps,
+} from "@src/types/artwork";
 
 import * as S from "./styles";
 

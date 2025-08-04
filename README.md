@@ -108,9 +108,12 @@ Para padronizar a entrega e facilitar a análise:
 > ✅ **Dica**: Você pode incluir um arquivo `THOUGHTS.md` com decisões técnicas, ideias descartadas e sugestões de melhoria.
 
 ---
-## DEPLOY 
+
+## DEPLOY
+
 - FRONT-END DEPLOY VERCEL: https://art-explorer-react-nu.vercel.app/
 - BACK-END DEPLOY RENDER: https://met-museum-backend.onrender.com
+
 ---
 
 ## 📚 Extras

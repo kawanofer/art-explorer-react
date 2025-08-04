@@ -1,12 +1,12 @@
 import React, { Suspense } from "react";
-
-import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
-import { ThemeProvider } from "./contexts/ThemeContext";
-import { AppRouters } from "./router/routes";
 import { Toaster } from "react-hot-toast";
+
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import GlobalStyle from "./assets/global";
 import Footer from "./components/Footer";
+import { ThemeProvider } from "./contexts/ThemeContext";
+import { AppRouters } from "./router/routes";
 
 const queryClient = new QueryClient();
 

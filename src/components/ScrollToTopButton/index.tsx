@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+
 import * as S from "./styles";
 
-const ScrollToTopButton: React.FC = () => {
+const ScrollToTopButton = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   // Show button when page is scrolled down

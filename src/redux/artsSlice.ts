@@ -1,5 +1,5 @@
-import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { fetchArtworkWithImages } from "../api/arts";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { fetchArtworkWithImages } from "@src/api/arts";
 
 interface ArtsState {
   artworkIds: number[];

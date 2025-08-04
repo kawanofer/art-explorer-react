@@ -1,4 +1,3 @@
-// prettier.config.mjs
 import pluginSortImports from "@trivago/prettier-plugin-sort-imports";
 
 export default {
@@ -14,17 +13,21 @@ export default {
   tabWidth: 2,
   trailingComma: "none",
   useTabs: false,
-  importOrderParserPlugins: ["jsx", "decorators-legacy"],
+
+  // Plugin configuration
   plugins: [pluginSortImports],
+
+  // Import sorting configuration
+  importOrderParserPlugins: ["jsx", "decorators-legacy", "typescript"],
   importOrder: [
-    "^react",
-    "<THIRD_PARTY_MODULES>",
-    "^@mui",
-    "^@src/components",
-    "^@src/store",
-    "^@src/constants",
-    "^@src/utils",
-    "^[./]",
+    "^react(.*)$", // React imports first
+    "^@?\\w", // Third party libraries
+    "^@mui/(.*)$", // MUI components
+    "^@/(.*)$", // Your alias imports (if using @)
+    "^@src/(.*)$", // Your @src alias imports
+    "^[./]", // Relative imports
+    "^\\.\\..*", // Parent directory imports
+    "^\\..*", // Current directory imports
   ],
   importOrderSeparation: true,
   importOrderSortSpecifiers: true,

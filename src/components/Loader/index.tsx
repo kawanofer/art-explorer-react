@@ -1,6 +1,8 @@
 import React from "react";
-import * as S from "./styles";
+
 import { CircularProgress } from "@mui/material";
+
+import * as S from "./styles";
 
 const Loader = () => {
   return (

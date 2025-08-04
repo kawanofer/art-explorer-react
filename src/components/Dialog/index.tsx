@@ -1,14 +1,14 @@
 import React from "react";
+
+import CloseIcon from "@mui/icons-material/Close";
+import { Box, DialogContent, DialogTitle, IconButton } from "@mui/material";
+import useLocalStorage from "@src/hooks/useLocalStorage";
+import { ArtworkDetailProps } from "@src/types/artwork";
 import { isEmpty } from "lodash";
 
-import { DialogTitle, DialogContent, Box, IconButton } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
-
-import * as S from "./styles";
 import FavoriteIcon from "../FavoriteIcon";
-import useLocalStorage from "../../hooks/useLocalStorage";
-import type { ArtworkDetailProps } from "../../types/artwork";
 import ImageCarousel from "./ImageCarousel";
+import * as S from "./styles";
 
 export interface DialogProps {
   open: boolean;

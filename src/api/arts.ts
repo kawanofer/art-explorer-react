@@ -1,5 +1,6 @@
 import axios from "axios";
-import config from "../config/env";
+
+import config from "@src/config/env";
 import { ArtworkItemsProps } from "@src/types/artwork";
 
 const BASE_URL = config.baseUrl;
@@ -85,7 +86,6 @@ export const fetchArtworkByDepartment = async (
     const response = await axios.get<ArtworkItemsProps[]>(
       `${BASE_URL}/api/artworks/search/department?departmentId=${departmentId}`,
     );
-    console.log(`Fetched ${response} artworks for department ${departmentId}`);
     return response.data;
   } catch (error) {
     console.error(

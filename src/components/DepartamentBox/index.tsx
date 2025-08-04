@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+
 import {
   FormControl,
   InputLabel,
   MenuItem,
   SelectChangeEvent,
 } from "@mui/material";
-import { fetchDepartments } from "../../api/arts";
+import { fetchDepartments } from "@src/api/arts";
+import { DepartmentProps } from "@src/types/departaments";
+
 import * as S from "./styles";
-import { DepartmentProps } from "../../types/departaments";
 
 interface DepartamentBoxProps {
   onChange?: (department: string) => void;

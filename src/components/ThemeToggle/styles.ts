@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import { styled as muiStyled } from "@mui/material/styles";
 import { ToggleButtonGroup } from "@mui/material";
+import { styled as muiStyled } from "@mui/material/styles";
+import styled from "styled-components";
 
 export const Container = styled.div`
   display: flex;

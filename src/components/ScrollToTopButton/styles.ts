@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import { Fab } from "@mui/material";
+import styled from "styled-components";
 
 export const ScrollToTopContainer = styled.div<{ $isVisible: boolean }>`
   position: fixed;

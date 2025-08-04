@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { AnimatePresence } from "motion/react";
-import { IconButton, Box } from "@mui/material";
+
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { Box, IconButton } from "@mui/material";
+import { AnimatePresence } from "motion/react";
 import { wrap } from "motion/react";
 
 import AnimatedImage from "./AnimatedImage";

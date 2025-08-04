@@ -1,11 +1,12 @@
 import React from "react";
-import { isEmpty } from "lodash";
+
 import { Grid } from "@mui/material";
+import { ArtworkDisplayProps } from "@src/types/artwork";
+import { isEmpty } from "lodash";
 import * as motion from "motion/react-client";
 
 import FavoriteIcon from "../../FavoriteIcon";
 import * as S from "../styles";
-import { ArtworkDisplayProps } from "../../../types/artwork";
 
 interface ArtCardProps {
   artworks: ArtworkDisplayProps[];

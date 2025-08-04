@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from "react";
-import * as S from "./styles";
-import Title from "../../components/Title";
-import useLocalStorage from "../../hooks/useLocalStorage";
-import ArtsDisplay from "../../components/ArtsDisplay";
-import Loader from "../../components/Loader";
-import DialogDetails from "../../components/Dialog";
+import React, { useEffect, useState } from "react";
 
-import { fetchArtworkDetail } from "../../api/arts";
+import { fetchArtworkDetail } from "@src/api/arts";
+import ArtsDisplay from "@src/components/ArtsDisplay";
+import DialogDetails from "@src/components/Dialog";
+import Loader from "@src/components/Loader";
+import Title from "@src/components/Title";
+import useLocalStorage from "@src/hooks/useLocalStorage";
+
 import type {
-  ArtworkItemsProps,
-  ArtworkDisplayProps,
   ArtworkDetailProps,
+  ArtworkDisplayProps,
+  ArtworkItemsProps,
 } from "../../types/artwork";
+import * as S from "./styles";
 
 function Favorites() {
   const [favorites] = useLocalStorage<number[]>("favorites", []);

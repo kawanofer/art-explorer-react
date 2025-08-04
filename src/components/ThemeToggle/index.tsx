@@ -1,8 +1,10 @@
 import React from "react";
-import { Tooltip, ToggleButton } from "@mui/material";
+
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
-import { useTheme } from "../../hooks/useTheme";
+import { ToggleButton, Tooltip } from "@mui/material";
+import { useTheme } from "@src/hooks/useTheme";
+
 import * as S from "./styles";
 
 export default function ThemeColor() {

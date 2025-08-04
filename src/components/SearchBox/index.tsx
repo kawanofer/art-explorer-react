@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
+
 import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
 
-import * as S from "./styles";
 import DepartamentBox from "../DepartamentBox";
+import * as S from "./styles";
 
 interface SearchBoxProps {
-  onSearch?: (query: string, searchType: string, department?: string) => void;
+  onSearch?: (query: string, searchType: string, department?: number) => void;
 }
 
 const searchTypes = [
@@ -35,7 +36,6 @@ export default function SearchBox({ onSearch }: SearchBoxProps) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Search submitted:", { query, searchType, selectedDepartment });
     if (onSearch) {
       onSearch(query.trim(), searchType, selectedDepartment);
     }

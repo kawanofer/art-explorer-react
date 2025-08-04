@@ -1,5 +1,5 @@
+import { Button, Divider, TextField } from "@mui/material";
 import styled from "styled-components";
-import { TextField, Button, Divider } from "@mui/material";
 
 export const Container = styled.div`
   background-color: ${({ theme }) => theme.background};
