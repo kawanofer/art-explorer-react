@@ -4,7 +4,9 @@ import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { AppRouters } from "./router/routes";
 import { Toaster } from "react-hot-toast";
+
 import GlobalStyle from "./assets/global";
+import Footer from "./components/Footer";
 
 const queryClient = new QueryClient();
 
@@ -17,6 +19,7 @@ function App() {
         <ThemeProvider>
           <GlobalStyle />
           <AppRouters />
+          <Footer />
           <Toaster />
         </ThemeProvider>
       </QueryClientProvider>

@@ -30,9 +30,9 @@ export interface ArtworkDisplayProps {
 
 export interface ArtworkDetailProps {
   additionalImages: string[];
-  constituents: constituentsProps[];
   artistDisplayName: string;
   artistPrefix: string;
+  constituents: constituentsProps[];
   department: string;
   dimensions: string;
   medium: string;

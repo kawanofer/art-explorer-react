@@ -9,7 +9,7 @@ declare module "styled-components" {
     textPrimary: string;
     textSecondary: string;
     textOnDark: string;
-    textError: string;
+    red: string;
     grey: string;
     border: string;
     interactivePrimary: string;

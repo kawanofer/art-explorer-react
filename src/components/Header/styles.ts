@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.header`
-  background-color: ${({ theme }) => theme.textError};
+  background-color: ${({ theme }) => theme.red};
   color: #fff;
   padding: 0;
   box-shadow: 0 2px 8px rgba(228, 0, 43, 0.3);
@@ -108,7 +108,7 @@ export const MobileNav = styled.div<{ $isOpen: boolean }>`
   top: 100%;
   left: 0;
   right: 0;
-  background-color: ${({ theme }) => theme.textError};
+  background-color: ${({ theme }) => theme.red};
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   padding: 16px;
   flex-direction: column;

@@ -1,19 +1,8 @@
 import axios from "axios";
 import config from "../config/env";
+import { ArtworkItemsProps } from "@src/types/artwork";
 
 const BASE_URL = config.baseUrl;
-
-interface ArtworkDetail {
-  objectID: number;
-  title: string;
-  artistDisplayName: string;
-  objectDate: string;
-  medium: string;
-  department: string;
-  primaryImage: string;
-  primaryImageSmall: string;
-  objectURL: string;
-}
 
 /*
   Buscar obras com imagens  GET /api/artworks/search/images
@@ -37,9 +26,9 @@ export const fetchArtworkWithImages = async (
 */
 export const fetchArtworkDetail = async (
   objectID: number,
-): Promise<ArtworkDetail | null> => {
+): Promise<ArtworkItemsProps | null> => {
   try {
-    const response = await axios.get<ArtworkDetail>(
+    const response = await axios.get<ArtworkItemsProps>(
       `${BASE_URL}/api/artworks/${objectID}`,
     );
     return response.data;
@@ -54,9 +43,9 @@ export const fetchArtworkDetail = async (
 */
 export const fetchArtworkByArtist = async (
   artistName: string,
-): Promise<ArtworkDetail[] | null> => {
+): Promise<ArtworkItemsProps[] | null> => {
   try {
-    const response = await axios.get<ArtworkDetail[]>(
+    const response = await axios.get<ArtworkItemsProps[]>(
       `${BASE_URL}/api/artworks/search/artist?q=${encodeURIComponent(artistName)}`,
     );
     return response.data;
@@ -91,9 +80,9 @@ export const fetchDepartments = async (): Promise<
 */
 export const fetchArtworkByDepartment = async (
   departmentId: number,
-): Promise<ArtworkDetail[] | null> => {
+): Promise<ArtworkItemsProps[] | null> => {
   try {
-    const response = await axios.get<ArtworkDetail[]>(
+    const response = await axios.get<ArtworkItemsProps[]>(
       `${BASE_URL}/api/artworks/search/department?departmentId=${departmentId}`,
     );
     console.log(`Fetched ${response} artworks for department ${departmentId}`);

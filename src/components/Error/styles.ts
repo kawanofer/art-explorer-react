@@ -10,6 +10,6 @@ export const ErrorContainer = styled.div`
 
 export const ErrorText = styled.div`
   font-size: 1.25rem;
-  color: ${({ theme }) => theme.textError};
+  color: ${({ theme }) => theme.red};
   font-weight: 600;
 `;

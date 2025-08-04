@@ -6,11 +6,11 @@ export const Container = styled.div`
 `;
 
 export const ErrorMessage = styled.div`
-  color: ${({ theme }) => theme.textError};
+  color: ${({ theme }) => theme.red};
   font-size: 0.875rem;
   padding: 8px 12px;
   background-color: ${({ theme }) => theme.surface};
-  border: 1px solid ${({ theme }) => theme.textError};
+  border: 1px solid ${({ theme }) => theme.red};
   border-radius: 4px;
   text-align: center;
 `;

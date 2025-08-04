@@ -1,27 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-interface ArtworkDetail {
-  objectID: number;
-  title: string;
-  primaryImage: string;
-  primaryImageSmall: string;
-  artistDisplayName?: string;
-  artistPrefix?: string;
-  artistRole?: string;
-  objectDate?: string;
-  dimensions?: string;
-  department?: string;
-  objectURL?: string;
-  additionalImages?: string[];
-  constituents?: {
-    name: string;
-    role: string;
-  }[];
-  medium?: string;
-}
+import { ArtworkItemsProps } from "../types/artwork";
 
 interface DetailsArtState {
-  detailArts: ArtworkDetail[] | null;
+  detailArts: ArtworkItemsProps[] | null;
 }
 
 const initialState: DetailsArtState = {
@@ -32,10 +13,10 @@ const detailsArtSlice = createSlice({
   name: "detailsArt",
   initialState,
   reducers: {
-    setDetailArts(state, action: PayloadAction<ArtworkDetail[] | null>) {
+    setDetailArts(state, action: PayloadAction<ArtworkItemsProps[] | null>) {
       state.detailArts = action.payload;
     },
-    addDetailArts(state, action: PayloadAction<ArtworkDetail[]>) {
+    addDetailArts(state, action: PayloadAction<ArtworkItemsProps[]>) {
       if (state.detailArts === null) {
         state.detailArts = action.payload;
       } else {
