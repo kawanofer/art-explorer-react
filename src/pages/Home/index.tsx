@@ -52,7 +52,7 @@ const Home = () => {
   }, [dispatch, isSearchMode]);
 
   useEffect(() => {
-    if (isSearchMode) return; // Don't load default artworks in search mode
+    if (isSearchMode) return;
 
     const fetchArtworks = async () => {
       if (!artworkIds || artworkIds.length === 0) {
@@ -62,10 +62,8 @@ const Home = () => {
       setLoadingMore(true);
 
       try {
-        // Get IDs for current display count
         const limitedIds = artworkIds.slice(0, displayedCount);
 
-        // Filter out already loaded artworks
         const alreadyLoadedIds = fullArtworks.map(
           (artwork) => artwork.objectID,
         );
@@ -78,14 +76,12 @@ const Home = () => {
           return;
         }
 
-        // Fetch artwork details for new IDs
         const artworkPromises = newIds.map((id: number) =>
           fetchArtworkDetail(id),
         );
 
         const artworkResults = await Promise.all(artworkPromises);
 
-        // Filter out null results and artworks without images
         const validArtworks = artworkResults.filter(
           (artwork): artwork is ArtworkItemsProps =>
             artwork !== null &&
@@ -93,14 +89,11 @@ const Home = () => {
             artwork.primaryImageSmall !== "",
         );
 
-        // Add to Redux store
         dispatch(addDetailArts(validArtworks));
 
-        // Merge with existing artworks
         const updatedFullArtworks = [...fullArtworks, ...validArtworks];
         setFullArtworks(updatedFullArtworks);
 
-        // Map to the format expected by ArtsDisplay component
         const mappedArtworks: ArtworkDisplayProps[] = updatedFullArtworks.map(
           (artwork) => ({
             objectID: artwork.objectID,
@@ -122,20 +115,17 @@ const Home = () => {
     };
 
     fetchArtworks();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [artworkIds, displayedCount, dispatch, isSearchMode]);
 
-  // Show loading if fetching artwork IDs or searching
   if (loading || searching) return <Loader />;
-
   if (error) return <Error message={error} />;
-
   if (!isSearchMode && (!artworkIds || artworkIds.length === 0)) {
     return <Error message="Nenhuma obra encontrada com imagens." />;
   }
 
   const handleLoadMore = () => {
     if (isSearchMode) {
-      // In search mode, we don't support load more
       return;
     }
     setDisplayedCount((prev) => prev + itemsPerLoad);
@@ -155,9 +145,8 @@ const Home = () => {
     setIsSearchMode(true);
     setSearching(true);
 
-    debugger;
     try {
-      let searchResults = [];
+      let searchResults: ArtworkDetailProps[] = [];
 
       if (searchType === "artist") {
         if (!query.trim()) {
@@ -178,9 +167,6 @@ const Home = () => {
       }
 
       if (searchResults && searchResults.length > 0) {
-        console.log("1 Search by department:", searchResults.length);
-
-        // Store as fullArtworks
         setFullArtworks(searchResults as ArtworkItemsProps[]);
 
         // Map to display format
@@ -195,7 +181,6 @@ const Home = () => {
           }),
         );
 
-        console.log("3 Mapped artworks:", mappedArtworks.length);
         setArtworks(mappedArtworks);
 
         // Add to Redux store
@@ -205,7 +190,6 @@ const Home = () => {
       } else {
         setArtworks([]);
         setFullArtworks([]);
-        toast.info("Nenhuma obra encontrada para esta busca");
       }
     } catch (error) {
       console.error("Search error:", error);
@@ -224,7 +208,6 @@ const Home = () => {
   };
 
   const handleArtClick = (artwork: ArtworkDisplayProps) => {
-    // Find the full artwork data from fullArtworks
     const fullArtwork = fullArtworks.find(
       (item) => item.objectID === artwork.objectID,
     );

@@ -20,7 +20,7 @@ export interface ArtworkItemsProps {
 }
 
 export interface ArtworkDisplayProps {
-  constituents?: { name: string }[];
+  constituents?: constituentsProps[];
   department?: string;
   objectDate?: string;
   objectID: number;
