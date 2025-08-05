@@ -13,8 +13,7 @@
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx}\" --config .prettierrc.cjs",
     "format:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx}\" --config .prettierrc.cjs",
     "lint": "eslint src --ext .ts,.tsx,.js,.jsx",
-    "lint:fix": "eslint src --ext .ts,.tsx,.js,.jsx --fix",
-    "prepare": "husky"
+    "lint:fix": "eslint src --ext .ts,.tsx,.js,.jsx --fix"
   },
   "engines": {
     "node": "^20.0.0 || >=22.0.0"
