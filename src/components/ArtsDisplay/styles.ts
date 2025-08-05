@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
@@ -78,7 +78,6 @@ export const StyledFavoriteIconContainer = styled.div`
 export const LoadMoreContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 32px;
   padding: 24px 0;
 `;
 

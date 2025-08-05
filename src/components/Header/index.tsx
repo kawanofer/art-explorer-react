@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { NavLink as RouterNavLink, useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
 
-import logo from "../../assets/logo.svg";
+import { NavLink as RouterNavLink, useNavigate } from 'react-router-dom';
 
-import ThemeToggle from "../ThemeToggle";
-import * as S from "./styles";
+import logo from '../../assets/logo.svg';
+import ThemeToggle from '../ThemeToggle';
+import * as S from './styles';
 
 interface MenuItem {
   label: string;
@@ -13,12 +13,12 @@ interface MenuItem {
 
 const menuItems: MenuItem[] = [
   {
-    label: "Obras",
-    to: "/",
+    label: 'Obras',
+    to: '/',
   },
   {
-    label: "Favoritas",
-    to: "/favorites",
+    label: 'Favoritas',
+    to: '/favorites',
   },
 ];
 
@@ -31,7 +31,7 @@ export default function Header() {
   };
 
   const handleLogoClick = () => {
-    navigate("/");
+    navigate('/');
   };
 
   return (
@@ -45,14 +45,14 @@ export default function Header() {
         <S.MobileMenuButton onClick={toggleMobileMenu}>☰</S.MobileMenuButton>
 
         <S.DesktopNav>
-          <S.Nav>
-            {menuItems.map((item) => (
+          <S.Nav data-testid="desktop-nav">
+            {menuItems.map(item => (
               <RouterNavLink
                 key={item.to}
                 to={item.to}
-                end={item.to === "/"}
+                end={item.to === '/'}
                 style={() => ({
-                  textDecoration: "none",
+                  textDecoration: 'none',
                 })}
               >
                 {({ isActive }) => (
@@ -66,20 +66,22 @@ export default function Header() {
       </S.Content>
 
       <S.MobileNav $isOpen={isMobileMenuOpen}>
-        {menuItems.map((item) => (
-          <RouterNavLink
-            key={item.to}
-            to={item.to}
-            end={item.to === "/"}
-            style={() => ({
-              textDecoration: "none",
-            })}
-          >
-            {({ isActive }) => (
-              <S.NavLink $isActive={isActive}>{item.label}</S.NavLink>
-            )}
-          </RouterNavLink>
-        ))}
+        <S.Nav data-testid="mobile-nav">
+          {menuItems.map(item => (
+            <RouterNavLink
+              key={item.to}
+              to={item.to}
+              end={item.to === '/'}
+              style={() => ({
+                textDecoration: 'none',
+              })}
+            >
+              {({ isActive }) => (
+                <S.NavLink $isActive={isActive}>{item.label}</S.NavLink>
+              )}
+            </RouterNavLink>
+          ))}
+        </S.Nav>
         <ThemeToggle />
       </S.MobileNav>
     </S.Container>

@@ -1,28 +1,23 @@
-import React, { Suspense } from "react";
-import { Toaster } from "react-hot-toast";
+import { Suspense } from 'react';
 
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Toaster } from 'react-hot-toast';
 
-import GlobalStyle from "./assets/global";
-import Footer from "./components/Footer";
-import { ThemeProvider } from "./contexts/ThemeContext";
-import { AppRouters } from "./router/routes";
-
-const queryClient = new QueryClient();
+import GlobalStyle from './assets/global';
+import Footer from './components/Footer';
+import { ThemeProvider } from './contexts/ThemeContext';
+import { AppRouters } from './router/routes';
 
 function App() {
   return (
     <Suspense
       fallback={<div className="flex justify-center text-3xl">Loading...</div>}
     >
-      <QueryClientProvider client={queryClient}>
-        <ThemeProvider>
-          <GlobalStyle />
-          <AppRouters />
-          <Footer />
-          <Toaster />
-        </ThemeProvider>
-      </QueryClientProvider>
+      <ThemeProvider>
+        <GlobalStyle />
+        <AppRouters />
+        <Footer />
+        <Toaster />
+      </ThemeProvider>
     </Suspense>
   );
 }

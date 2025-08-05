@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import { Box, IconButton } from "@mui/material";
-import { AnimatePresence } from "motion/react";
-import { wrap } from "motion/react";
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { Box, IconButton } from '@mui/material';
+import { AnimatePresence } from 'motion/react';
+import { wrap } from 'motion/react';
 
-import AnimatedImage from "./AnimatedImage";
+import AnimatedImage from './AnimatedImage';
 
 interface ImageCarouselProps {
   images: string[];
@@ -26,25 +26,25 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, title }) => {
   const currentImage = images[currentImageIndex];
 
   const handleImageError = (
-    e: React.SyntheticEvent<HTMLImageElement, Event>,
+    e: React.SyntheticEvent<HTMLImageElement, Event>
   ) => {
     (e.target as HTMLImageElement).src =
-      "https://via.placeholder.com/320x320?text=No+Image";
+      'https://via.placeholder.com/320x320?text=No+Image';
   };
 
   return (
     <Box
       sx={{
-        width: "100%",
-        maxWidth: { xs: "100%", md: "400px" },
-        height: { xs: "250px", sm: "300px", md: "400px" }, // Altura definida para mobile
-        position: "relative",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        overflow: "hidden",
-        backgroundColor: "#f5f5f5",
-        borderRadius: "8px",
+        width: '100%',
+        maxWidth: { xs: '100%', md: '400px' },
+        height: { xs: '250px', sm: '300px', md: '400px' }, // Altura definida para mobile
+        position: 'relative',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        overflow: 'hidden',
+        backgroundColor: '#f5f5f5',
+        borderRadius: '8px',
         mb: { xs: 2, md: 0 },
       }}
     >
@@ -52,7 +52,7 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, title }) => {
         <AnimatedImage
           key={currentImageIndex}
           src={currentImage}
-          alt={title || "Artwork image"}
+          alt={title || 'Artwork image'}
           onError={handleImageError}
         />
       </AnimatePresence>
@@ -63,17 +63,17 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, title }) => {
             aria-label="previous image"
             onClick={() => goToImage(-1)}
             sx={{
-              position: "absolute",
+              position: 'absolute',
               left: { xs: 4, md: 8 },
-              top: "50%",
-              transform: "translateY(-50%)",
+              top: '50%',
+              transform: 'translateY(-50%)',
               zIndex: 10,
-              backgroundColor: "rgba(255,255,255,0.8)",
-              backdropFilter: "blur(4px)",
+              backgroundColor: 'rgba(255,255,255,0.8)',
+              backdropFilter: 'blur(4px)',
               width: { xs: 36, md: 40 },
               height: { xs: 36, md: 40 },
-              "&:hover": {
-                backgroundColor: "rgba(255,255,255,0.95)",
+              '&:hover': {
+                backgroundColor: 'rgba(255,255,255,0.95)',
               },
             }}
           >
@@ -84,17 +84,17 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, title }) => {
             aria-label="next image"
             onClick={() => goToImage(1)}
             sx={{
-              position: "absolute",
+              position: 'absolute',
               right: { xs: 4, md: 8 },
-              top: "50%",
-              transform: "translateY(-50%)",
+              top: '50%',
+              transform: 'translateY(-50%)',
               zIndex: 10,
-              backgroundColor: "rgba(255,255,255,0.8)",
-              backdropFilter: "blur(4px)",
+              backgroundColor: 'rgba(255,255,255,0.8)',
+              backdropFilter: 'blur(4px)',
               width: { xs: 36, md: 40 },
               height: { xs: 36, md: 40 },
-              "&:hover": {
-                backgroundColor: "rgba(255,255,255,0.95)",
+              '&:hover': {
+                backgroundColor: 'rgba(255,255,255,0.95)',
               },
             }}
           >
@@ -107,11 +107,11 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, title }) => {
       {images.length > 1 && (
         <Box
           sx={{
-            position: "absolute",
+            position: 'absolute',
             bottom: 8,
-            left: "50%",
-            transform: "translateX(-50%)",
-            display: "flex",
+            left: '50%',
+            transform: 'translateX(-50%)',
+            display: 'flex',
             gap: 1,
             zIndex: 10,
           }}
@@ -123,13 +123,13 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, title }) => {
               sx={{
                 width: 8,
                 height: 8,
-                borderRadius: "50%",
+                borderRadius: '50%',
                 backgroundColor:
                   index === currentImageIndex
-                    ? "white"
-                    : "rgba(255,255,255,0.5)",
-                cursor: "pointer",
-                transition: "all 0.2s ease",
+                    ? 'white'
+                    : 'rgba(255,255,255,0.5)',
+                cursor: 'pointer',
+                transition: 'all 0.2s ease',
               }}
             />
           ))}

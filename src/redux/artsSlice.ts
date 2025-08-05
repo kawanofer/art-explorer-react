@@ -1,5 +1,6 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { fetchArtworkWithImages } from "@src/api/arts";
+import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+
+import { fetchArtworkWithImages } from '@src/api/arts';
 
 interface ArtsState {
   artworkIds: number[];
@@ -14,24 +15,24 @@ const initialState: ArtsState = {
 };
 
 export const fetchArtworkIds = createAsyncThunk<number[]>(
-  "arts/fetchArtworkWithImages",
+  'arts/fetchArtworkWithImages',
   async (_, { rejectWithValue }) => {
     try {
       const ids = await fetchArtworkWithImages();
       return ids || [];
     } catch (error: unknown) {
-      return rejectWithValue(error.message || "Erro ao buscar IDs das obras");
+      return rejectWithValue(error.message || 'Erro ao buscar IDs das obras');
     }
-  },
+  }
 );
 
 const artsSlice = createSlice({
-  name: "arts",
+  name: 'arts',
   initialState,
   reducers: {},
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     builder
-      .addCase(fetchArtworkIds.pending, (state) => {
+      .addCase(fetchArtworkIds.pending, state => {
         state.loading = true;
         state.error = null;
       })
@@ -40,7 +41,7 @@ const artsSlice = createSlice({
         (state, action: PayloadAction<number[]>) => {
           state.loading = false;
           state.artworkIds = action.payload;
-        },
+        }
       )
       .addCase(fetchArtworkIds.rejected, (state, action) => {
         state.loading = false;

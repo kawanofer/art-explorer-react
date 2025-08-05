@@ -1,21 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-import { fetchArtworkDetail } from "@src/api/arts";
-import ArtsDisplay from "@src/components/ArtsDisplay";
-import DialogDetails from "@src/components/Dialog";
-import Loader from "@src/components/Loader";
-import Title from "@src/components/Title";
-import useLocalStorage from "@src/hooks/useLocalStorage";
+import { fetchArtworkDetail } from '@src/api/arts';
+
+import ArtsDisplay from '@src/components/ArtsDisplay';
+import DialogDetails from '@src/components/Dialog';
+import Loader from '@src/components/Loader';
+import Title from '@src/components/Title';
+
+import useLocalStorage from '@src/hooks/useLocalStorage';
 
 import type {
   ArtworkDetailProps,
   ArtworkDisplayProps,
   ArtworkItemsProps,
-} from "../../types/artwork";
-import * as S from "./styles";
+} from '../../types/artwork';
+import * as S from './styles';
 
 function Favorites() {
-  const [favorites] = useLocalStorage<number[]>("favorites", []);
+  const [favorites] = useLocalStorage<number[]>('favorites', []);
   const [artworks, setArtworks] = useState<ArtworkDisplayProps[]>([]);
   const [fullArtworks, setFullArtworks] = useState<ArtworkItemsProps[]>([]);
   const [loading, setLoading] = useState(false);
@@ -33,7 +35,7 @@ function Favorites() {
       setLoading(true);
       try {
         const artworkPromises = favorites.map((id: number) =>
-          fetchArtworkDetail(id),
+          fetchArtworkDetail(id)
         );
 
         const artworkResults = await Promise.all(artworkPromises);
@@ -42,19 +44,19 @@ function Favorites() {
         const validArtworks = artworkResults.filter(
           (artwork): artwork is ArtworkItemsProps =>
             artwork !== null &&
-            typeof artwork.primaryImageSmall === "string" &&
-            artwork.primaryImageSmall !== "",
+            typeof artwork.primaryImageSmall === 'string' &&
+            artwork.primaryImageSmall !== ''
         );
 
         // Store full artworks data
         setFullArtworks(validArtworks);
 
         // Map to the format expected by ArtsDisplay component
-        const mappedArtworks = validArtworks.map((artwork) => ({
+        const mappedArtworks = validArtworks.map(artwork => ({
           objectID: artwork.objectID,
           primaryImageSmall: artwork.primaryImageSmall,
           title: artwork.title,
-          constituents: artwork.constituents,
+          constituents: artwork.constituents ?? [],
           objectDate: artwork.objectDate,
           department: artwork.department,
         }));
@@ -73,14 +75,14 @@ function Favorites() {
   const handleArtClick = (artwork: ArtworkDisplayProps) => {
     // Find the full artwork data from fullArtworks
     const fullArtwork = fullArtworks.find(
-      (item) => item.objectID === artwork.objectID,
+      item => item.objectID === artwork.objectID
     );
 
     if (!fullArtwork) return;
 
     const constituents =
       fullArtwork.constituents?.filter(
-        (constituent) => constituent.role === "Artist",
+        constituent => constituent.role === 'Artist'
       ) || [];
 
     const artworkForDialog: ArtworkDetailProps = {
@@ -88,7 +90,20 @@ function Favorites() {
       constituents: constituents,
     };
 
-    setSelectedArt(artworkForDialog);
+    const artDetail = {
+      additionalImages: artworkForDialog.additionalImages,
+      constituents: artworkForDialog.constituents,
+      department: artworkForDialog.department,
+      dimensions: artworkForDialog.dimensions,
+      medium: artworkForDialog.medium,
+      objectDate: artworkForDialog.objectDate,
+      objectID: artworkForDialog.objectID,
+      objectURL: artworkForDialog.objectURL,
+      primaryImageSmall: artworkForDialog.primaryImageSmall,
+      title: artworkForDialog.title,
+    };
+
+    setSelectedArt(artDetail);
     setIsDialogOpen(true);
   };
 

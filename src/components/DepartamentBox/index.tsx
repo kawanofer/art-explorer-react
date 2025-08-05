@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
 import {
   FormControl,
   InputLabel,
   MenuItem,
   SelectChangeEvent,
-} from "@mui/material";
-import { fetchDepartments } from "@src/api/arts";
-import { DepartmentProps } from "@src/types/departaments";
+} from '@mui/material';
 
-import * as S from "./styles";
+import { fetchDepartments } from '@src/api/arts';
+
+import { DepartmentProps } from '@src/types/departaments';
+
+import * as S from './styles';
 
 interface DepartamentBoxProps {
   onChange?: (department: string) => void;
@@ -18,7 +20,7 @@ interface DepartamentBoxProps {
 
 export default function DepartamentBox({
   onChange,
-  value = "",
+  value = '',
 }: DepartamentBoxProps) {
   const [departmentsOptions, setDepartmentsOptions] = useState<
     DepartmentProps[]
@@ -36,8 +38,8 @@ export default function DepartamentBox({
         const departmentList = await fetchDepartments();
         setDepartmentsOptions(departmentList);
       } catch (err) {
-        setError("Erro ao carregar departamentos");
-        console.error("Error loading departments:", err);
+        setError('Erro ao carregar departamentos');
+        console.error('Error loading departments:', err);
       } finally {
         setLoading(false);
       }
@@ -78,12 +80,13 @@ export default function DepartamentBox({
             label="Departamento"
             labelId="department-select-label"
             onChange={handleChange}
+            data-testid="department-select"
             value={selectedDepartment}
           >
             <MenuItem value="">
               <em>Selecione um departamento</em>
             </MenuItem>
-            {departmentsOptions.map((department) => (
+            {departmentsOptions.map(department => (
               <MenuItem
                 key={department.departmentId}
                 value={department.departmentId}

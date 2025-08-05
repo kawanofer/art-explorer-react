@@ -1,11 +1,13 @@
-import React from "react";
+import React from 'react';
 
-import { Button, Grid } from "@mui/material";
-import useLocalStorage from "@src/hooks/useLocalStorage";
-import { ArtworkDisplayProps } from "@src/types/artwork";
+import { Button, Grid } from '@mui/material';
 
-import ArtCard from "./Card";
-import * as S from "./styles";
+import { ArtworkDisplayProps } from '@src/types/artwork';
+
+import useLocalStorage from '@src/hooks/useLocalStorage';
+
+import ArtCard from './Card';
+import * as S from './styles';
 
 interface ArtsDisplayProps {
   artworks: ArtworkDisplayProps[];
@@ -22,7 +24,7 @@ export default function ArtsDisplay({
   hasMore = false,
   loading = false,
 }: ArtsDisplayProps) {
-  const [favorites] = useLocalStorage<number[]>("favorites", []);
+  const [favorites] = useLocalStorage<number[]>('favorites', []);
 
   return (
     <S.Container>
@@ -42,7 +44,7 @@ export default function ArtsDisplay({
             onClick={onLoadMore}
             variant="contained"
           >
-            {loading ? "Carregando..." : "Carregar mais"}
+            {loading ? 'Carregando...' : 'Carregar mais'}
           </Button>
         </S.LoadMoreContainer>
       )}

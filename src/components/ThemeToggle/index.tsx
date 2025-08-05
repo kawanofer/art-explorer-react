@@ -1,19 +1,17 @@
-import React from "react";
+import React from 'react';
 
-import DarkModeIcon from "@mui/icons-material/DarkMode";
-import LightModeIcon from "@mui/icons-material/LightMode";
-import { ToggleButton, Tooltip } from "@mui/material";
-import { useTheme } from "@src/hooks/useTheme";
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import LightModeIcon from '@mui/icons-material/LightMode';
+import { ToggleButton, Tooltip } from '@mui/material';
 
-import * as S from "./styles";
+import { useTheme } from '@src/hooks/useTheme';
+
+import * as S from './styles';
 
 export default function ThemeColor() {
   const { currentTheme, toggleTheme } = useTheme();
 
-  const handleThemeChange = (
-    event: React.MouseEvent<HTMLElement>,
-    newTheme: "light" | "dark" | null,
-  ) => {
+  const handleThemeChange = (newTheme: 'light' | 'dark' | null) => {
     if (newTheme !== null && newTheme !== currentTheme) {
       toggleTheme();
     }

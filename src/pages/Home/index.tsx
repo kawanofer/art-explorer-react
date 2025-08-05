@@ -1,35 +1,39 @@
-import React, { useEffect, useState } from "react";
-import toast from "react-hot-toast";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from 'react';
 
-import { Button } from "@mui/material";
+import { Button } from '@mui/material';
+import toast from 'react-hot-toast';
+import { useDispatch, useSelector } from 'react-redux';
+
 import {
   fetchArtworkByArtist,
   fetchArtworkByDepartment,
   fetchArtworkDetail,
-} from "@src/api/arts";
-import ArtsDisplay from "@src/components/ArtsDisplay";
-import DialogDetails from "@src/components/Dialog";
-import Error from "@src/components/Error";
-import Loader from "@src/components/Loader";
-import ScrollToTopButton from "@src/components/ScrollToTopButton";
-import SearchBox from "@src/components/SearchBox";
-import Title from "@src/components/Title";
-import { fetchArtworkIds } from "@src/redux/artsSlice";
-import { addDetailArts } from "@src/redux/detailsArtSlice";
-import type { AppDispatch, RootState } from "@src/redux/store";
+} from '@src/api/arts';
+
+import { fetchArtworkIds } from '@src/redux/artsSlice';
+import { addDetailArts } from '@src/redux/detailsArtSlice';
+import type { AppDispatch, RootState } from '@src/redux/store';
+
 import type {
   ArtworkDetailProps,
   ArtworkDisplayProps,
   ArtworkItemsProps,
-} from "@src/types/artwork";
+} from '@src/types/artwork';
 
-import * as S from "./styles";
+import ArtsDisplay from '@src/components/ArtsDisplay';
+import DialogDetails from '@src/components/Dialog';
+import Error from '@src/components/Error';
+import Loader from '@src/components/Loader';
+import ScrollToTopButton from '@src/components/ScrollToTopButton';
+import SearchBox from '@src/components/SearchBox';
+import Title from '@src/components/Title';
+
+import * as S from './styles';
 
 const Home = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { artworkIds, loading, error } = useSelector(
-    (state: RootState) => state.arts,
+    (state: RootState) => state.arts
   );
 
   const [artworks, setArtworks] = useState<ArtworkDisplayProps[]>([]);
@@ -62,12 +66,8 @@ const Home = () => {
       try {
         const limitedIds = artworkIds.slice(0, displayedCount);
 
-        const alreadyLoadedIds = fullArtworks.map(
-          (artwork) => artwork.objectID,
-        );
-        const newIds = limitedIds.filter(
-          (id) => !alreadyLoadedIds.includes(id),
-        );
+        const alreadyLoadedIds = fullArtworks.map(artwork => artwork.objectID);
+        const newIds = limitedIds.filter(id => !alreadyLoadedIds.includes(id));
 
         if (newIds.length === 0) {
           setLoadingMore(false);
@@ -75,7 +75,7 @@ const Home = () => {
         }
 
         const artworkPromises = newIds.map((id: number) =>
-          fetchArtworkDetail(id),
+          fetchArtworkDetail(id)
         );
 
         const artworkResults = await Promise.all(artworkPromises);
@@ -83,8 +83,8 @@ const Home = () => {
         const validArtworks = artworkResults.filter(
           (artwork): artwork is ArtworkItemsProps =>
             artwork !== null &&
-            typeof artwork.primaryImageSmall === "string" &&
-            artwork.primaryImageSmall !== "",
+            typeof artwork.primaryImageSmall === 'string' &&
+            artwork.primaryImageSmall !== ''
         );
 
         dispatch(addDetailArts(validArtworks));
@@ -93,20 +93,20 @@ const Home = () => {
         setFullArtworks(updatedFullArtworks);
 
         const mappedArtworks: ArtworkDisplayProps[] = updatedFullArtworks.map(
-          (artwork) => ({
+          artwork => ({
             objectID: artwork.objectID,
             primaryImageSmall: artwork.primaryImageSmall,
             title: artwork.title,
             constituents: artwork.constituents,
             objectDate: artwork.objectDate,
             department: artwork.department,
-          }),
+          })
         );
 
         setArtworks(mappedArtworks);
       } catch (error) {
-        console.error("Error fetching artworks:", error);
-        toast.error("Erro ao carregar as obras de arte");
+        console.error('Error fetching artworks:', error);
+        toast.error('Erro ao carregar as obras de arte');
       } finally {
         setLoadingMore(false);
       }
@@ -126,7 +126,7 @@ const Home = () => {
     if (isSearchMode) {
       return;
     }
-    setDisplayedCount((prev) => prev + itemsPerLoad);
+    setDisplayedCount(prev => prev + itemsPerLoad);
   };
 
   const hasMore =
@@ -135,7 +135,7 @@ const Home = () => {
   const onSearch = async (
     query: string,
     searchType: string,
-    selectedDepartment: number,
+    selectedDepartment: number
   ) => {
     // Reset states
     setArtworks([]);
@@ -146,7 +146,7 @@ const Home = () => {
     try {
       let searchResults: ArtworkDetailProps[] = [];
 
-      if (searchType === "artist") {
+      if (searchType === 'artist') {
         if (!query.trim()) {
           setIsSearchMode(false);
           setSearching(false);
@@ -154,7 +154,7 @@ const Home = () => {
         }
 
         searchResults = await fetchArtworkByArtist(query.trim());
-      } else if (searchType === "department") {
+      } else if (searchType === 'department') {
         if (!selectedDepartment) {
           setIsSearchMode(false);
           setSearching(false);
@@ -169,14 +169,14 @@ const Home = () => {
 
         // Map to display format
         const mappedArtworks: ArtworkDisplayProps[] = searchResults.map(
-          (artwork) => ({
+          artwork => ({
             objectID: artwork.objectID,
             primaryImageSmall: artwork.primaryImageSmall,
             title: artwork.title,
             constituents: artwork.constituents,
             objectDate: artwork.objectDate,
             department: artwork.department,
-          }),
+          })
         );
 
         setArtworks(mappedArtworks);
@@ -190,8 +190,8 @@ const Home = () => {
         setFullArtworks([]);
       }
     } catch (error) {
-      console.error("Search error:", error);
-      toast.error("Erro ao realizar a busca");
+      console.error('Search error:', error);
+      toast.error('Erro ao realizar a busca');
       setIsSearchMode(false);
     } finally {
       setSearching(false);
@@ -207,18 +207,18 @@ const Home = () => {
 
   const handleArtClick = (artwork: ArtworkDisplayProps) => {
     const fullArtwork = fullArtworks.find(
-      (item) => item.objectID === artwork.objectID,
+      item => item.objectID === artwork.objectID
     );
 
     if (!fullArtwork) {
-      toast.error("Erro ao carregar detalhes da obra");
+      toast.error('Erro ao carregar detalhes da obra');
       return;
     }
 
     // Filter constituents to show only artists, ensuring we have a valid array
     const constituents =
       fullArtwork.constituents?.filter(
-        (constituent) => constituent.role === "Artist",
+        constituent => constituent.role === 'Artist'
       ) || [];
 
     // Create artwork for dialog with guaranteed constituents array

@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 function useLocalStorage<T>(key: string, initialValue: T) {
   const [storedValue, setStoredValue] = useState<T>(() => {
-    if (typeof window === "undefined" || !window.localStorage) {
+    if (typeof window === 'undefined' || !window.localStorage) {
       return initialValue;
     }
 
@@ -21,10 +21,10 @@ function useLocalStorage<T>(key: string, initialValue: T) {
         value instanceof Function ? value(storedValue) : value;
       setStoredValue(valueToStore);
 
-      if (typeof window !== "undefined" && window.localStorage) {
+      if (typeof window !== 'undefined' && window.localStorage) {
         window.localStorage.setItem(key, JSON.stringify(valueToStore));
         // Dispatch a custom event to notify other components
-        window.dispatchEvent(new Event("localStorage"));
+        window.dispatchEvent(new Event('localStorage'));
       }
     } catch {
       // Handle localStorage errors silently
@@ -33,7 +33,7 @@ function useLocalStorage<T>(key: string, initialValue: T) {
 
   useEffect(() => {
     const handleStorageChange = () => {
-      if (typeof window !== "undefined" && window.localStorage) {
+      if (typeof window !== 'undefined' && window.localStorage) {
         try {
           const item = window.localStorage.getItem(key);
           const newValue = item ? JSON.parse(item) : initialValue;
@@ -45,13 +45,13 @@ function useLocalStorage<T>(key: string, initialValue: T) {
     };
 
     // Listen for storage changes from other tabs/windows
-    window.addEventListener("storage", handleStorageChange);
+    window.addEventListener('storage', handleStorageChange);
     // Listen for our custom localStorage event
-    window.addEventListener("localStorage", handleStorageChange);
+    window.addEventListener('localStorage', handleStorageChange);
 
     return () => {
-      window.removeEventListener("storage", handleStorageChange);
-      window.removeEventListener("localStorage", handleStorageChange);
+      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('localStorage', handleStorageChange);
     };
   }, [key, initialValue]);
 

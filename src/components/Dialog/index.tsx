@@ -1,24 +1,26 @@
-import React from "react";
+import React from 'react';
 
-import CloseIcon from "@mui/icons-material/Close";
-import { Box, DialogContent, DialogTitle, IconButton } from "@mui/material";
-import useLocalStorage from "@src/hooks/useLocalStorage";
-import { ArtworkDetailProps } from "@src/types/artwork";
-import { isEmpty } from "lodash";
+import CloseIcon from '@mui/icons-material/Close';
+import { Box, DialogContent, DialogTitle, IconButton } from '@mui/material';
+import { isEmpty } from 'lodash';
 
-import FavoriteIcon from "../FavoriteIcon";
-import ImageCarousel from "./ImageCarousel";
-import * as S from "./styles";
+import { ArtworkDetailProps } from '@src/types/artwork';
+
+import useLocalStorage from '@src/hooks/useLocalStorage';
+
+import FavoriteIcon from '../FavoriteIcon';
+import ImageCarousel from './ImageCarousel';
+import * as S from './styles';
 
 export interface DialogProps {
-  open: boolean;
   artDetail: ArtworkDetailProps;
-  onClose: (value?: string) => void;
+  onClose?: () => void;
+  open: boolean;
 }
 
 export default function ArtDetailDialog(props: DialogProps) {
   const { onClose, open, artDetail } = props;
-  const [favorites] = useLocalStorage<number[]>("favorites", []);
+  const [favorites] = useLocalStorage<number[]>('favorites', []);
 
   if (!artDetail) return null;
 
@@ -47,8 +49,8 @@ export default function ArtDetailDialog(props: DialogProps) {
         <IconButton
           aria-label="close"
           onClick={() => onClose && onClose()}
-          sx={(theme) => ({
-            position: "absolute",
+          sx={theme => ({
+            position: 'absolute',
             right: 8,
             top: 8,
             color: theme.palette.grey[500],
@@ -58,10 +60,10 @@ export default function ArtDetailDialog(props: DialogProps) {
         </IconButton>
       </DialogTitle>
       <DialogContent dividers>
-        <Box display="flex" flexDirection={{ xs: "column", md: "row" }} gap={3}>
+        <Box display="flex" flexDirection={{ xs: 'column', md: 'row' }} gap={3}>
           <ImageCarousel images={images} title={artDetail.title} />
           <Box flex={1} gap={2} display="flex" flexDirection="column">
-            <div style={{ display: "flex", justifyContent: "flex-end" }}>
+            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
               <FavoriteIcon
                 isFavorite={isFavorite}
                 objectID={artDetail.objectID}

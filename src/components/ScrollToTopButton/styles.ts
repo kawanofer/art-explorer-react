@@ -1,5 +1,5 @@
-import { Fab } from "@mui/material";
-import styled from "styled-components";
+import { Fab } from '@mui/material';
+import styled from 'styled-components';
 
 export const ScrollToTopContainer = styled.div<{ $isVisible: boolean }>`
   position: fixed;
@@ -7,10 +7,10 @@ export const ScrollToTopContainer = styled.div<{ $isVisible: boolean }>`
   right: 24px;
   z-index: 1000;
   opacity: ${({ $isVisible }) => ($isVisible ? 1 : 0)};
-  visibility: ${({ $isVisible }) => ($isVisible ? "visible" : "hidden")};
+  visibility: ${({ $isVisible }) => ($isVisible ? 'visible' : 'hidden')};
   transition: all 0.3s ease-in-out;
   transform: ${({ $isVisible }) =>
-    $isVisible ? "translateY(0)" : "translateY(20px)"};
+    $isVisible ? 'translateY(0)' : 'translateY(20px)'};
 
   @media (max-width: 768px) {
     bottom: 20px;

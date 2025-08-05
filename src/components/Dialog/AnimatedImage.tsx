@@ -1,8 +1,8 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef } from 'react';
 
-import { motion, usePresenceData } from "motion/react";
+import { motion, usePresenceData } from 'motion/react';
 
-import * as S from "./styles";
+import * as S from './styles';
 
 interface AnimatedImageProps {
   src: string;
@@ -26,7 +26,7 @@ const AnimatedImage = forwardRef<HTMLImageElement, AnimatedImageProps>(
           x: 0,
           transition: {
             delay: 0.2,
-            type: "spring",
+            type: 'spring',
             visualDuration: 0.3,
             bounce: 0.4,
           },
@@ -35,7 +35,7 @@ const AnimatedImage = forwardRef<HTMLImageElement, AnimatedImageProps>(
         className={S.AnimatedImageDiv}
       />
     );
-  },
+  }
 );
 
 export default AnimatedImage;

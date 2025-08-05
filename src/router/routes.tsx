@@ -1,9 +1,10 @@
-import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import React from 'react';
 
-import Header from "../components/Header";
-import Favorites from "../pages/Favorites";
-import Home from "../pages/Home";
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
+import Header from '../components/Header';
+import Favorites from '../pages/Favorites';
+import Home from '../pages/Home';
 
 export function AppRouters() {
   return (

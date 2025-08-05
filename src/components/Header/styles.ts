@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.header`
   background-color: ${({ theme }) => theme.colorError};
@@ -122,6 +122,6 @@ export const MobileNav = styled.div<{ $isOpen: boolean }>`
   `}
 
   @media (max-width: 768px) {
-    display: ${({ $isOpen }) => ($isOpen ? "flex" : "none")};
+    display: ${({ $isOpen }) => ($isOpen ? 'flex' : 'none')};
   }
 `;

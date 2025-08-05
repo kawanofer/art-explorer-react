@@ -1,12 +1,12 @@
-import React from "react";
+import React from 'react';
 
-import * as S from "./styles";
+import * as S from './styles';
 
 interface ErrorProps {
   message?: string;
 }
 export default function Error({
-  message = "Ocorreu um erro inesperado.",
+  message = 'Ocorreu um erro inesperado.',
 }: ErrorProps) {
   return (
     <S.ErrorContainer>

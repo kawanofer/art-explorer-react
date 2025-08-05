@@ -1,7 +1,8 @@
-import axios from "axios";
+import axios from 'axios';
 
-import config from "@src/config/env";
-import { ArtworkItemsProps } from "@src/types/artwork";
+import { ArtworkItemsProps } from '@src/types/artwork';
+
+import config from '@src/config/env';
 
 const BASE_URL = config.baseUrl;
 
@@ -9,15 +10,15 @@ const BASE_URL = config.baseUrl;
   Buscar obras com imagens  GET /api/artworks/search/images
 */
 export const fetchArtworkWithImages = async (
-  query: string = "painting",
+  query: string = 'painting'
 ): Promise<number[]> => {
   try {
     const response = await axios.get(
-      `${BASE_URL}/api/artworks/search/images?q=${encodeURIComponent(query)}`,
+      `${BASE_URL}/api/artworks/search/images?q=${encodeURIComponent(query)}`
     );
     return response.data;
   } catch (error) {
-    console.error("Error fetching artwork IDs:", error);
+    console.error('Error fetching artwork IDs:', error);
     return [];
   }
 };
@@ -26,11 +27,11 @@ export const fetchArtworkWithImages = async (
   Detalhes de uma obra  GET /api/artworks/:objectID
 */
 export const fetchArtworkDetail = async (
-  objectID: number,
+  objectID: number
 ): Promise<ArtworkItemsProps | null> => {
   try {
     const response = await axios.get<ArtworkItemsProps>(
-      `${BASE_URL}/api/artworks/${objectID}`,
+      `${BASE_URL}/api/artworks/${objectID}`
     );
     return response.data;
   } catch (error) {
@@ -43,11 +44,11 @@ export const fetchArtworkDetail = async (
   Buscar por artista/cultura  GET /api/artworks/search/artist?q=van+gogh
 */
 export const fetchArtworkByArtist = async (
-  artistName: string,
+  artistName: string
 ): Promise<ArtworkItemsProps[] | null> => {
   try {
     const response = await axios.get<ArtworkItemsProps[]>(
-      `${BASE_URL}/api/artworks/search/artist?q=${encodeURIComponent(artistName)}`,
+      `${BASE_URL}/api/artworks/search/artist?q=${encodeURIComponent(artistName)}`
     );
     return response.data;
   } catch (error) {
@@ -71,7 +72,7 @@ export const fetchDepartments = async (): Promise<
     >(`${BASE_URL}/api/departments`);
     return response.data;
   } catch (error) {
-    console.error("Error fetching departments:", error);
+    console.error('Error fetching departments:', error);
     return null;
   }
 };
@@ -80,17 +81,17 @@ export const fetchDepartments = async (): Promise<
   Buscar por departamento GET /api/artworks/search/department?departmentId=11&q=portrait
 */
 export const fetchArtworkByDepartment = async (
-  departmentId: number,
+  departmentId: number
 ): Promise<ArtworkItemsProps[] | null> => {
   try {
     const response = await axios.get<ArtworkItemsProps[]>(
-      `${BASE_URL}/api/artworks/search/department?departmentId=${departmentId}`,
+      `${BASE_URL}/api/artworks/search/department?departmentId=${departmentId}`
     );
     return response.data;
   } catch (error) {
     console.error(
       `Error fetching artworks for department ${departmentId}:`,
-      error,
+      error
     );
     return null;
   }

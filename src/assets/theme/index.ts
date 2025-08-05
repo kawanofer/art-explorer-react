@@ -1,6 +1,6 @@
-import createTheme from "@src/utils/styled-components-theme";
+import createTheme from '@src/utils/styled-components-theme';
 
-import CustomTheme from "./CustomTheme";
+import CustomTheme from './CustomTheme';
 
 const Theme = createTheme(...Object.keys(CustomTheme));
 export default Theme;

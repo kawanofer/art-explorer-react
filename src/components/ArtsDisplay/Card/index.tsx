@@ -1,12 +1,13 @@
-import React from "react";
+import React from 'react';
 
-import { Grid } from "@mui/material";
-import { ArtworkDisplayProps } from "@src/types/artwork";
-import { isEmpty } from "lodash";
-import * as motion from "motion/react-client";
+import { Grid } from '@mui/material';
+import { isEmpty } from 'lodash';
+import * as motion from 'motion/react-client';
 
-import FavoriteIcon from "../../FavoriteIcon";
-import * as S from "../styles";
+import { ArtworkDisplayProps } from '@src/types/artwork';
+
+import FavoriteIcon from '../../FavoriteIcon';
+import * as S from '../styles';
 
 interface ArtCardProps {
   artworks: ArtworkDisplayProps[];
@@ -21,18 +22,18 @@ export default function ArtCard({
 }: ArtCardProps) {
   return (
     <>
-      {artworks.map((artwork) => (
+      {artworks.map(artwork => (
         <Grid item xs={12} sm={6} md={3} key={artwork.objectID}>
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 1.1 }}>
             <S.StyledCard onClick={() => onArtClick(artwork)}>
               <S.StyledCardContent>
-                <div style={{ position: "relative" }}>
+                <div style={{ position: 'relative' }}>
                   <S.CardMedia
                     src={artwork.primaryImageSmall}
                     alt={artwork.title}
                     onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
                       const target = e.target as HTMLImageElement;
-                      target.src = "/placeholder-image.jpg";
+                      target.src = '/placeholder-image.jpg';
                     }}
                   />
                   <S.StyledFavoriteIconContainer>
@@ -47,7 +48,7 @@ export default function ArtCard({
                 )}
                 {!isEmpty(artwork.constituents) && (
                   <S.InfoText>
-                    {artwork.constituents?.map((c) => c.name).join(", ")}
+                    {artwork.constituents?.map(c => c.name).join(', ')}
                   </S.InfoText>
                 )}
                 <br />

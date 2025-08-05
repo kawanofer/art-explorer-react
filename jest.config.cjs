@@ -1,35 +1,37 @@
 module.exports = {
-  testEnvironment: "jsdom",
-  setupFilesAfterEnv: ["<rootDir>/src/setupTests.ts"],
+  preset: 'ts-jest',
+  testEnvironment: 'jsdom',
+  setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
   moduleNameMapper: {
-    "^@src/(.*)$": "<rootDir>/src/$1",
-    "^@/(.*)$": "<rootDir>/src/$1",
-    "\\.(css|less|scss|sass)$": "identity-obj-proxy",
-    "\\.(jpg|jpeg|png|gif|svg)$": "<rootDir>/src/__mocks__/fileMock.js",
+    '^@src/(.*)$': '<rootDir>/src/$1',
+    '^@src/config/env$': '<rootDir>/src/config/__mocks__/env.ts',
+    '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
+    '\\.(gif|ttf|eot|svg|png|jpg|jpeg)$': '<rootDir>/src/__mocks__/fileMock.js',
   },
   transform: {
-    // ✅ Nova sintaxe do ts-jest
-    "^.+\\.(ts|tsx)$": [
-      "ts-jest",
-      {
-        tsconfig: "tsconfig.json",
-        useESM: false,
-      },
-    ],
-    "^.+\\.(js|jsx)$": "babel-jest",
+    '^.+\\.(ts|tsx)$': ['ts-jest', {
+      useESM: true,
+    }],
+    '^.+\\.(js|jsx)$': 'babel-jest',
   },
+  transformIgnorePatterns: [
+    'node_modules/(?!(axios)/)',
+  ],
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json'],
   testMatch: [
-    "<rootDir>/src/**/__tests__/**/*.{ts,tsx,js,jsx}",
-    "<rootDir>/src/**/*.{test,spec}.{ts,tsx,js,jsx}",
+    '<rootDir>/src/**/__tests__/**/*.(ts|tsx|js)',
+    '<rootDir>/src/**/*.(test|spec).(ts|tsx|js)',
   ],
   collectCoverageFrom: [
-    "src/**/*.{ts,tsx,js,jsx}",
-    "!src/**/*.d.ts",
-    "!src/main.tsx",
-    "!src/vite-env.d.ts",
-    "!src/setupTests.ts",
+    'src/**/*.(ts|tsx)',
+    '!src/**/*.d.ts',
+    '!src/main.tsx',
+    '!src/vite-env.d.ts',
   ],
-  moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json"],
-  testPathIgnorePatterns: ["<rootDir>/node_modules/"],
-  transformIgnorePatterns: ["node_modules/(?!(.*\\.mjs$))"],
+  extensionsToTreatAsEsm: ['.ts', '.tsx'],
+  globals: {
+    'ts-jest': {
+      useESM: true,
+    },
+  },
 };

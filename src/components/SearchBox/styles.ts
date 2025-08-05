@@ -1,5 +1,5 @@
-import { Button, Divider, TextField } from "@mui/material";
-import styled from "styled-components";
+import { Divider, TextField } from '@mui/material';
+import styled from 'styled-components';
 
 export const Container = styled.div`
   background-color: ${({ theme }) => theme.background};
@@ -72,19 +72,6 @@ export const RadioGroupWrapper = styled.div`
     flex-direction: column;
     align-items: stretch;
     gap: 16px;
-  }
-`;
-
-export const StyledButton = styled(Button)`
-  background-color: ${({ theme }) => theme.colorPrimary} !important;
-  color: ${({ theme }) => theme.colorBackground} !important;
-
-  &:hover {
-    background-color: ${({ theme }) => theme.colorPrimaryHover} !important;
-  }
-
-  @media (max-width: 768px) {
-    width: 100%;
   }
 `;
 

@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import theme from "../../assets/theme/CustomTheme";
+import theme from '../../assets/theme/CustomTheme';
 
 export const Container = styled.div`
   position: fixed;

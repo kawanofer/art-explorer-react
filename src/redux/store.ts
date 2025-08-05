@@ -1,8 +1,8 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { combineReducers } from "@reduxjs/toolkit";
+import { configureStore } from '@reduxjs/toolkit';
+import { combineReducers } from '@reduxjs/toolkit';
 
-import artsReducer from "./artsSlice";
-import detailsArtReducer from "./detailsArtSlice";
+import artsReducer from './artsSlice';
+import detailsArtReducer from './detailsArtSlice';
 
 const rootReducer = combineReducers({
   arts: artsReducer,
@@ -11,7 +11,7 @@ const rootReducer = combineReducers({
 
 export const store = configureStore({
   reducer: rootReducer,
-  devTools: process.env.NODE_ENV !== "production",
+  devTools: process.env.NODE_ENV !== 'production',
 });
 
 export type RootState = ReturnType<typeof store.getState>;

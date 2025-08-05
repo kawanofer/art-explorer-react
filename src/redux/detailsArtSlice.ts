@@ -1,6 +1,6 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import { ArtworkItemsProps } from "../types/artwork";
+import { ArtworkItemsProps } from '../types/artwork';
 
 interface DetailsArtState {
   detailArts: ArtworkItemsProps[] | null;
@@ -11,7 +11,7 @@ const initialState: DetailsArtState = {
 };
 
 const detailsArtSlice = createSlice({
-  name: "detailsArt",
+  name: 'detailsArt',
   initialState,
   reducers: {
     setDetailArts(state, action: PayloadAction<ArtworkItemsProps[] | null>) {
@@ -22,11 +22,9 @@ const detailsArtSlice = createSlice({
         state.detailArts = action.payload;
       } else {
         // Filter out duplicates based on objectID before adding
-        const existingIds = new Set(
-          state.detailArts.map((art) => art.objectID),
-        );
+        const existingIds = new Set(state.detailArts.map(art => art.objectID));
         const newArts = action.payload.filter(
-          (art) => !existingIds.has(art.objectID),
+          art => !existingIds.has(art.objectID)
         );
         state.detailArts = [...state.detailArts, ...newArts];
       }
