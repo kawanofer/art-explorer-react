@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavLink as RouterNavLink, useNavigate } from "react-router-dom";
 
-import logo from "@src/assets/logo.svg";
+import logo from "../../assets/logo.svg";
 
 import ThemeToggle from "../ThemeToggle";
 import * as S from "./styles";

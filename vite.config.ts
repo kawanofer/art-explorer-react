@@ -29,4 +29,17 @@ export default defineConfig({
     port: 2025,
     open: true, // abre navegador?
   },
+  test: {
+    globals: true,
+    environment: "jsdom",
+    setupFiles: ["./src/setupTests.ts"],
+    css: true,
+    // Adicionar alias para testes também
+    alias: {
+      "@src": path.resolve(__dirname, "./src"),
+      "@": path.resolve(__dirname, "./src"),
+    },
+  },
+  // Configuração para arquivos estáticos em testes
+  assetsInclude: ["**/*.svg"],
 });
