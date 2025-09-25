@@ -1,6 +1,6 @@
 # 🎨 Art Explorer React
 
-> Uma aplicação moderna para explorar e descobrir obras de arte do Metropolitan Museum of Art
+> A modern application to explore and discover artworks from the Metropolitan Museum of Art
 
 [![Deploy](https://img.shields.io/badge/Deploy-Vercel-black?style=for-the-badge&logo=vercel)](https://art-explorer-react-nu.vercel.app/)
 [![Backend](https://img.shields.io/badge/Backend-Render-46E3B7?style=for-the-badge&logo=render)](https://met-museum-backend.onrender.com)
@@ -8,69 +8,69 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.6.3-3178C6?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
 [![Vite](https://img.shields.io/badge/Vite-6.0.1-646CFF?style=for-the-badge&logo=vite)](https://vitejs.dev/)
 
-## 📖 Sobre o Projeto
+## 📖 About the Project
 
-O **Art Explorer React** é uma aplicação web que permite aos usuários explorar e descobrir obras de arte do renomado Metropolitan Museum of Art de Nova York. Com uma interface moderna e intuitiva, os usuários podem pesquisar por artistas, departamentos, visualizar detalhes das obras e gerenciar suas coleções favoritas.
+**Art Explorer React** is a web application that allows users to explore and discover artworks from the renowned Metropolitan Museum of Art in New York. With a modern and intuitive interface, users can search by artists, departments, view artwork details, and manage their favorite collections.
 
-## ✨ Funcionalidades
+## ✨ Features
 
-### 🔍 **Exploração de Arte**
-- Navegação por milhares de obras de arte do Met Museum
-- Carregamento dinâmico com paginação infinita
-- Visualização de imagens em alta qualidade
+### 🔍 **Art Exploration**
+- Browse through thousands of artworks from the Met Museum
+- Dynamic loading with infinite pagination
+- High-quality image viewing
 
-### 🔎 **Sistema de Busca Avançado**
-- **Busca por Artista**: Encontre obras de seus artistas favoritos
-- **Busca por Departamento**: Explore por categorias (Pinturas, Esculturas, etc.)
-- Filtros inteligentes e resultados relevantes
+### 🔎 **Advanced Search System**
+- **Artist Search**: Find works by your favorite artists
+- **Department Search**: Explore by categories (Paintings, Sculptures, etc.)
+- Smart filters and relevant results
 
-### ❤️ **Gerenciamento de Favoritos**
-- Adicione/remova obras da sua coleção pessoal
-- Persistência local dos favoritos
-- Interface intuitiva com feedback visual
+### ❤️ **Favorites Management**
+- Add/remove artworks from your personal collection
+- Local persistence of favorites
+- Intuitive interface with visual feedback
 
-### 📱 **Interface Responsiva**
-- Design adaptável para desktop, tablet e mobile
-- Experiência otimizada em todos os dispositivos
-- Navegação fluida e intuitiva
+### 📱 **Responsive Interface**
+- Adaptive design for desktop, tablet, and mobile
+- Optimized experience across all devices
+- Smooth and intuitive navigation
 
-### 🎨 **Detalhes Completos das Obras**
-- Modal com informações detalhadas
-- Dados do artista, data, dimensões e técnica
-- Múltiplas imagens quando disponível
-- Link direto para o site oficial do Met
+### 🎨 **Complete Artwork Details**
+- Modal with detailed information
+- Artist data, date, dimensions, and technique
+- Multiple images when available
+- Direct link to the official Met website
 
-## 🛠️ Stack Tecnológica
+## 🛠️ Tech Stack
 
 ### **Frontend**
-- ⚛️ **React 19.0.0** - Biblioteca principal
-- 🔷 **TypeScript 5.6.3** - Tipagem estática
-- ⚡ **Vite 6.0.1** - Build tool e dev server
-- 🎨 **Material-UI 5.14.19** - Componentes e design system
-- 🗃️ **Redux Toolkit 2.8.2** - Gerenciamento de estado
-- 🌐 **Axios 1.11.0** - Cliente HTTP
-- 🎭 **Emotion** - CSS-in-JS para estilização
+- ⚛️ **React 19.0.0** - Main library
+- 🔷 **TypeScript 5.6.3** - Static typing
+- ⚡ **Vite 6.0.1** - Build tool and dev server
+- 🎨 **Material-UI 5.14.19** - Components and design system
+- 🗃️ **Redux Toolkit 2.8.2** - State management
+- 🌐 **Axios 1.11.0** - HTTP client
+- 🎭 **Emotion** - CSS-in-JS for styling
 
-### **Ferramentas de Desenvolvimento**
-- 🧪 **Jest** - Framework de testes
-- 🧹 **ESLint** - Linter de código
-- 💅 **Prettier** - Formatador de código
-- 📝 **Lint-staged** - Linting em arquivos staged
+### **Development Tools**
+- 🧪 **Jest** - Testing framework
+- 🧹 **ESLint** - Code linter
+- 💅 **Prettier** - Code formatter
+- 📝 **Lint-staged** - Linting on staged files
 
 ### **Backend & API**
-- 🖼️ **Met Museum API** - Dados das obras de arte
-- 🌐 **Backend Custom** - Proxy e otimizações
+- 🖼️ **Met Museum API** - Artwork data
+- 🌐 **Custom Backend** - Proxy and optimizations
 
-## 📋 Requisitos
+## 📋 Requirements
 
-### **Sistema**
+### **System**
 - 🟢 **Node.js**: ^20.0.0 || >=22.0.0
 - 📦 **npm**: >= 9.0.0
-- 🌐 **Navegadores modernos** (Chrome, Firefox, Safari, Edge)
+- 🌐 **Modern browsers** (Chrome, Firefox, Safari, Edge)
 
-## 🚀 Instalação
+## 🚀 Installation
 
-### **1. Clone os projetos**
+### **1. Clone the projects**
 
 #### Front-end
 ```bash
@@ -86,30 +86,30 @@ cd met-museum-backend
 npm install
 ```
 
-### **2. Configure as variáveis de ambiente**
+### **2. Configure environment variables**
 
 #### Front-end
 ```bash
-# Crie o arquivo .env na pasta Frontend
+# Create the .env file in the Frontend folder
 touch .env
 
-# Configure as variáveis necessárias
+# Configure the necessary variables
 echo "VITE_BASE_URL=http://localhost:3001" > .env
 ```
 
 #### Back-end
 ```bash
-# Crie o arquivo .env na pasta do backend
+# Create the .env file in the backend folder
 touch .env
 
-# Configure as variáveis necessárias
+# Configure the necessary variables
 echo "MET_API_BASE_URL=https://collectionapi.metmuseum.org/public/collection/v1" > .env
 echo "PORT=3001" >> .env
 ```
 
-### **3. Execute os projetos**
+### **3. Run the projects**
 
-#### Opção 1: Executar separadamente
+#### Option 1: Run separately
 ```bash
 # Terminal 1 - Backend
 cd met-museum-backend
@@ -120,19 +120,19 @@ cd art-explorer-react/Frontend
 npm run dev
 ```
 
-## 📁 Estrutura do Projeto
+## 📁 Project Structure
 
 ```
 art-explorer-react/
-├── 📁 public/            # Arquivos estáticos  
+├── 📁 public/            # Static files  
 ├── 📁 src/
-│   ├── 📁 api/           # Configuração de API
-│   ├── 📁 components/    # Componentes reutilizáveis
-│   ├── 📁 hooks/         # Hooks customizados
-│   ├── 📁 pages/         # Páginas da aplicação
-│   ├── 📁 redux/         # Estado global
-│   ├── 📁 types/         # Tipos TypeScript
-│   └── 📁 utils/         # Funções utilitárias
+│   ├── 📁 api/           # API configuration
+│   ├── 📁 components/    # Reusable components
+│   ├── 📁 hooks/         # Custom hooks
+│   ├── 📁 pages/         # Application pages
+│   ├── 📁 redux/         # Global state
+│   ├── 📁 types/         # TypeScript types
+│   └── 📁 utils/         # Utility functions
 ├── 📄 package.json
 ├── 📄 vite.config.ts
 └── 📄 tsconfig.json
@@ -146,10 +146,3 @@ art-explorer-react/
 
 ### **Backend - Render**
 🔗 **URL**: [https://met-museum-backend.onrender.com](https://met-museum-backend.onrender.com)
-
-
-## 📊 Performance
-- ⚡ **Lighthouse Score**: 95+
-- 🎯 **Core Web Vitals**: Excelente
-- 📦 **Bundle Size**: < 1MB
-- 🔄 **Cache Strategy**: Service Worker + API cache

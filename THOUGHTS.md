@@ -1,73 +1,73 @@
-# 🎨 Art Explorer - Processo de Desenvolvimento
+# 🎨 Art Explorer - Development Process
 
-## 📋 Visão Geral do Projeto
+## 📋 Project Overview
 
-O **Art Explorer** é uma aplicação full-stack desenvolvida para explorar e descobrir obras de arte do Metropolitan Museum of Art. O projeto consiste em um backend Node.js/Express que atua como proxy para a API do Met Museum e um frontend React moderno com TypeScript.
+**Art Explorer** is a full-stack application developed to explore and discover artworks from the Metropolitan Museum of Art. The project consists of a Node.js/Express backend that acts as a proxy for the Met Museum API and a modern React frontend with TypeScript.
 
-## 🏗️ Arquitetura e Decisões Técnicas
+## 🏗️ Architecture and Technical Decisions
 
 ### Backend (Node.js/Express)
 
-#### ✅ Decisões Implementadas
+#### ✅ Implemented Decisions
 
-**1. Sistema de Cache Inteligente**
-- **Tecnologia**: `node-cache` com TTL de 1 hora
-- **Motivação**: A API do Met Museum tem limitações de rate limiting e pode retornar erros 403 com múltiplas requisições simultâneas
-- **Benefícios**: Redução significativa de chamadas à API externa, melhoria na performance e experiência do usuário
+**1. Intelligent Cache System**
+- **Technology**: `node-cache` with 1-hour TTL
+- **Motivation**: The Met Museum API has rate limiting restrictions and can return 403 errors with multiple simultaneous requests
+- **Benefits**: Significant reduction in external API calls, improved performance and user experience
 
-**2. Rate Limiting e Queue System**
-- **Tecnologia**: `p-queue` com concorrência limitada (3 requests simultâneas, 10 requests por intervalo de 2s)
-- **Motivação**: Prevenir bloqueios por rate limiting da API do Met Museum
-- **Implementação**: Sistema de fila com retry automático para erros 403 usando exponential backoff
+**2. Rate Limiting and Queue System**
+- **Technology**: `p-queue` with limited concurrency (3 simultaneous requests, 10 requests per 2s interval)
+- **Motivation**: Prevent blocking due to Met Museum API rate limiting
+- **Implementation**: Queue system with automatic retry for 403 errors using exponential backoff
 
 **3. Proxy API Pattern**
-- **Estrutura**: Backend atua como intermediador entre frontend e API do Met Museum
-- **Benefícios**: Centralização da lógica de cache, rate limiting e error handling
-- **Endpoints**: 5 endpoints principais cobrindo busca por imagens, artista, departamento e detalhes
+- **Structure**: Backend acts as intermediary between frontend and Met Museum API
+- **Benefits**: Centralization of cache logic, rate limiting, and error handling
+- **Endpoints**: 5 main endpoints covering search by images, artist, department, and details
 
-**4. Error Handling Robusto**
-- Retry automático para erros 403 com backoff exponencial
-- Logs detalhados para debugging
-- Responses estruturadas com status codes apropriados
+**4. Robust Error Handling**
+- Automatic retry for 403 errors with exponential backoff
+- Detailed logs for debugging
+- Structured responses with appropriate status codes
 
 ### Frontend (React/TypeScript)
 
-#### ✅ Decisões Implementadas
+#### ✅ Implemented Decisions
 
-**1. Arquitetura de Componentes Modulares**
-- **Pattern**: Atomic Design principles com componentes reutilizáveis
-- **Estrutura**: Separação clara entre components, pages, hooks, contexts
-- **Benefícios**: Manutenibilidade, testabilidade e escalabilidade
+**1. Modular Component Architecture**
+- **Pattern**: Atomic Design principles with reusable components
+- **Structure**: Clear separation between components, pages, hooks, contexts
+- **Benefits**: Maintainability, testability, and scalability
 
-**2. Gerenciamento de Estado**
-- **Redux Toolkit**: Para estado global (lista de artworks, loading states)
-- **useState local**: Para estados específicos de componentes
-- **localStorage**: Para persistência de favoritos
-- **Motivação**: Separação de responsabilidades e performance otimizada
+**2. State Management**
+- **Redux Toolkit**: For global state (artwork lists, loading states)
+- **Local useState**: For component-specific states
+- **localStorage**: For favorites persistence
+- **Motivation**: Separation of concerns and optimized performance
 
-**3. Sistema de Theming Avançado**
-- **Tecnologias**: styled-components + Context API
-- **Features**: Dark/Light mode com persistência, theming tipado
-- **Implementação**: Custom hooks (`useTheme`) e context providers
+**3. Advanced Theming System**
+- **Technologies**: styled-components + Context API
+- **Features**: Dark/Light mode with persistence, typed theming
+- **Implementation**: Custom hooks (`useTheme`) and context providers
 
-**4. Design System e UI/UX**
-- **Material-UI**: Componentes base com customizações
-- **styled-components**: Estilização avançada e theming
-- **Animações**: Framer Motion para micro-interações
-- **Responsividade**: Design mobile-first com breakpoints consistentes
+**4. Design System and UI/UX**
+- **Material-UI**: Base components with customizations
+- **styled-components**: Advanced styling and theming
+- **Animations**: Framer Motion for micro-interactions
+- **Responsiveness**: Mobile-first design with consistent breakpoints
 
-**5. Performance e Otimização**
-- **Lazy Loading**: Componentes carregados sob demanda
-- **Paginação**: Sistema de "Load More" para evitar sobrecarga
-- **Memoização**: Uso estratégico de useMemo e useCallback
-- **Otimização de imagens**: Fallbacks e loading states
+**5. Performance and Optimization**
+- **Lazy Loading**: Components loaded on demand
+- **Pagination**: "Load More" system to avoid overload
+- **Memoization**: Strategic use of useMemo and useCallback
+- **Image optimization**: Fallbacks and loading states
 
 **6. Developer Experience**
-- **TypeScript**: Tipagem completa em todo o projeto
-- **Testing**: Jest + Testing Library com boa cobertura
-- **Linting**: ESLint + Prettier para consistência de código
+- **TypeScript**: Complete typing throughout the project
+- **Testing**: Jest + Testing Library with good coverage
+- **Linting**: ESLint + Prettier for code consistency
 
-#### 🔧 Stack Técnica Detalhada
+#### 🔧 Detailed Tech Stack
 
 ```json
 {
@@ -82,37 +82,37 @@ O **Art Explorer** é uma aplicação full-stack desenvolvida para explorar e de
 }
 ```
 
-## 🚫 Ideias Descartadas e Justificativas
+## 🚫 Discarded Ideas and Justifications
 
 ### Frontend
 
 **1. React Hook Form** ❌
-- **Motivação para descarte**: O projeto possui apenas um input de busca e um radio group simples
-- **Justificativa**: Overhead desnecessário para formulários tão simples
-- **Alternativa adotada**: useState nativo para gerenciar os valores dos inputs
+- **Reason for discarding**: The project has only one search input and a simple radio group
+- **Justification**: Unnecessary overhead for such simple forms
+- **Alternative adopted**: Native useState to manage input values
 
 **2. React Query / TanStack Query** ❌
-- **Motivação para descarte**: Cache padrão de 5 minutos não era interessante para o caso de uso
-- **Justificativa**: Implementação de cache customizado no backend foi mais eficiente
-- **Benefícios da decisão**: Controle total sobre o cache, melhor performance, menos overhead no frontend
+- **Reason for discarding**: Default 5-minute cache wasn't suitable for the use case
+- **Justification**: Custom cache implementation in the backend was more efficient
+- **Benefits of the decision**: Full control over cache, better performance, less frontend overhead
 
 ### Backend
 
 **2. Database/Persistence Layer** ❌
-- **Motivação**: Dados vêm diretamente da API do Met Museum
-- **Cache em memória**: Suficiente para os requisitos do projeto
-- **Justificativa**: Simplicidade e performance adequadas
+- **Motivation**: Data comes directly from the Met Museum API
+- **In-memory cache**: Sufficient for project requirements
+- **Justification**: Adequate simplicity and performance
 
-## 🚀 Sugestões de Melhorias Futuras
+## 🚀 Future Improvement Suggestions
 
-### **Server-Sent Events (SSE) - PRIORIDADE ALTA** 🔥
+### **Server-Sent Events (SSE) - HIGH PRIORITY** 🔥
 
-**Problema Atual**: 
-- Frontend fica "travado" aguardando múltiplas requisições da API do Met Museum
-- Experiência do usuário degradada durante buscas que retornam muitos resultados
+**Current Problem**: 
+- Frontend gets "stuck" waiting for multiple Met Museum API requests
+- Degraded user experience during searches that return many results
 
-**Benefícios**:
-- Interface não bloqueia durante carregamento
-- Artworks aparecem progressivamente
-- Melhor feedback visual para o usuário
-- Possibilidade de cancelar requisições
+**Benefits**:
+- Interface doesn't block during loading
+- Artworks appear progressively
+- Better visual feedback for users
+- Ability to cancel requests
