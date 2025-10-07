@@ -12,6 +12,16 @@
 
 **Art Explorer React** is a web application that allows users to explore and discover artworks from the renowned Metropolitan Museum of Art in New York. With a modern and intuitive interface, users can search by artists, departments, view artwork details, and manage their favorite collections.
 
+## 🎬 Preview
+
+*Interactive demo showing the main features of Art Explorer React*
+
+> 📺 **[View Full Demo](https://jam.dev/c/8e6a07d8-e85a-4d46-be67-b20175026355)** - Click to see the application in action
+
+<div align="center">
+  <img src="./src/assets/preview/preview.gif" alt="Art Explorer Demo" width="100%">
+</div>
+
 ## ✨ Features
 
 ### 🔍 **Art Exploration**
